@@ -2,9 +2,9 @@
 title: "第1章"
 ---
 
-# 第1章 导论
+# 讲义
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap1.html){target="_blank"}
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[第1章导论slides](https://lizongzhang.github.io/stat26/L1slides.html){target="_blank"}
 
 
 # 课堂讨论
@@ -21,7 +21,15 @@ title: "第1章"
 
 <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[No.2线性回归>短视频点赞量分析](https://mp.weixin.qq.com/s/D87xeFDCRqOIrIA4utLGeg)
 
-- 讨论: 这类报告有何特点？
+- 讨论:
+
+  - 数据来源是什么？
+  - 研究中的观测单元（观测个体）是什么？
+  - 样本容量是多少？
+  - 研究中使用了哪些变量？
+  - 文中利用统计分析回答了哪些问题？
+  - 该推文对我们开展统计案例分析有何启发？
+  
 
 
 # 课堂练习
@@ -70,7 +78,7 @@ title: "第1章"
 
 2.5 该推文对我们开展统计案例分析有何启发？
 
-# Microsoft Excel
+# Excel教学视频
 
 <img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px;">[如何加载Excel的“数据分析”加载项](https://www.bilibili.com/video/BV19S4y1r7E4/)
 

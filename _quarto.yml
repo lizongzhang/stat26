@@ -3,7 +3,7 @@ project:
   output-dir: docs
   
 website:
-  title: "统计学25秋"
+  title: "统计学26秋"
   navbar:
     left:
       - href: index.qmd
@@ -19,14 +19,13 @@ website:
       - chap10.qmd
       - chap11.qmd
       - chap13.qmd
-      - chap14.qmd
       - case.qmd
     tools:
       - icon: envelope
         href: lizongzhang9@qq.com
   page-footer:
     right: "Data illuminates insights."
-    left: "&copy; Copyright 2025, Li Zongzhang"
+    left: "&copy; Copyright 2026, Li Zongzhang"
 format:
   html:
     theme: [yeti, theme_light.scss]

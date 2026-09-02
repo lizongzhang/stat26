@@ -1,8 +1,28 @@
 ---
-title: "案例分析"
+title: "小组作业"
 ---
 
-**每组4-5人，由组长填写在线问卷，提交分组信息：<https://www.wjx.top/vm/e3AyWsR.aspx#> **
+**提交分组信息：<https://www.wjx.top/vm/rXASrvi.aspx#> **
+
+# 组队原则与管理
+
+## 组队标准
+* **标准规模**：每组原则上由 **4 位同学**组成。
+* **人数调节**：若班级总人数无法被 4 完全整除，允许出现个别 **3人组** 或 **5人组**。
+* **工作量对等原则**：
+    * **3 人组**：需完成与标准组一致的要求，建议由综合能力较强的同学组成。
+    * **5 人组**：为抵消人力优势，该组需**增加30%的有效样本量**。
+
+## 填报与随机分配
+* **填报限期**：请各组长于 **第 2 周下课前** 完成本问卷的组员名单填报。
+* **逾期后果**：逾期（第 2 周下课后）仍未提交名单的同学，将视为放弃自主组队权利。
+* **强制指派**：届时，老师将根据剩余名单进行随机分配或合并，确保每位同学都有组归属并能按时开展小组作业。
+
+## 合作伙伴守则
+* **共识建立**：请同学们在组队时充分沟通，确保组员在学习态度和任务分配上达成共识。
+* **剔除机制**：若组内出现成员经多次沟通仍严重不配合的行为，小组可提交沟通记录并向老师申请剔除该组员。
+* **申请限期**：剔除申请截止于 **第 10 周**。
+* **独立惩罚**：被剔除的成员需独立完成小组作业。
 
 
     
@@ -27,7 +47,7 @@ title: "案例分析"
 
 -   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[期末汇报要求](https://lizongzhang.github.io/stat25/casefinal.html){target="_blank"}
 
--   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[案例分析常见问题 to be updated](https://lizongzhang.github.io/stat25/case.html){target="_blank"}
+-   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[案例分析常见问题 to be updated](https://lizongzhang.github.io/stat26/case.html){target="_blank"}
 
 # 讨论课安排
 
