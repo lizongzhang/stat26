@@ -45,7 +45,7 @@ title: "小组作业"
 ## 期末汇报
 
 
--   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[期末汇报要求](https://lizongzhang.github.io/stat25/casefinal.html){target="_blank"}
+-   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[期末汇报要求](https://lizongzhang.github.io/stat26/casefinal.html){target="_blank"}
 
 -   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[案例分析常见问题 to be updated](https://lizongzhang.github.io/stat26/case.html){target="_blank"}
 

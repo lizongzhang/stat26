@@ -78,6 +78,42 @@ title: "第1章"
 
 2.5 该推文对我们开展统计案例分析有何启发？
 
+# 本章难点
+
+<details>
+
+## 描述统计和推断统计的区别
+
+<details>
+<summary>Click to view image</summary>
+
+<img src="img/branch4.jpg" style="width: 80%; display: block; margin: 15px auto;">
+<img src="img/branch3.png" style="width: 80%; display: block; margin: 15px auto;">
+<img src="img/branch1.png" style="width: 80%; display: block; margin: 15px auto;">
+<img src="img/branch2.png" style="width: 80%; display: block; margin: 15px auto;">
+
+</details>
+
+## 数据/变量类型
+
+<details>
+<summary>Click to view image</summary>
+
+<img src="img/var_type1.jpg" style="width: 80%; display: block; margin: 15px auto;">
+
+</details>
+
+## 总体和样本
+
+<details>
+<summary>Click to view image</summary>
+
+<img src="img/popu_sample1.jpg" style="width: 80%; display: block; margin: 15px auto;">
+
+<img src="img/popu_sample2.jpg" style="width: 80%; display: block; margin: 15px auto;">
+
+</details>
+
 # Excel教学视频
 
 <img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px;">[如何加载Excel的“数据分析”加载项](https://www.bilibili.com/video/BV19S4y1r7E4/)
