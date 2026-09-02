@@ -525,6 +525,126 @@ Li Zongzhang
 </div>
 </div>
 </section>
+<section id="对比" class="slide level2">
+<h2>对比</h2>
+<p>定性变量说明事物的<strong>品质特征</strong>，结果表现为类别；定量变量说明现象的<strong>数值特征</strong>，结果表现为具体的数字度量。</p>
+</section>
+<section class="slide level2">
+
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">维度</th>
+<th style="text-align: left;">定性变量（分类变量）</th>
+<th style="text-align: left;">定量变量（数值变量）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>本质属性</strong></td>
+<td style="text-align: left;">品质特征（属于哪一类）</td>
+<td style="text-align: left;">数量特征（有多少/多大）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>主要子类</strong></td>
+<td style="text-align: left;">- <strong>无序分类</strong>：类别无先后（如：行业、性别）<br>- <strong>有序分类</strong>：类别有高低（如：满意度）</td>
+<td style="text-align: left;">- <strong>离散变量</strong>：取值有限可列举（如：汽车产量）<br>- <strong>连续变量</strong>：区间内连续取值（如：温度、年龄）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>典型取值</strong></td>
+<td style="text-align: left;">“制造业”、“通过”、“男/女”、“很好”</td>
+<td style="text-align: left;">20万元、38.5℃、1000台</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>数学运算</strong></td>
+<td style="text-align: left;">不能进行加、减、求平均等算术运算</td>
+<td style="text-align: left;">可直接进行加、减、乘、除及求均值等运算</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>常用统计方法</strong></td>
+<td style="text-align: left;">频数（频率）分布、列联表、卡方检验</td>
+<td style="text-align: left;">计算均值、方差、做参数估计与假设检验</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>能否做“有意义的加减运算”？</strong></p>
+</div>
+<div class="callout-content">
+<p>拿到一个变量时，不要先看它是不是用数字表示的，先问自己一个问题：<strong>“把这些取值加起来算个平均值，在业务上具备现实意义吗？”</strong> - <strong>如果毫无意义</strong>（例如算身份证号或工号的均值）：属于<strong>定性变量</strong>。 - <strong>如果有实际意义</strong>（例如计算平均月薪或平均气温）：属于<strong>定量变量</strong>。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>初学者三大易错点避坑指南</strong></p>
+</div>
+<div class="callout-content">
+<h3 id="数字编码陷阱以数字形态出现的分类变量">数字编码陷阱（以数字形态出现的分类变量）</h3>
+<ul>
+<li><strong>错误认知</strong>：“只要是用数字记录的数据，就是定量变量。”</li>
+<li><strong>真相</strong>：调查问卷中常把“性别”编码为 <code>1 = 男, 2 = 女</code>；把员工评级编为 <code>1 = 初级, 2 = 中级, 3 = 高级</code>。这里的 <code>1</code> 和 <code>2</code> 仅仅是文字类别的<strong>数字代码（代号）</strong>。计算 <code>1 + 2 = 3</code> 或算性别的平均值是没有任何实际意义的，它们依然是<strong>定性变量</strong>。</li>
+<li><strong>典型实例</strong>：身份证号、电话号码、邮政编码、足球队员球衣号码（如 10 号球衣不代表比 7 号球衣高出 3 个单位）。</li>
+</ul>
+<hr>
+<h3 id="有序变量误当定量变量李克特量表陷阱">有序变量误当定量变量（李克特量表陷阱）</h3>
+<ul>
+<li><strong>错误认知</strong>：“满意度评分为 1 到 5 分，可以当成连续数值直接加减。”</li>
+<li><strong>真相</strong>：“很满意(5分)”与“满意(4分)”之间的差距，并不能在物理上严格等同于“一般(3分)”与“不满意(2分)”之间的差距。它本质上只有<strong>顺序（次序）关系</strong>，没有恒定的测量单位，属于<strong>有序分类变量（定性）</strong>。</li>
+</ul>
+<hr>
+<h3 id="统计指标与变量本身的混淆">统计指标与变量本身的混淆</h3>
+<ul>
+<li><strong>错误认知</strong>：“’企业男女比例为 1:2’是数字，所以性别是定量变量。”</li>
+<li><strong>真相</strong>：
+<ul>
+<li>研究的<strong>原始变量</strong>是员工个人的“性别”（男/女），这是<strong>定性变量</strong>。</li>
+<li>“比例”、“占比”或“频数”是基于样本或总体<strong>统计汇总计算出来的统计量</strong>，不能颠倒原始变量本身的类型。</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>快速练习自测</strong></p>
+</div>
+<div class="callout-content">
+<p>尝试判断下列变量属于<strong>定性变量</strong>还是<strong>定量变量</strong> 1. 汽车车牌号（如：粤A·12345） 2. 某型号汽车的发动机排量（如：1.5L, 2.0L） 3. 汽车碰撞安全测试等级（如：五星、四星、三星） 4. 工厂每个月的实际汽车装配下线量（如：12,000台）</p>
+<blockquote>
+<p><em>答案解析</em>：1、3为定性变量（分别属于无序与有序分类）；2、4为定量变量（分别属于连续与离散数值）。</p>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
 <section id="下列数据是定性数据还是定量数据" class="slide level2">
 <h2>下列数据是定性数据还是定量数据？</h2>
 <ul>
@@ -1094,7 +1214,7 @@ David R. Anderson, China Machine Press, 2003</p></li>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="https://lizongzhang.github.io/metrics26i">Econometrics</a> | © 2026, <a href="https://space.bilibili.com/590872906/">Li Zongzhang</a></p>
+<p><a href="https://lizongzhang.github.io/stat26">Stat</a> | © 2026, <a href="https://space.bilibili.com/590872906/">Li Zongzhang</a></p>
 </div>
 </div></div>
 
