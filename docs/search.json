@@ -347,7 +347,7 @@
     "href": "index.html#r和r-studio的的安装",
     "title": "教材",
     "section": "R和R Studio的的安装",
-    "text": "R和R Studio的的安装\nR和R Studio的下载\nR和RStudio的安装\n不用安装就能用的RStudio——RStudio Cloud(若无法安装R和R Studio, 请看此视频)\n教学视频\nExcel数据分析实战\n教学平台\n\n雨课堂：考勤、作业、测验、直播回看\nQQ群：提交作业，提问答疑\n\n参考书\n下载\n课程考核\n\n平时成绩：50%\n\n个人作业：20%\n小组作业(案例分析)：15%\n测验：5%\n考勤： 5%\n\n期末考试：50%\n\n\n\n\n\nclick here"
+    "text": "R和R Studio的的安装\nR和R Studio的下载\nR和RStudio的安装\n不用安装就能用的RStudio——RStudio Cloud(若无法安装R和R Studio, 请看此视频)"
   },
   {
     "objectID": "chap1_slide.html#第1章-导论",
@@ -1138,7 +1138,7 @@
     "href": "L1slides.html#按计量尺度划分",
     "title": "第1章 导论",
     "section": "按计量尺度划分",
-    "text": "按计量尺度划分\n\n分类数据 (nominal data)\n顺序数据 (ordinal data)\n数值型数据 (numeric data)\n\n\n\n定性数据：qualitative data\n定量数据：quantitative data"
+    "text": "按计量尺度划分"
   },
   {
     "objectID": "L1slides.html#数据类型和数字代码",
@@ -1173,7 +1173,7 @@
     "href": "L1slides.html#截面数据",
     "title": "第1章 导论",
     "section": "截面数据",
-    "text": "截面数据\n\n定义：截面数据（Cross-sectional data）是在相同或近似相同的时间点上收集的数据。\n特点：数据通常是在不同的空间（或不同个体）上获得的，用于描述现象在某一特定时刻的状态、分布及差异。\n与时间序列的区别：\n\n截面数据：同一时点，多个个体（横向对比，侧重空间分布）。\n时间序列数据：同一个体，不同时间（纵向追踪，侧重发展趋势）。"
+    "text": "截面数据\n\n定义：截面数据（Cross-sectional data）是在相同或近似相同的时间点上收集的数据。\n特点：数据通常是在不同的空间（或不同个体）上获得的，用于描述现象在某一特定时刻的状态、分布及差异。"
   },
   {
     "objectID": "L1slides.html#截面数据举例",
@@ -1201,7 +1201,7 @@
     "href": "L1slides.html#时间序列",
     "title": "第1章 导论",
     "section": "时间序列",
-    "text": "时间序列\n\n定义：时间序列数据（Time Series Data）是在不同时间收集到的数据。\n特征：这类数据是按时间先后顺序排列和记录的，主要用于观察和描述现象随时间推移而发生的变化情况与演变趋势。\n与截面数据的区别：\n\n时间序列数据：同一个体/对象，在不同的时间点追踪观察（纵向对比，侧重时间趋势）。\n截面数据：同一或近似时间点，多个不同个体/对象（横向对比，侧重空间分布）。"
+    "text": "时间序列\n\n定义：时间序列数据（Time Series Data）是在不同时间收集到的数据。\n特征：这类数据是按时间先后顺序排列和记录的，主要用于观察和描述现象随时间推移而发生的变化情况与演变趋势。"
   },
   {
     "objectID": "L1slides.html#时间序列实例",
@@ -1292,21 +1292,21 @@
     "href": "L1slides.html#课程目标",
     "title": "第1章 导论",
     "section": "课程目标",
-    "text": "课程目标\n\n统计方法的运用\n统计直觉、批判性思维\n软件操作：Excel / SPSS / R"
+    "text": "课程目标\n\n培养统计直觉：看穿数据背后的故事\n训练批判性思维：不被数据欺骗，学会质疑\n熟练运用工具：\n\nExcel：从零到精通的数据整理\nR：掌握编程语言，打开数据科学大门\nSPSS：点点鼠标，让复杂分析变简单"
   },
   {
     "objectID": "L1slides.html#教学形式",
     "href": "L1slides.html#教学形式",
     "title": "第1章 导论",
     "section": "教学形式",
-    "text": "教学形式\n\n新课\n课堂练习\n课后作业：上机（EXCEL）+ 手工计算，个人独立完成\n案例：小组完成，4次案例作业，期末课堂汇报\n小测验"
+    "text": "教学形式\n理论讲授\n\n新课精讲\n随堂小测：即时反馈，检验学习效果（不用紧张，是帮你查漏补缺！）"
   },
   {
     "objectID": "L1slides.html#学习方法",
     "href": "L1slides.html#学习方法",
     "title": "第1章 导论",
     "section": "学习方法",
-    "text": "学习方法\n\n课堂效率\n主动参与\n\n个人作业\n小组作业\n知识拓展：多元统计\n同老师交流\n\n兴趣 + 实践"
+    "text": "学习方法\n紧跟课堂，高效吸收\n\n课堂是黄金时间，不要浪费\n预习 → 听讲 → 复习，三步走"
   },
   {
     "objectID": "L1slides.html#学术竞赛",
@@ -1320,7 +1320,7 @@
     "href": "L1slides.html#参考教材",
     "title": "第1章 导论",
     "section": "参考教材",
-    "text": "参考教材\n\n《商务与经济统计》（原书第13版）F712.3/45\n（美）戴维 R. 安德森 等，机械工业出版社 2017\nStatistics for Business and Economics F222/15/E.8\nDavid R. Anderson, China Machine Press, 2003"
+    "text": "参考教材\n\n《商务与经济统计》（原书第13版）\n\n戴维 R. 安德森 等著，机械工业出版社\n\nStatistics for Business and Economics (8th Edition)\n\nDavid R. Anderson et al., China Machine Press"
   },
   {
     "objectID": "L1slides.html#第1章重点",
@@ -1629,5 +1629,75 @@
     "title": "第1章 导论",
     "section": "对比",
     "text": "对比\n定性变量说明事物的品质特征，结果表现为类别；定量变量说明现象的数值特征，结果表现为具体的数字度量。"
+  },
+  {
+    "objectID": "L1slides.html#统计分析实例基金经理特征分析",
+    "href": "L1slides.html#统计分析实例基金经理特征分析",
+    "title": "第1章 导论",
+    "section": "统计分析实例：基金经理特征分析",
+    "text": "统计分析实例：基金经理特征分析\n研究问题\n中国公募基金经理群体的特征，例如：\n\n性别比例如何？\n年龄、学历、专业背景分布怎样？\n从业经历、海外经历、资格证书持有情况如何？\n这些特征与业绩表现之间有没有关系？"
+  },
+  {
+    "objectID": "L1slides.html#定性数据和定量数据",
+    "href": "L1slides.html#定性数据和定量数据",
+    "title": "第1章 导论",
+    "section": "定性数据和定量数据",
+    "text": "定性数据和定量数据\n\n定性数据 qualitative data\n\n分类数据：categorical data\n顺序数据：ordinal data\n\n定量数据 quantitative data\n\n数值型数据：numeric data"
+  },
+  {
+    "objectID": "L1slides.html#时间序列举例",
+    "href": "L1slides.html#时间序列举例",
+    "title": "第1章 导论",
+    "section": "时间序列举例",
+    "text": "时间序列举例\n\n宏观经济：2010—2023年我国各年份的国内生产总值（GDP）、年度居民消费价格指数（CPI）。\n金融市场：某只股票过去一年中每个交易日的日收盘价与成交量。\n商业运营：某电商平台过去24个月每月的产品总销售额。\n气象监测：某地气象监测站连续30天记录的日最高气温。"
+  },
+  {
+    "objectID": "L1slides.html#总体均值和样本均值",
+    "href": "L1slides.html#总体均值和样本均值",
+    "title": "第1章 导论",
+    "section": "总体均值和样本均值",
+    "text": "总体均值和样本均值"
+  },
+  {
+    "objectID": "L1slides.html#参数与样本的常用符号",
+    "href": "L1slides.html#参数与样本的常用符号",
+    "title": "第1章 导论",
+    "section": "参数与样本的常用符号",
+    "text": "参数与样本的常用符号\n\n\n\n总体参数\n含义\n样本统计量\n\n\n\n\n\\(\\mu\\)\n平均数\n\\(\\bar{x}\\)\n\n\n\\(\\sigma\\)\n标准差\n\\(s\\)\n\n\n\\(\\pi\\)\n比例\n\\(p\\)"
+  },
+  {
+    "objectID": "L1slides.html#练习定性数据还是定量数据",
+    "href": "L1slides.html#练习定性数据还是定量数据",
+    "title": "第1章 导论",
+    "section": "练习：定性数据还是定量数据？",
+    "text": "练习：定性数据还是定量数据？\n\n一个消费调查中鞋子的品牌\n一份试卷中答对的题数\n一篇论文评定的等级\n一篮球队员球衣上的数字\n满意度等级：非常满意、比较满意、基本满意、比较不满意、非常不满意\n满意度评分等级：1到5"
+  },
+  {
+    "objectID": "L1slides.html#截面数据-1",
+    "href": "L1slides.html#截面数据-1",
+    "title": "第1章 导论",
+    "section": "截面数据",
+    "text": "截面数据\n\n宏观经济：2023年我国各省份的地区生产总值（GDP）和人均可支配收入。\n企业财务：某交易日收盘时，所有沪深300成分股的市盈率（PE）与换手率。\n社会调查：某次问卷中，1000位受访者在接受调查当下的年龄、文化程度和消费满意度。"
+  },
+  {
+    "objectID": "L1slides.html#截面数据-2",
+    "href": "L1slides.html#截面数据-2",
+    "title": "第1章 导论",
+    "section": "截面数据",
+    "text": "截面数据\n\n\n\n地区 (个体/空间)\n时间\nGDP (亿元)\n人均可支配收入 (元)\n\n\n\n\n广东省\n2023年\n135,673\n49,327\n\n\n江苏省\n2023年\n128,222\n52,674\n\n\n山东省\n2023年\n92,069\n39,890\n\n\n浙江省\n2023年\n82,553\n63,830\n\n\n\n\n\n\n\n\n\n提示\n\n\n时间固定在“2023年”，变化的是“不同地区”"
+  },
+  {
+    "objectID": "L1slides.html#截面数据-3",
+    "href": "L1slides.html#截面数据-3",
+    "title": "第1章 导论",
+    "section": "截面数据",
+    "text": "截面数据\n\n\n查看R代码\nlibrary(ggplot2)\n\n# 构建截面数据集\ndf_cross &lt;- data.frame(\n  region = c(\"广东\", \"江苏\", \"山东\", \"浙江\"),\n  year = 2023,\n  income = c(49327, 52674, 39890, 63830)\n)\n\n# 绘制柱状图直观展示个体间的差异\nggplot(df_cross, aes(x = reorder(region, income), y = income, fill = region)) +\n  geom_col(width = 0.5, show.legend = FALSE) +\n  coord_flip() +\n  labs(\n    title = \"2023年各地区人均可支配收入对比\",\n    x = \"地区\",\n    y = \"人均可支配收入 (元)\"\n  ) +\n  theme_minimal()\n\n\n\n\nFigure 1: 2023年部分地区人均可支配收入对比（截面数据示例）"
+  },
+  {
+    "objectID": "L1slides.html#学术竞赛实践",
+    "href": "L1slides.html#学术竞赛实践",
+    "title": "第1章 导论",
+    "section": "学术竞赛实践",
+    "text": "学术竞赛实践\n\n“原来后浪们都在B站学习”——大学生B站学习满意度影响因素研究\n“疫情停课不停学，教育变更不变质”——大学生“云”课堂学习效果及满意度分析"
   }
 ]

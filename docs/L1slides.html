@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Li Zongzhang">
-  <meta name="dcterms.date" content="2026-09-02">
+  <meta name="dcterms.date" content="2026-09-03">
   <title>统计学26秋 – 第1章 导论</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -251,7 +251,7 @@ Li Zongzhang
 </div>
 </div>
 
-  <p class="date">2026-09-02</p>
+  <p class="date">2026-09-03</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">大纲</h2>
@@ -277,118 +277,170 @@ Li Zongzhang
 <li>统计学是<strong>收集</strong>、<strong>处理</strong>、<strong>分析</strong>、<strong>解释</strong>数据并从数据中得出结论的科学。</li>
 </ul>
 </section>
-<section id="统计分析步骤" class="slide level2">
-<h2>统计分析步骤</h2>
+<section class="slide level2">
+
+
+<img data-src="img/stat.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+<h3 id="统计分析步骤">统计分析步骤</h3>
 
 <img data-src="img/process.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section class="slide level2">
 
-<h3 id="应用举例基金经理特征分析">应用举例：基金经理特征分析</h3>
+<h3 id="统计分析方法分支">统计分析方法分支</h3>
+
+<img data-src="img/branches.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+<h3 id="描述统计-descriptive-statistics">描述统计 Descriptive Statistics</h3>
+<p>用图表和概括性数字，对<strong>已经收集到的数据</strong>进行整理、汇总和展示，目的是清晰地描述数据的基本特征。</p>
+<p><strong>关键特点</strong>：</p>
 <ul>
-<li>性别？</li>
-<li>年龄？</li>
-<li>学历？</li>
-<li>专业？</li>
+<li><p>只针对<strong>手头已有的数据</strong>（样本或总体）</p></li>
+<li><p>不涉及对未知总体的推断</p></li>
+<li><p>结果是<strong>确定的</strong>，不带有不确定性</p></li>
 </ul>
 </section>
 <section class="slide level2">
 
+<h3 id="推断统计-inferential-statistics">推断统计 Inferential Statistics</h3>
+<p>根据<strong>样本数据</strong>的信息，对<strong>总体</strong>的未知特征进行估计、检验或预测，并给出结论的可靠程度。</p>
+<p><strong>关键特点</strong>： - 从样本推断总体</p>
 <ul>
-<li>从业经历？</li>
-<li>海外经历？</li>
-<li>资格证书？
-<ul>
-<li>Chartered Financial Analyst (CFA)</li>
-<li>Financial Risk Manager (FRM)</li>
-</ul></li>
-<li>业绩表现？</li>
+<li><p>结论带有<strong>不确定性</strong>（用概率来度量）</p></li>
+<li><p>需要抽样分布、置信区间、假设检验等工具</p></li>
 </ul>
 </section>
 <section class="slide level2">
 
-<h3 id="基金经理特征收集数据">基金经理特征——收集数据</h3>
-<ul>
-<li>问卷调查</li>
-<li>数据库
-<ul>
-<li>CSMAR</li>
-<li>RESSET</li>
-</ul></li>
-<li>数据库的使用：研究期间、数据范围、字段含义、数值代码</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<h3 id="基金经理特征处理数据">基金经理特征——处理数据</h3>
-<ul>
-<li>整理数据</li>
-<li>图表展示
-<ul>
-<li>性别分布</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>性别分布示例</strong></p>
-<ul>
-<li>男性：75%</li>
-<li>女性：25%</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="L1slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section class="slide level2">
-
-<h3 id="学历分布">学历分布</h3>
+<h3 id="描述统计-vs-推断统计对比">描述统计 vs 推断统计对比</h3>
 <table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 37%">
+<col style="width: 42%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>学历</th>
-<th>人数</th>
-<th>百分比</th>
+<th>对比维度</th>
+<th>描述统计</th>
+<th>推断统计</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>博士后</td>
-<td>2</td>
-<td>0.3%</td>
+<td><strong>研究对象</strong></td>
+<td>已有的数据（样本或总体）</td>
+<td>通过样本推断总体</td>
 </tr>
 <tr class="even">
-<td>博士</td>
-<td>53</td>
-<td>8.8%</td>
+<td><strong>目的</strong></td>
+<td>整理、汇总、展示数据特征</td>
+<td>估计、检验、预测总体特征</td>
 </tr>
 <tr class="odd">
-<td>硕士</td>
-<td>521</td>
-<td>86.8%</td>
+<td><strong>结论性质</strong></td>
+<td>确定性描述</td>
+<td>统计推断，有不确定性</td>
 </tr>
 <tr class="even">
-<td>本科</td>
-<td>24</td>
-<td>4.0%</td>
+<td><strong>是否需要抽样分布</strong></td>
+<td>不需要</td>
+<td>需要</td>
 </tr>
 <tr class="odd">
-<td><strong>总计</strong></td>
-<td><strong>600</strong></td>
-<td><strong>100%</strong></td>
+<td><strong>典型问题</strong></td>
+<td>“这组数据的平均分是多少？”</td>
+<td>“全体学生的平均分大概是多少？”</td>
+</tr>
+<tr class="even">
+<td><strong>对应章节</strong></td>
+<td>第3章，第4章</td>
+<td>第6–11章、第13章等</td>
 </tr>
 </tbody>
 </table>
 </section>
 <section class="slide level2">
 
-<h3 id="专业背景分布">专业背景分布</h3>
+<h3 id="举例大学生每日手机屏幕使用时长">举例：大学生“每日手机屏幕使用时长”</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>研究场景</strong></p>
+</div>
+<div class="callout-content">
+<p>希望掌握全校 40,000名本科生平均每天在手机屏幕上花费的时长</p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>描述统计</strong>：
+<ul>
+<li><p>随机抽取 300 名学生并采集其手机“屏幕时间”数据，计算得出该样本的<strong>平均屏幕时间为 6.2 小时/天</strong>，并绘制直方图展示分布形态。</p></li>
+<li><p><strong>聚焦于样本本身</strong>：仅对已收集到的 300 个观测值进行统计计算与可视化呈现。</p></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>推断统计</strong>：
+<ul>
+<li><p>利用这 300 人的样本数据推算，以 95% 置信度估计<strong>“全校 1.5 万名学生的总体平均屏幕时间在 5.9 至 6.5 小时之间”</strong>；同时执行假设检验，判断<strong>“全校总体均值是否显著超过5小时”</strong>。</p></li>
+<li><p><strong>从局部推向全局</strong>：以样本统计量为依据，对未知的全校总体参数作出推断。</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="统计分析实例基金经理特征分析" class="slide level2">
+<h2>统计分析实例：基金经理特征分析</h2>
+<h3 id="研究问题">研究问题</h3>
+<p>中国公募基金经理群体的特征，例如：</p>
+<ul>
+<li>性别比例如何？</li>
+<li>年龄、学历、专业背景分布怎样？</li>
+<li>从业经历、海外经历、资格证书持有情况如何？</li>
+<li>这些特征与业绩表现之间有没有关系？</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="数据收集">数据收集</h3>
+<ul>
+<li><p>问卷调查</p></li>
+<li><p>数据库：CSMAR、RESSET</p></li>
+<li><p>注意：研究期间、数据范围、字段含义、数值代码</p></li>
+</ul>
+<p>从CSMAR和RESSET数据库收集到 <strong>600名</strong> 基金经理的数据（这是一个<strong>样本</strong>）。</p>
+</section>
+<section class="slide level2">
+
+<h3 id="描述统计能回答什么问题">描述统计能回答什么问题？</h3>
+<p>描述统计只描述<strong>这600名基金经理</strong>的情况，不延伸到全体基金经理。</p>
+<h4 id="性别分布">1. 性别分布</h4>
+<ul>
+<li>男性：75%</li>
+<li>女性：25%</li>
+</ul>
+
+<img data-src="L1slides_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section class="slide level2">
+
+<h4 id="学历分布">2. 学历分布</h4>
+<div class="line-block">学历 | 人数 | 百分比 |<br>
+博士后 | 2 | 0.3% |<br>
+博士 | 53 | 8.8% |<br>
+硕士 | 521 | 86.8% |<br>
+本科 | 24 | 4.0% |<br>
+<strong>总计</strong> | <strong>600</strong> | <strong>100%</strong> |</div>
+</section>
+<section class="slide level2">
+
+<h4 id="专业背景分布">3. 专业背景分布</h4>
 <ul>
 <li>金融：57.5%</li>
 <li>理工科：20.7%</li>
@@ -401,12 +453,11 @@ Li Zongzhang
 </section>
 <section class="slide level2">
 
-<h3 id="专业背景分布-1">专业背景分布</h3>
 
 <img data-src="img/treemap.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section class="slide level2">
 
-<h3 id="毕业院校-持有证书">毕业院校 &amp; 持有证书</h3>
+<h4 id="毕业院校与证书">4. 毕业院校与证书</h4>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>毕业院校</strong></p>
@@ -424,10 +475,10 @@ Li Zongzhang
 </tr>
 <tr class="even">
 <td>211高校</td>
-<td>73.0%</td>
+<td>23.0%</td>
 </tr>
 <tr class="odd">
-<td>海外求学</td>
+<td>海外高校</td>
 <td>17.0%</td>
 </tr>
 </tbody>
@@ -460,28 +511,85 @@ Li Zongzhang
 </section>
 <section class="slide level2">
 
-<h3 id="从业年限分布">从业年限分布</h3>
+<h4 id="从业年限分布">5. 从业年限分布</h4>
 
-<img data-src="L1slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="分析数据" class="slide level2">
-<h2>分析数据</h2>
+<img data-src="L1slides_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section class="slide level2">
+
+<p><strong>描述统计的结论</strong></p>
 <ul>
-<li><p><strong>描述统计</strong></p></li>
-<li><p><strong>推断统计</strong></p></li>
-<li><p>单个变量：集中趋势和离散程度</p></li>
-<li><p>两个变量：独立性检验、方差分析、相关和回归分析</p></li>
+<li><p>在这600名基金经理中，男性占75%，硕士学历占86.8%，金融专业背景最多, 从业年限集中在5-15年的占75%。</p></li>
+<li><p>这些结论<strong>只针对样本</strong>，不能直接说“全中国基金经理都是这样”。</p></li>
 </ul>
 </section>
 <section class="slide level2">
 
-<h3 id="统计分析方法分支">统计分析方法分支</h3>
-
-<img data-src="img/branches.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
-<section id="解释数据-得出结论" class="slide level2">
-<h2>解释数据 &amp; 得出结论</h2>
+<h3 id="推断统计方法能回答什么问题">推断统计方法能回答什么问题？</h3>
+<p>用这600人的样本，去回答关于<strong>全体中国公募基金经理</strong>的问题。</p>
+<h4 id="参数估计类问题">1. 参数估计类问题</h4>
 <ul>
-<li>对统计分析结果进行解释，提炼有价值的结论。</li>
-<li>结论：<strong>不是显而易见的</strong>，能体现统计分析的价值。</li>
+<li>全体基金经理中，女性的真实比例大概是多少？（区间估计）</li>
+<li>全体基金经理的平均从业年限估计是多少？有多大把握？</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="假设检验类问题">2. 假设检验类问题</h4>
+<ul>
+<li>女性基金经理的比例是否显著低于50%？</li>
+<li>有CFA证书的基金经理，业绩是否显著好于没有CFA的？</li>
+<li>海外经历对基金业绩是否有显著影响？</li>
+<li>不同学历（硕士 vs 博士）的基金经理，业绩是否有显著差异？</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="相关与回归类问题">3. 相关与回归类问题</h4>
+<ul>
+<li>从业年限与业绩表现之间是否存在显著的相关关系？</li>
+<li>在控制了其他因素后，性别是否还会影响业绩？</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="具体可检验的问题举例">4. 具体可检验的问题举例</h4>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>问题</th>
+<th>可能使用的推断方法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>女性基金经理比例是否真的低于30%？</td>
+<td>单样本比例检验</td>
+</tr>
+<tr class="even">
+<td>有CFA和没有CFA的经理，平均收益率是否有差异？</td>
+<td>两独立样本t检验</td>
+</tr>
+<tr class="odd">
+<td>学历（本科/硕士/博士）对业绩是否有影响？</td>
+<td>单因素方差分析（ANOVA）</td>
+</tr>
+<tr class="even">
+<td>从业年限能否解释业绩的差异？</td>
+<td>一元线性回归</td>
+</tr>
+<tr class="odd">
+<td>性别与是否持有CFA证书是否独立？</td>
+<td>卡方独立性检验</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+<h4 id="描述统计和推断统计">描述统计和推断统计</h4>
+<ul>
+<li><p><strong>描述统计</strong>：把已经拿到的600人数据，用图表和数字说清楚。</p></li>
+<li><p><strong>推断统计</strong>：用这600人的结果，去回答“全体基金经理可能是什么样的”，并告诉别人这个回答有多可靠。</p></li>
 </ul>
 </section></section>
 <section>
@@ -495,27 +603,59 @@ Li Zongzhang
 <p><strong>1.2.2</strong> 观测数据和实验数据</p>
 <p><strong>1.2.3</strong> 截面数据和时间序列数据</p>
 </section>
+<section id="数据类型-分析方法" class="slide level2">
+<h2>数据类型 → 分析方法</h2>
+<ul>
+<li><strong>单个变量</strong>：定量数据 or 定性数据？</li>
+<li><strong>两个变量</strong>：
+<ul>
+<li>定性数据 &amp; 定性数据 → Chap 9</li>
+<li>定性数据 &amp; 定量数据 → Chap 10</li>
+<li>定量数据 &amp; 定量数据 → Chap 11</li>
+</ul></li>
+</ul>
+</section>
 <section id="数据类型" class="slide level2">
 <h2>数据类型</h2>
 
 <img data-src="img/data_type.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section id="按计量尺度划分" class="slide level2">
 <h2>按计量尺度划分</h2>
+
+<img data-src="img/scale.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section id="定性数据和定量数据" class="slide level2">
+<h2>定性数据和定量数据</h2>
 <ul>
-<li><strong>分类数据</strong> (nominal data)</li>
-<li><strong>顺序数据</strong> (ordinal data)</li>
-<li><strong>数值型数据</strong> (numeric data)</li>
-</ul>
-<p><br></p>
+<li>定性数据 qualitative data
 <ul>
-<li>定性数据：qualitative data</li>
-<li>定量数据：quantitative data</li>
+<li>分类数据：categorical data</li>
+<li>顺序数据：ordinal data</li>
+</ul></li>
+<li>定量数据 quantitative data
+<ul>
+<li>数值型数据：numeric data</li>
+</ul></li>
 </ul>
 </section>
-<section id="数据类型和数字代码" class="slide level2">
-<h2>数据类型和数字代码</h2>
+<section class="slide level2">
+
+
+<img data-src="img/discrete.jpg" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+<h3 id="常见误区">常见误区</h3>
+<div class="{callout-warning}">
+<p>整数是离散，带小数就是连续</p>
+</div>
 <ul>
-<li>性别：男 = 0，女 = 1</li>
+<li><p>鞋码</p></li>
+<li><p>身高</p></li>
+<li><p>年龄</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li>学历：小学 = 1，初中 = 2，高中 = 3，大学 = 4</li>
 <li>受教育年限（数值型）</li>
 </ul>
@@ -533,10 +673,6 @@ Li Zongzhang
 </div>
 </div>
 </section>
-<section id="对比" class="slide level2">
-<h2>对比</h2>
-<p>定性变量说明事物的<strong>品质特征</strong>，结果表现为类别；定量变量说明现象的<strong>数值特征</strong>，结果表现为具体的数字度量。</p>
-</section>
 <section class="slide level2">
 
 <table class="caption-top">
@@ -548,8 +684,8 @@ Li Zongzhang
 <thead>
 <tr class="header">
 <th style="text-align: left;">维度</th>
-<th style="text-align: left;">定性变量（分类变量）</th>
-<th style="text-align: left;">定量变量（数值变量）</th>
+<th style="text-align: left;">定性变量</th>
+<th style="text-align: left;">定量变量</th>
 </tr>
 </thead>
 <tbody>
@@ -592,231 +728,43 @@ Li Zongzhang
 <p><strong>能否做“有意义的加减运算”？</strong></p>
 </div>
 <div class="callout-content">
-<p>拿到一个变量时，不要先看它是不是用数字表示的，先问自己一个问题：<strong>“把这些取值加起来算个平均值，在业务上具备现实意义吗？”</strong> - <strong>如果毫无意义</strong>（例如算身份证号或工号的均值）：属于<strong>定性变量</strong>。 - <strong>如果有实际意义</strong>（例如计算平均月薪或平均气温）：属于<strong>定量变量</strong>。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>初学者三大易错点避坑指南</strong></p>
-</div>
-<div class="callout-content">
-<h3 id="数字编码陷阱以数字形态出现的分类变量">数字编码陷阱（以数字形态出现的分类变量）</h3>
+<p>拿到一个变量时，不要先看它是不是用数字表示的，先问自己一个问题：<strong>“把这些取值加起来算个平均值，在业务上具备现实意义吗？”</strong></p>
 <ul>
-<li><strong>错误认知</strong>：“只要是用数字记录的数据，就是定量变量。”</li>
-<li><strong>真相</strong>：调查问卷中常把“性别”编码为 <code>1 = 男, 2 = 女</code>；把员工评级编为 <code>1 = 初级, 2 = 中级, 3 = 高级</code>。这里的 <code>1</code> 和 <code>2</code> 仅仅是文字类别的<strong>数字代码（代号）</strong>。计算 <code>1 + 2 = 3</code> 或算性别的平均值是没有任何实际意义的，它们依然是<strong>定性变量</strong>。</li>
-<li><strong>典型实例</strong>：身份证号、电话号码、邮政编码、足球队员球衣号码（如 10 号球衣不代表比 7 号球衣高出 3 个单位）。</li>
-</ul>
-<hr>
-<h3 id="有序变量误当定量变量李克特量表陷阱">有序变量误当定量变量（李克特量表陷阱）</h3>
-<ul>
-<li><strong>错误认知</strong>：“满意度评分为 1 到 5 分，可以当成连续数值直接加减。”</li>
-<li><strong>真相</strong>：“很满意(5分)”与“满意(4分)”之间的差距，并不能在物理上严格等同于“一般(3分)”与“不满意(2分)”之间的差距。它本质上只有<strong>顺序（次序）关系</strong>，没有恒定的测量单位，属于<strong>有序分类变量（定性）</strong>。</li>
-</ul>
-<hr>
-<h3 id="统计指标与变量本身的混淆">统计指标与变量本身的混淆</h3>
-<ul>
-<li><strong>错误认知</strong>：“’企业男女比例为 1:2’是数字，所以性别是定量变量。”</li>
-<li><strong>真相</strong>：
-<ul>
-<li>研究的<strong>原始变量</strong>是员工个人的“性别”（男/女），这是<strong>定性变量</strong>。</li>
-<li>“比例”、“占比”或“频数”是基于样本或总体<strong>统计汇总计算出来的统计量</strong>，不能颠倒原始变量本身的类型。</li>
-</ul></li>
+<li><p><strong>如果毫无意义</strong>（例如算身份证号或工号的均值）：属于<strong>定性变量</strong>。</p></li>
+<li><p><strong>如果有实际意义</strong>（例如计算平均月薪或平均气温）：属于<strong>定量变量</strong>。</p></li>
 </ul>
 </div>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<div class="callout callout-note callout-titled callout-style-simple">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>快速练习自测</strong></p>
-</div>
-<div class="callout-content">
-<p>尝试判断下列变量属于<strong>定性变量</strong>还是<strong>定量变量</strong> 1. 汽车车牌号（如：粤A·12345） 2. 某型号汽车的发动机排量（如：1.5L, 2.0L） 3. 汽车碰撞安全测试等级（如：五星、四星、三星） 4. 工厂每个月的实际汽车装配下线量（如：12,000台）</p>
-<blockquote>
-<p><em>答案解析</em>：1、3为定性变量（分别属于无序与有序分类）；2、4为定量变量（分别属于连续与离散数值）。</p>
-</blockquote>
-</div>
-</div>
-</div>
-</section>
-<section id="下列数据是定性数据还是定量数据" class="slide level2">
-<h2>下列数据是定性数据还是定量数据？</h2>
+<section id="练习定性数据还是定量数据" class="slide level2">
+<h2>练习：定性数据还是定量数据？</h2>
 <ul>
 <li><p>一个消费调查中鞋子的品牌</p></li>
 <li><p>一份试卷中答对的题数</p></li>
 <li><p>一篇论文评定的等级</p></li>
 <li><p>一篮球队员球衣上的数字</p></li>
+<li><p>满意度等级：非常满意、比较满意、基本满意、比较不满意、非常不满意</p></li>
+<li><p>满意度评分等级：1到5</p></li>
 </ul>
-</section>
-<section id="scales-of-measurement-计量尺度" class="slide level2">
-<h2>Scales of Measurement 计量尺度</h2>
-<ul>
-<li><strong>Nominal Scale 分类尺度</strong>
-<ul>
-<li>是/否，包含的信息最少</li>
-</ul></li>
-<li><strong>Ordinal Scale 顺序尺度</strong>
-<ul>
-<li>是/否，比较大小，但不能量化差异</li>
-</ul></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li><strong>Interval Scale 间隔尺度</strong>
-<ul>
-<li>0 代表的是刻度上的一点，如温度</li>
-<li>减法运算，可以量化差异</li>
-</ul></li>
-<li><strong>Ratio Scale 比率尺度</strong>
-<ul>
-<li>0 代表没有</li>
-<li>可以进行减法、除法运算</li>
-</ul></li>
-</ul>
-</section>
-<section id="数据类型示例" class="slide level2">
-<h2>数据类型示例</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 29%">
-<col style="width: 12%">
-<col style="width: 14%">
-<col style="width: 13%">
-<col style="width: 17%">
-<col style="width: 13%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Car</th>
-<th>Size</th>
-<th>Cylinders</th>
-<th>City MPG</th>
-<th>Highway MPG</th>
-<th>Fuel</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Audi A8</td>
-<td>Large</td>
-<td>12</td>
-<td>13</td>
-<td>19</td>
-<td>Premium</td>
-</tr>
-<tr class="even">
-<td>BMW 328Xi</td>
-<td>Compact</td>
-<td>6</td>
-<td>17</td>
-<td>25</td>
-<td>Premium</td>
-</tr>
-<tr class="odd">
-<td>Cadillac CTS</td>
-<td>Midsize</td>
-<td>6</td>
-<td>16</td>
-<td>25</td>
-<td>Regular</td>
-</tr>
-<tr class="even">
-<td>Chrysler 300</td>
-<td>Large</td>
-<td>8</td>
-<td>13</td>
-<td>18</td>
-<td>Premium</td>
-</tr>
-<tr class="odd">
-<td>Ford Focus</td>
-<td>Compact</td>
-<td>4</td>
-<td>24</td>
-<td>33</td>
-<td>Regular</td>
-</tr>
-<tr class="even">
-<td>Hyundai Elantra</td>
-<td>Midsize</td>
-<td>4</td>
-<td>25</td>
-<td>33</td>
-<td>Regular</td>
-</tr>
-<tr class="odd">
-<td>Jeep Grand Cherokee</td>
-<td>Midsize</td>
-<td>6</td>
-<td>17</td>
-<td>26</td>
-<td>Diesel</td>
-</tr>
-<tr class="even">
-<td>Pontiac G6</td>
-<td>Compact</td>
-<td>6</td>
-<td>15</td>
-<td>22</td>
-<td>Regular</td>
-</tr>
-<tr class="odd">
-<td>Toyota Camry</td>
-<td>Midsize</td>
-<td>4</td>
-<td>21</td>
-<td>31</td>
-<td>Regular</td>
-</tr>
-<tr class="even">
-<td>Volkswagen Jetta</td>
-<td>Compact</td>
-<td>5</td>
-<td>21</td>
-<td>29</td>
-<td>Regular</td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="截面数据" class="slide level2">
 <h2>截面数据</h2>
 <ul>
 <li><strong>定义</strong>：截面数据（Cross-sectional data）是在<strong>相同或近似相同的时间点</strong>上收集的数据。</li>
 <li><strong>特点</strong>：数据通常是在<strong>不同的空间（或不同个体）</strong>上获得的，用于描述现象在某一特定时刻的状态、分布及差异。</li>
-<li><strong>与时间序列的区别</strong>：
-<ul>
-<li><strong>截面数据</strong>：同一时点，多个个体（横向对比，侧重空间分布）。</li>
-<li><strong>时间序列数据</strong>：同一个体，不同时间（纵向追踪，侧重发展趋势）。</li>
-</ul></li>
 </ul>
 </section>
-<section id="截面数据举例" class="slide level2">
-<h2>截面数据举例</h2>
+<section id="截面数据-1" class="slide level2">
+<h2>截面数据</h2>
 <ol type="1">
 <li><strong>宏观经济</strong>：2023年我国各省份的地区生产总值（GDP）和人均可支配收入。</li>
 <li><strong>企业财务</strong>：某交易日收盘时，所有沪深300成分股的市盈率（PE）与换手率。</li>
 <li><strong>社会调查</strong>：某次问卷中，1000位受访者在接受调查当下的年龄、文化程度和消费满意度。</li>
 </ol>
 </section>
-<section id="截面数据结构示例" class="slide level2">
-<h2>截面数据结构示例</h2>
+<section id="截面数据-2" class="slide level2">
+<h2>截面数据</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -867,8 +815,8 @@ Li Zongzhang
 </div>
 </div>
 </section>
-<section id="截面数据示例" class="slide level2">
-<h2>截面数据示例</h2>
+<section id="截面数据-3" class="slide level2">
+<h2>截面数据</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>查看R代码</summary>
@@ -902,6 +850,11 @@ Figure&nbsp;1: 2023年部分地区人均可支配收入对比（截面数据示�
 <ul>
 <li><strong>定义</strong>：时间序列数据（Time Series Data）是在<strong>不同时间</strong>收集到的数据。</li>
 <li><strong>特征</strong>：这类数据是<strong>按时间先后顺序</strong>排列和记录的，主要用于观察和描述现象随时间推移而发生的变化情况与演变趋势。</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><strong>与截面数据的区别</strong>：
 <ul>
 <li><strong>时间序列数据</strong>：同一个体/对象，在不同的时间点追踪观察（纵向对比，侧重时间趋势）。</li>
@@ -909,8 +862,8 @@ Figure&nbsp;1: 2023年部分地区人均可支配收入对比（截面数据示�
 </ul></li>
 </ul>
 </section>
-<section id="时间序列实例" class="slide level2">
-<h2>时间序列实例</h2>
+<section id="时间序列举例" class="slide level2">
+<h2>时间序列举例</h2>
 <ul>
 <li><strong>宏观经济</strong>：2010—2023年我国各年份的国内生产总值（GDP）、年度居民消费价格指数（CPI）。</li>
 <li><strong>金融市场</strong>：某只股票过去一年中每个交易日的日收盘价与成交量。</li>
@@ -1005,19 +958,7 @@ Figure&nbsp;1: 2023年部分地区人均可支配收入对比（截面数据示�
 </div>
 <img data-src="L1slides_files/figure-revealjs/fig-timeseries-1.png" width="960" class="r-stretch quarto-figure-center" id="fig-timeseries"><p class="caption">
 Figure&nbsp;2: 2018—2023年我国GDP变化趋势（时间序列示例）
-</p></section>
-<section id="数据类型-分析方法" class="slide level2">
-<h2>数据类型 → 分析方法</h2>
-<ul>
-<li><strong>单个变量</strong>：定量数据 or 定性数据？</li>
-<li><strong>两个变量</strong>：
-<ul>
-<li>定性数据 &amp; 定性数据 → Chap 9</li>
-<li>定性数据 &amp; 定量数据 → Chap 10</li>
-<li>定量数据 &amp; 定量数据 → Chap 11</li>
-</ul></li>
-</ul>
-</section></section>
+</p></section></section>
 <section>
 <section id="基本概念" class="title-slide slide level1 center">
 <h1>1.3 基本概念</h1>
@@ -1054,6 +995,10 @@ Figure&nbsp;2: 2018—2023年我国GDP变化趋势（时间序列示例）
 <h2>总体和样本</h2>
 
 <img data-src="img/population_sample.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="img/sample2.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section id="参数和统计量" class="slide level2">
 <h2>参数和统计量</h2>
 <p><strong>参数 (parameter)</strong></p>
@@ -1067,8 +1012,16 @@ Figure&nbsp;2: 2018—2023年我国GDP变化趋势（时间序列示例）
 <li><strong>随机变量</strong></li>
 </ul>
 </section>
-<section id="总体与样本的对应关系" class="slide level2">
-<h2>总体与样本的对应关系</h2>
+<section id="总体均值和样本均值" class="slide level2">
+<h2>总体均值和样本均值</h2>
+
+<img data-src="img/mean.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="img/mean2.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section id="参数与样本的常用符号" class="slide level2">
+<h2>参数与样本的常用符号</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1096,36 +1049,6 @@ Figure&nbsp;2: 2018—2023年我国GDP变化趋势（时间序列示例）
 </tbody>
 </table>
 </section>
-<section id="例题" class="slide level2">
-<h2>例题</h2>
-<p>某大学的一位研究人员希望估计该大学本科生平均每月的生活费支出，为此，他调查了200名学生，发现他们的每月平均生活费支出是600元。</p>
-<ul>
-<li><strong>总体</strong>？</li>
-<li><strong>样本</strong>？</li>
-<li><strong>参数</strong>？</li>
-<li><strong>统计量</strong>？</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<div class="fragment">
-<p><strong>答案</strong>： - 总体：该大学全部本科生的每月生活费支出</p>
-<ul>
-<li><p>样本：调查的200名学生的每月生活费支出</p></li>
-<li><p>参数：全体本科生平均每月生活费支出（未知）</p></li>
-<li><p>统计量：样本平均每月生活费支出 = 600元</p></li>
-</ul>
-</div>
-</section>
-<section id="练习以下数据是离散的还是连续的" class="slide level2">
-<h2>练习：以下数据是离散的还是连续的？</h2>
-<ol type="1">
-<li>步行1公里所用的时间。</li>
-<li>日历年中的年份（如2016, 2017, 2018）</li>
-<li>农场中奶牛的数量。</li>
-<li>农场中奶牛的产奶量。</li>
-</ol>
-</section>
 <section id="贝壳二手房示例可提取哪些数据数据类型" class="slide level2">
 <h2>贝壳二手房示例：可提取哪些数据？数据类型？</h2>
 <ul>
@@ -1150,59 +1073,98 @@ Figure&nbsp;2: 2018—2023年我国GDP变化趋势（时间序列示例）
 <section>
 <section id="课程概况" class="title-slide slide level1 center">
 <h1>课程概况</h1>
-<ul>
-<li>课程目标</li>
-<li>教学形式</li>
-<li>学习方法</li>
-<li>考核方式</li>
-</ul>
+
 </section>
 <section id="课程目标" class="slide level2">
 <h2>课程目标</h2>
 <ul>
-<li>统计方法的运用</li>
-<li>统计直觉、批判性思维</li>
-<li>软件操作：Excel / SPSS / R</li>
+<li>培养<strong>统计直觉</strong>：看穿数据背后的故事</li>
+<li>训练<strong>批判性思维</strong>：不被数据欺骗，学会质疑</li>
+<li>熟练运用工具：
+<ul>
+<li><strong>Excel</strong>：从零到精通的数据整理</li>
+<li><strong>R</strong>：掌握编程语言，打开数据科学大门</li>
+<li><strong>SPSS</strong>：点点鼠标，让复杂分析变简单</li>
+</ul></li>
 </ul>
 </section>
 <section id="教学形式" class="slide level2">
 <h2>教学形式</h2>
+<h3 id="理论讲授">理论讲授</h3>
 <ul>
-<li>新课</li>
-<li>课堂练习</li>
-<li>课后作业：上机（EXCEL）+ 手工计算，个人独立完成</li>
-<li>案例：小组完成，4次案例作业，期末课堂汇报</li>
-<li>小测验</li>
+<li><p>新课精讲</p></li>
+<li><p><strong>随堂小测</strong>：即时反馈，检验学习效果（不用紧张，是帮你查漏补缺！）</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="实践训练">实践训练</h3>
+<p>作业**（让你真正学会）</p>
+<ul>
+<li><p>动手上机：用 Excel/R 处理真实数据</p></li>
+<li><p>手工计算：理解算法本质</p></li>
+<li><p>独立完成：建立自己的知识体系</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><strong>小组作业</strong></p>
+<ul>
+<li><p>选择你感兴趣的话题</p></li>
+<li><p>团队合作：分工、讨论、碰撞</p></li>
+<li><p>期末汇报：展示成果</p></li>
+<li><p>真实数据，真实问题，真实解决方案</p></li>
 </ul>
 </section>
 <section id="学习方法" class="slide level2">
 <h2>学习方法</h2>
+<p><strong>紧跟课堂，高效吸收</strong></p>
 <ul>
-<li>课堂效率</li>
-<li>主动参与
-<ul>
-<li>个人作业</li>
-<li>小组作业</li>
-<li>知识拓展：多元统计</li>
-<li>同老师交流</li>
-</ul></li>
-<li>兴趣 + 实践</li>
+<li><p>课堂是黄金时间，不要浪费</p></li>
+<li><p>预习 → 听讲 → 复习，三步走</p></li>
 </ul>
 </section>
-<section id="学术竞赛" class="slide level2">
-<h2>学术竞赛</h2>
+<section class="slide level2">
+
+<p><strong>多维参与，知行合一</strong></p>
+<ul>
+<li><p>📝 独立作业：巩固基础</p></li>
+<li><p>👥 小组协作：学会沟通与合作</p></li>
+<li><p>🔬 前沿拓展：</p>
+<ul>
+<li><p>数据可视化</p></li>
+<li><p>机器学习</p></li>
+<li><p>AI工具</p></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><strong>保持好奇，学以致用</strong></p>
+<ul>
+<li><p>问为什么：为什么要这样计算？</p></li>
+<li><p>想应用：我能用它做什么？</p></li>
+<li><p>搞明白：数据说了什么，不说什么？</p></li>
+</ul>
+</section>
+<section id="学术竞赛实践" class="slide level2">
+<h2>学术竞赛实践</h2>
 <ul>
 <li><p>“原来后浪们都在B站学习”——大学生B站学习满意度影响因素研究</p></li>
-<li><p>“疫情停课不停学，教育变更不变质”——大学生“云”课堂学习效果和满意度影响因素分析</p></li>
+<li><p>“疫情停课不停学，教育变更不变质”——大学生“云”课堂学习效果及满意度分析</p></li>
 </ul>
 </section>
 <section id="参考教材" class="slide level2">
 <h2>参考教材</h2>
 <ul>
-<li><p>《商务与经济统计》（原书第13版）F712.3/45<br>
-（美）戴维 R. 安德森 等，机械工业出版社 2017</p></li>
-<li><p><em>Statistics for Business and Economics</em> F222/15/E.8<br>
-David R. Anderson, China Machine Press, 2003</p></li>
+<li>《商务与经济统计》（原书第13版）
+<ul>
+<li>戴维 R. 安德森 等著，机械工业出版社</li>
+</ul></li>
+<li><em>Statistics for Business and Economics</em> (8th Edition)
+<ul>
+<li>David R. Anderson et al., China Machine Press</li>
+</ul></li>
 </ul>
 </section>
 <section id="第1章重点" class="slide level2">
@@ -1222,7 +1184,7 @@ David R. Anderson, China Machine Press, 2003</p></li>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="https://lizongzhang.github.io/stat26">Stat</a> | © 2026, <a href="https://space.bilibili.com/590872906/">Li Zongzhang</a></p>
+<p><a href="https://lizongzhang.github.io/stat26">STAT</a> | © 2026, <a href="https://space.bilibili.com/590872906/">Li Zongzhang</a></p>
 </div>
 </div></div>
 

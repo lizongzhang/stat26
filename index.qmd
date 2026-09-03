@@ -49,28 +49,28 @@ about:
 <img src="img/video.png"  style="width: 24px; height: 24px;margin-right: 10px">[不用安装就能用的RStudio------RStudio
                 Cloud](https://www.bilibili.com/video/BV1zY4y1M7HX/){target="_blank"}(若无法安装R和R Studio, 请看此视频)
 
-**教学视频**
+# 教学视频
 
 <img src="img/video.png" style="width: 24px; height: 24px;margin-right: 10px"/>[Excel数据分析实战](https://space.bilibili.com/590872906/channel/collectiondetail?sid=758820)
 
 
-**教学平台**
+# 教学平台
 
 -   雨课堂：考勤、作业、测验、直播回看
 
--   QQ群：提交作业，提问答疑
+-   QQ群：提问答疑
 
-**参考书**
+# 参考书
 
 <img src="img/download.png" style="width: 24px; height: 24px;margin-right: 10px"/>[下载](https://pan.baidu.com/s/1yJ_6AiYyXOfm3d9izGCB5w?pwd=6666)
 
-**课程考核**
+# 课程考核
 
 -   平时成绩：50%
 
-    -   个人作业：20%
+    -   个人作业：25%
     
-    -   小组作业(案例分析)：15%    
+    -   小组作业：15%    
 
     -   测验：5%    
 

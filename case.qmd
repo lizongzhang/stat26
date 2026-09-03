@@ -42,12 +42,6 @@ title: "小组作业"
 
 -   不要使用其他教材中的例题或习题数据，不要使用虚拟数据  
 
-## 期末汇报
-
-
--   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[期末汇报要求](https://lizongzhang.github.io/stat26/casefinal.html){target="_blank"}
-
--   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[案例分析常见问题 to be updated](https://lizongzhang.github.io/stat26/case.html){target="_blank"}
 
 # 讨论课安排
 
@@ -144,7 +138,10 @@ title: "小组作业"
 -   将Excel的输出结果，及文字说明整理到PPT文档。
 
 
-## 小组汇报 (第16-17周)
+# 期末汇报 (第15-16周)
+-   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[期末汇报要求](https://lizongzhang.github.io/stat26/casefinal.html){target="_blank"}
+
+-   <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">[案例分析常见问题 to be updated](https://lizongzhang.github.io/stat26/case.html){target="_blank"}
 
 
 # 案例分析示例
