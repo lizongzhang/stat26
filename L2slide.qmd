@@ -49,7 +49,6 @@ library(showtext)
 showtext_auto()
 ```
 
----
 
 # 2.1 数据的来源 Data Source
 
@@ -191,16 +190,19 @@ showtext_auto()
 ## 抽样调查
 
 - **总体**（Population）
+
 - **样本**（Sample）
+
 - **抽样框**（Sampling frame）
-- **抽样方法**
+
+- **概率抽样方法**
   - 简单随机抽样
   - 分层抽样
   - 整群抽样
   - 系统抽样
   - 多阶段抽样
 
----
+---  
 
 ### 总体（Population）
 
@@ -243,7 +245,7 @@ showtext_auto()
 
 ---
 
-![](img/frame.png){width=45% fig-align="center"})
+![](img/frame.png){width=80% fig-align="center"})
 
 ---
 
