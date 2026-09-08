@@ -518,9 +518,6 @@ Li Zongzhang
 <li><strong>资料类型</strong></li>
 </ul>
 <p>支持统计年鉴、调查资料等多种类型。</p>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="调查数据-survey-data" class="title-slide slide level1 center">
@@ -529,8 +526,7 @@ Li Zongzhang
 </section>
 <section class="slide level2">
 
-<p>调查是获取一手数据最常用的方法之一。</p>
-<p>主要环节包括：</p>
+<p>调查环节：</p>
 <ol type="1">
 <li>明确调查目的与问题</li>
 <li>确定调查对象与抽样框</li>
@@ -551,7 +547,6 @@ Li Zongzhang
 <li>典型调查</li>
 </ul></li>
 </ul>
-<p>在实际研究中，<strong>抽样调查</strong>最为常用。</p>
 </section>
 <section id="抽样调查" class="slide level2">
 <h2>抽样调查</h2>
@@ -571,66 +566,71 @@ Li Zongzhang
 </section>
 <section class="slide level2">
 
-</section>
-<section class="slide level2">
-
 <h3 id="总体population">总体（Population）</h3>
 <p><strong>定义</strong>：<br>
 我们想要研究的<strong>全部对象</strong>所构成的集合。</p>
-<p><strong>例子</strong>： - 想了解某大学所有在校本科生的平均每周学习时间<br>
-→ 总体 = 该大学全部在校本科生 - 想研究全国高考考生的数学成绩分布<br>
-→ 总体 = 当年全部高考考生</p>
-<p><strong>注意</strong>：总体可以是有限的，也可以是无限的（理论上）。</p>
+<p><strong>例子</strong>： - 想了解某大学所有在校本科生的平均每周学习时间</p>
+<ul>
+<li><p>总体 = 该大学全部在校本科生</p></li>
+<li><p>想研究全国高考考生的数学成绩分布</p>
+<ul>
+<li>总体 = 当年全部高考考生</li>
+</ul></li>
+</ul>
 </section>
 <section class="slide level2">
 
 <h3 id="样本sample">样本（Sample）</h3>
 <p><strong>定义</strong>：<br>
 从总体中抽取的一部分个体，用来推断总体特征。</p>
-<p><strong>例子</strong>： - 从某大学 2 万名本科生中，随机抽取 500 人进行问卷调查<br>
-→ 这 500 人就是样本 - 从全国高考考生中抽取 1 万人的成绩进行分析<br>
-→ 这 1 万人就是样本</p>
+<p><strong>例子</strong>： - 从某大学 2 万名本科生中，随机抽取 500 人进行问卷调查</p>
+<ul>
+<li><p>这 500 人就是样本</p></li>
+<li><p>从全国高考考生中抽取 1 万人的成绩进行分析</p>
+<ul>
+<li>这 1 万人就是样本</li>
+</ul></li>
+</ul>
 <p><strong>核心思想</strong>：用样本的信息去估计总体的未知特征（如均值、比例等）。</p>
 </section>
 <section class="slide level2">
 
 <h3 id="抽样框sampling-frame">抽样框（Sampling Frame）</h3>
-<p><strong>定义</strong>：<br>
-实际用于抽样的<strong>完整名单或名录</strong>，是连接总体与样本的桥梁。</p>
-<p><strong>理想情况</strong>：抽样框 = 总体<br>
-<strong>实际情况</strong>：抽样框常常与总体不完全一致</p>
-<p><strong>例子</strong>： - 调查某市居民对公共交通的满意度<br>
-- 理想总体：全市所有常住居民<br>
-- 实际抽样框：可能是该市固定电话号码簿、或某平台注册用户名单</p>
-<p><strong>常见问题</strong>： - 覆盖不全（有些人没被列入） - 包含不合格对象（已搬走、已去世等） - 重复登记</p>
+<p>总体中所有个体的<strong>名单或名录</strong>。</p>
 </section>
-<section id="抽样方法总览" class="slide level2">
-<h2>抽样方法总览</h2>
-<p>常见概率抽样方法：</p>
-<ol type="1">
-<li><strong>简单随机抽样</strong>（Simple Random Sampling）</li>
-<li><strong>分层抽样</strong>（Stratified Sampling）</li>
-<li><strong>整群抽样</strong>（Cluster Sampling）</li>
-<li><strong>系统抽样</strong>（Systematic Sampling）</li>
-<li><strong>多阶段抽样</strong>（Multi-stage Sampling）</li>
-</ol>
+<section class="slide level2">
+
+<p><img data-src="img/frame.png" class="quarto-figure quarto-figure-center" style="width:45.0%">)</p>
+</section>
+<section id="概率抽样方法" class="slide level2">
+<h2>概率抽样方法</h2>
+<p><strong>简单随机抽样</strong>（Simple Random Sampling）</p>
+<p><strong>分层抽样</strong>（Stratified Sampling）</p>
+<p><strong>整群抽样</strong>（Cluster Sampling）</p>
+<p><strong>系统抽样</strong>（Systematic Sampling）</p>
+<p><strong>多阶段抽样</strong>（Multi-stage Sampling）</p>
 </section>
 <section class="slide level2">
 
 <h3 id="简单随机抽样simple-random-sampling">简单随机抽样（Simple Random Sampling）</h3>
-<p><strong>定义</strong>：<br>
-总体中每一个个体被抽中的概率完全相同，且抽取过程相互独立（或等概率无放回）。</p>
-<p><strong>优点</strong>：简单、统计理论性质好<br>
-<strong>缺点</strong>：需要完整抽样框；当总体很大时实施成本高</p>
+<p>总体中每一个个体被抽中的概率完全相同，且抽取过程相互独立（或等概率无放回）。</p>
+<p><strong>优点</strong>：简单、统计理论性质好</p>
+<p><strong>缺点</strong>：需要完整抽样框；当总体很大时实施成本高</p>
 </section>
 <section class="slide level2">
 
 
 <img data-src="img/simple.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
-<section id="分层抽样stratified-sampling" class="slide level2">
-<h2>分层抽样（Stratified Sampling）</h2>
-<p><strong>定义</strong>：<br>
-先将总体按照某个特征分成若干互不重叠的<strong>层</strong>（strata），再从每一层中独立进行随机抽样。 <strong>优点</strong>： - 保证各层都有代表性 - 通常能提高估计精度 - 可对每层单独分析</p>
+<section class="slide level2">
+
+<h3 id="分层抽样stratified-sampling">分层抽样（Stratified Sampling）</h3>
+<p>先将总体按照某个特征分成若干互不重叠的<strong>层</strong>（strata），再从每一层中独立进行随机抽样。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li><p>保证各层都有代表性</p></li>
+<li><p>通常能提高估计精度</p></li>
+<li><p>可对每层单独分析</p></li>
+</ul>
 <p><strong>适用情况</strong>：总体内部差异较大，且可按重要特征分层时。</p>
 </section>
 <section class="slide level2">
@@ -641,101 +641,60 @@ Li Zongzhang
 
 
 <img data-src="img/stratified2.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
-<section id="整群抽样cluster-sampling" class="slide level2">
-<h2>3. 整群抽样（Cluster Sampling）</h2>
-<p><strong>定义</strong>：<br>
-先将总体分成若干群（clusters），然后随机抽取一部分群，对抽中的群进行<strong>全部调查</strong>（或再抽样）。</p>
+<section class="slide level2">
+
+<h3 id="整群抽样cluster-sampling">整群抽样（Cluster Sampling）</h3>
+<p>先将总体分成若干群（clusters），然后随机抽取一部分群，对抽中的群进行<strong>全部调查</strong>。</p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/cluster.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
 <p><strong>例子</strong>： 想调查某市小学生的视力情况。<br>
 以“学校”为群，随机抽取 20 所小学，然后调查这 20 所小学的全部学生。</p>
-<p><strong>优点</strong>：实施方便、节省成本（尤其当个体分散时）<br>
-<strong>缺点</strong>：精度通常低于简单随机抽样（因为同一群内个体往往较相似）</p>
+<p><strong>优点</strong>：实施方便、节省成本（尤其当个体分散时）</p>
+<p><strong>缺点</strong>：精度通常低于简单随机抽样（因为同一群内个体往往较相似）</p>
 </section>
-<section id="系统抽样systematic-sampling" class="slide level2">
-<h2>4. 系统抽样（Systematic Sampling）</h2>
-<p><strong>定义</strong>：<br>
-将总体按一定顺序排列，先随机确定一个起点，然后按固定间隔抽取个体。</p>
-<p><strong>操作步骤</strong>： 1. 计算抽样间隔 <span class="math inline">\(k = N/n\)</span>（总体量 / 样本量） 2. 在 1 ~ <span class="math inline">\(k\)</span> 中随机选一个起点 3. 之后每隔 <span class="math inline">\(k\)</span> 个抽取一个</p>
-<p><strong>例子</strong>： 某流水线每天生产 1000 件产品，想抽 50 件检验。<br>
-间隔 <span class="math inline">\(k = 1000/50 = 20\)</span>。<br>
-随机选第 7 件作为起点，然后抽第 27、47、67…件。</p>
-<p><strong>优点</strong>：操作简单、样本分布较均匀<br>
-<strong>缺点</strong>：如果总体有周期性，可能产生偏差</p>
+<section class="slide level2">
+
+<h3 id="系统抽样systematic-sampling">系统抽样（Systematic Sampling）</h3>
+<p>将总体按一定顺序排列，先随机确定一个起点，然后按固定间隔抽取个体。</p>
 </section>
-<section id="多阶段抽样multi-stage-sampling" class="slide level2">
-<h2>5. 多阶段抽样（Multi-stage Sampling）</h2>
-<p><strong>定义</strong>：<br>
-分多个阶段进行抽样，每个阶段使用不同的抽样单位。</p>
-<p><strong>典型例子</strong>（全国性入户调查）： 1. <strong>第一阶段</strong>：抽取省份 / 城市 2. <strong>第二阶段</strong>：在抽中的城市中抽取区县 3. <strong>第三阶段</strong>：在抽中的区县中抽取街道 / 村 4. <strong>第四阶段</strong>：在抽中的街道中抽取住户</p>
-<p><strong>优点</strong>：特别适合大规模、分散的总体，成本可控<br>
-<strong>缺点</strong>：设计与方差估计较复杂</p>
+<section class="slide level2">
+
+
+<img data-src="img/systematic.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+<p>系统抽样</p>
+<p><strong>优点</strong>：操作简单、样本分布较均匀</p>
+<p><strong>缺点</strong>：如果总体中的个体排列有周期性，可能产生偏差</p>
 </section>
-<section id="抽样方法对比小结" class="slide level2">
-<h2>抽样方法对比小结</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 34%">
-<col style="width: 22%">
-<col style="width: 27%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>方法</th>
-<th>核心特点</th>
-<th>优点</th>
-<th>主要局限</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>简单随机抽样</td>
-<td>每个个体等概率</td>
-<td>理论简单、公平</td>
-<td>需要完整名单，成本高</td>
-</tr>
-<tr class="even">
-<td>分层抽样</td>
-<td>先分层再抽样</td>
-<td>精度高、代表性好</td>
-<td>需要分层变量信息</td>
-</tr>
-<tr class="odd">
-<td>整群抽样</td>
-<td>抽取整群并调查群内全部</td>
-<td>实施方便、省钱</td>
-<td>精度较低</td>
-</tr>
-<tr class="even">
-<td>系统抽样</td>
-<td>等间隔抽取</td>
-<td>操作简单、分布均匀</td>
-<td>怕周期性波动</td>
-</tr>
-<tr class="odd">
-<td>多阶段抽样</td>
-<td>分</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section></section>
-<section>
+<section class="slide level2">
+
+<h3 id="多阶段抽样multi-stage-sampling">多阶段抽样（Multi-stage Sampling）</h3>
+<p>分多个阶段进行抽样，每个阶段使用不同的抽样单位。</p>
+
+<img data-src="img/multi.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="img/one_percent.jpeg" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="img/comparison.jpeg" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section></section>
 <section id="实验数据-experimental-data" class="title-slide slide level1 center">
 <h1>2.3 实验数据 Experimental Data</h1>
 
 </section>
-<section class="slide level2">
 
-</section></section>
 <section>
 <section id="数据的误差" class="title-slide slide level1 center">
 <h1>2.4 数据的误差</h1>
 
-</section>
-<section class="slide level2">
-
-<p>数据误差主要分为两大类：</p>
 </section>
 <section id="抽样误差sampling-error" class="slide level2">
 <h2>抽样误差（Sampling error）</h2>
@@ -748,8 +707,7 @@ Li Zongzhang
 <section id="非抽样误差non-sampling-error" class="slide level2">
 <h2>非抽样误差（Non-sampling error）</h2>
 <ul>
-<li><p>人为因素引起</p></li>
-<li><p>往往更难发现和控制</p></li>
+<li>人为因素引起</li>
 </ul>
 </section>
 <section class="slide level2">
@@ -774,25 +732,18 @@ Li Zongzhang
 <li>对缺失值和异常值进行审慎处理</li>
 </ul>
 </section>
-<section class="slide level2">
-
-<h3 id="数据质量评价的基本维度">数据质量评价的基本维度</h3>
+<section id="第2章重点" class="slide level2">
+<h2>第2章重点</h2>
 <ul>
-<li><strong>准确性</strong>（Accuracy）</li>
-<li><strong>完整性</strong>（Completeness）</li>
-<li><strong>及时性</strong>（Timeliness）</li>
-<li><strong>一致性</strong>（Consistency）</li>
-<li><strong>可比性</strong>（Comparability）</li>
-</ul>
-<p>好的数据是统计分析可靠的前提。</p>
-</section>
-<section id="第2章小结" class="slide level2">
-<h2>第2章小结</h2>
+<li><p>抽样框</p></li>
+<li><p>概率抽样</p>
 <ul>
-<li><p>数据可分为<strong>一手数据</strong>与<strong>二手数据</strong></p></li>
-<li><p>二手数据来源广泛（统计局、国际组织、商业数据库等 ）</p></li>
-<li><p>调查数据和实验数据</p></li>
-<li><p>抽样调查</p></li>
+<li><p>简单随机抽样simple random sampling</p></li>
+<li><p>分层抽样 stratified sampling</p></li>
+<li><p>整群抽样 cluster sampling</p></li>
+<li><p>系统抽样 systematic sampling</p></li>
+<li><p>多阶段抽样 multi-stage sampling</p></li>
+</ul></li>
 <li><p>抽样误差与非抽样误差</p></li>
 </ul>
 

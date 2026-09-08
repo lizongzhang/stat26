@@ -2370,7 +2370,7 @@
     "href": "L2slide.html#调查方式常见分类",
     "title": "第2章 数据的搜集",
     "section": "调查方式常见分类",
-    "text": "调查方式常见分类\n\n全面调查（普查）\n非全面调查\n\n抽样调查\n重点调查\n典型调查\n\n\n在实际研究中，抽样调查最为常用。"
+    "text": "调查方式常见分类\n\n全面调查（普查）\n非全面调查\n\n抽样调查\n重点调查\n典型调查"
   },
   {
     "objectID": "L2slide.html#抽样调查",
@@ -2433,13 +2433,34 @@
     "href": "L2slide.html#非抽样误差non-sampling-error",
     "title": "第2章 数据的搜集",
     "section": "非抽样误差（Non-sampling error）",
-    "text": "非抽样误差（Non-sampling error）\n\n人为因素引起\n往往更难发现和控制"
+    "text": "非抽样误差（Non-sampling error）\n\n人为因素引起"
   },
   {
     "objectID": "L2slide.html#第2章小结",
     "href": "L2slide.html#第2章小结",
     "title": "第2章 数据的搜集",
     "section": "第2章小结",
-    "text": "第2章小结\n\n数据可分为一手数据与二手数据\n二手数据来源广泛（统计局、国际组织、商业数据库等 ）\n调查数据和实验数据\n抽样调查\n抽样误差与非抽样误差"
+    "text": "第2章小结\n\n抽样框\n概率抽样\n\n简单随机抽样simple random sampling\n分层抽样 stratified sampling\n整群抽样 cluster sampling\n系统抽样 systematic sampling\n多阶段抽样 multi-stage sampling\n\n抽样误差与非抽样误差"
+  },
+  {
+    "objectID": "L2slide.html#概率抽样方法",
+    "href": "L2slide.html#概率抽样方法",
+    "title": "第2章 数据的搜集",
+    "section": "概率抽样方法",
+    "text": "概率抽样方法\n简单随机抽样（Simple Random Sampling）\n分层抽样（Stratified Sampling）\n整群抽样（Cluster Sampling）\n系统抽样（Systematic Sampling）\n多阶段抽样（Multi-stage Sampling）"
+  },
+  {
+    "objectID": "L2slide.html#section",
+    "href": "L2slide.html#section",
+    "title": "第2章 数据的搜集",
+    "section": "",
+    "text": "方法\n核心特点\n优点\n主要局限\n\n\n\n\n简单随机抽样\n每个个体等概率\n理论简单、公平\n需要完整名单，成本高\n\n\n分层抽样\n先分层再抽样\n精度高、代表性好\n需要分层变量信息\n\n\n整群抽样\n抽取整群并调查群内全部\n实施方便、省钱\n精度较低\n\n\n系统抽样\n等间隔抽取\n操作简单、分布均匀\n怕周期性波动\n\n\n多阶段抽样\n分"
+  },
+  {
+    "objectID": "L2slide.html#第2章重点",
+    "href": "L2slide.html#第2章重点",
+    "title": "第2章 数据的搜集",
+    "section": "第2章重点",
+    "text": "第2章重点\n\n抽样框\n概率抽样\n\n简单随机抽样simple random sampling\n分层抽样 stratified sampling\n整群抽样 cluster sampling\n系统抽样 systematic sampling\n多阶段抽样 multi-stage sampling\n\n抽样误差与非抽样误差"
   }
 ]
