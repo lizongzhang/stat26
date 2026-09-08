@@ -2,7 +2,7 @@
 title:  "问卷设计"
 date: today
 author: 
-  name: "李宗璋"
+  name: "Li Zongzhang"
   url: https://space.bilibili.com/590872906/
 format: 
   revealjs:
@@ -18,16 +18,16 @@ format:
     chalkboard: 
       buttons: true
     preview-links: auto
-    css: styles.css
+    css: style.css
     footer: |
-      <https://lizongzhang.github.io/stat25><br>© Li Zongzhang 
+      <https://lizongzhang.github.io/stat26><br>© Li Zongzhang 
     include-before-body: 
       - header.html
       - fonts.html
-    title-slide-attributes: 
-      data-background-image: "img/bili_up.jpg"  
-      data-background-size: "100px"        
-      data-background-position: "center bottom 200px"  
+    # title-slide-attributes: 
+    #   data-background-image: "img/bili_up.jpg"  
+    #   data-background-size: "100px"        
+    #   data-background-position: "center bottom 200px"  
     plugins: [highlight, zoom, notes]
 editor: 
   markdown: 

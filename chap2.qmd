@@ -2,11 +2,11 @@
 title: "第2章"
 ---
 
-# 第2章 数据的搜集
+# 讲义
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap2.html){target="_blank"}
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[L2数据的搜集 Slides](https://lizongzhang.github.io/stat26/L2slide.html){target="_blank"}
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[问卷设计](https://lizongzhang.github.io/stat25/chap2ques.html){target="_blank"}
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[问卷设计](https://lizongzhang.github.io/stat26/chap2ques.html){target="_blank"}
 
 # 课堂练习
 

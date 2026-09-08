@@ -4,7 +4,7 @@ title: "第1章"
 
 # 讲义
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[第1章导论slides](https://lizongzhang.github.io/stat26/L1slides.html){target="_blank"}
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[第1章导论slides](https://lizongzhang.github.io/stat26/L1slide.html){target="_blank"}
 
 
 # 课堂讨论

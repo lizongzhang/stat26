@@ -11,7 +11,7 @@
 
   <meta name="author" content="Li Zongzhang">
   <meta name="dcterms.date" content="2026-09-08">
-  <title>统计学26秋 – 问卷设计</title>
+  <title>统计学26秋 – 第2章 数据的搜集</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,7 +30,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-0c22b6e252e162282a19289aa8a4686d.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-3b23134f08a4276564e1247b4ea610ff.css">
   <link rel="stylesheet" href="style.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -134,7 +134,7 @@
   right: 20px;
   z-index: 1000;
 ">
-  <a href="https://lizongzhang.github.io/metrics26i" style="
+  <a href="https://lizongzhang.github.io/stat26" style="
        display: inline-flex;
        align-items: center;
        gap: 8px;
@@ -170,321 +170,638 @@
        " alt="logo">
 </div>
 
+<!-- ============================================================
+     Reveal.js slide zoom
+     Cmd/Ctrl +  : 放大幻灯片
+     Cmd/Ctrl -  : 缩小幻灯片
+     Cmd/Ctrl 0  : 恢复默认
+     ============================================================ -->
+
+<script>
+(function () {
+
+  let userZoom = 1;
+
+  const ZOOM_STEP = 1.10;
+  const MIN_ZOOM = 0.50;
+  const MAX_ZOOM = 2.50;
+
+  function getSlides() {
+    return document.querySelector('.reveal .slides');
+  }
+
+  /*
+   * Reveal.js 自己负责计算适合当前窗口的 scale。
+   *
+   * 我们只在 Reveal.js 的 scale 上再乘一个 userZoom。
+   */
+  function applyUserZoom() {
+
+    const slides = getSlides();
+
+    if (!slides || typeof Reveal === 'undefined') {
+      return;
+    }
+
+    const revealScale = Reveal.getScale();
+
+    if (!revealScale || !isFinite(revealScale)) {
+      return;
+    }
+
+    /*
+     * Reveal.js 当前版本使用 CSS zoom 来缩放 .slides。
+     * 因此直接在它计算出的 scale 上叠加我们的倍率。
+     */
+    slides.style.zoom = String(revealScale * userZoom);
+  }
+
+
+  function setUserZoom(value) {
+
+    userZoom = Math.max(
+      MIN_ZOOM,
+      Math.min(MAX_ZOOM, value)
+    );
+
+    applyUserZoom();
+  }
+
+
+  function zoomIn() {
+    setUserZoom(userZoom * ZOOM_STEP);
+  }
+
+
+  function zoomOut() {
+    setUserZoom(userZoom / ZOOM_STEP);
+  }
+
+
+  function resetZoom() {
+    setUserZoom(1);
+  }
+
+
+  /*
+   * Cmd/Ctrl + / -
+   *
+   * 注意：
+   * 我们主动阻止浏览器的默认网页缩放。
+   * 因此 Cmd+ 会真正控制幻灯片，而不是整个网页。
+   */
+  document.addEventListener('keydown', function (event) {
+
+    if (!(event.metaKey || event.ctrlKey)) {
+      return;
+    }
+
+    /*
+     * 如果用户正在输入框、文本框或可编辑区域，
+     * 不干扰正常的 Cmd+/Cmd- 操作。
+     */
+    const target = event.target;
+
+    if (
+      target &&
+      (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'SELECT' ||
+        target.isContentEditable
+      )
+    ) {
+      return;
+    }
+
+
+    /*
+     * Cmd/Ctrl +
+     *
+     * Mac Chrome/Safari:
+     * event.key 通常是 "+" 或 "="
+     */
+    if (
+      event.key === '+' ||
+      event.key === '='
+    ) {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      zoomIn();
+
+      return;
+    }
+
+
+    /*
+     * Cmd/Ctrl -
+     */
+    if (event.key === '-') {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      zoomOut();
+
+      return;
+    }
+
+
+    /*
+     * Cmd/Ctrl 0
+     */
+    if (event.key === '0') {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      resetZoom();
+
+      return;
+    }
+
+  }, true);
+
+
+  /*
+   * Reveal.js 初始化完成以后执行。
+   */
+  function initializeZoomControl() {
+
+    if (typeof Reveal === 'undefined') {
+      setTimeout(initializeZoomControl, 100);
+      return;
+    }
+
+
+    /*
+     * Reveal.js ready
+     */
+    Reveal.on('ready', function () {
+
+      userZoom = 1;
+
+      setTimeout(function () {
+        applyUserZoom();
+      }, 0);
+
+    });
+
+
+    /*
+     * Reveal.js 每次重新计算 slide scale 时都会触发 resize。
+     *
+     * 例如：
+     * - 浏览器窗口改变大小
+     * - 全屏
+     * - 改变屏幕
+     * - Reveal.layout()
+     *
+     * 这时重新叠加我们的 userZoom。
+     */
+    Reveal.on('resize', function () {
+
+      setTimeout(function () {
+        applyUserZoom();
+      }, 0);
+
+    });
+
+  }
+
+
+  initializeZoomControl();
+
+})();
+</script>
+
 <!-- 加载楷体风格字体 Noto Serif SC（中国镜像） -->
 <link href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">问卷设计</h1>
+  <h1 class="title">第2章 数据的搜集</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-<a href="https://space.bilibili.com/590872906/">Li Zongzhang</a> 
+Li Zongzhang 
 </div>
 </div>
 </div>
 
   <p class="date">2026-09-08</p>
-</section>
-<section id="大纲" class="slide level2">
-<h2>大纲</h2>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">大纲</h2>
 <ul>
-<li><p>1.1 选题</p></li>
-<li><p>1.2 定性数据</p></li>
-<li><p>1.3 定量数据</p></li>
-<li><p>1.4 在线工具</p></li>
+<li><a href="#/数据的来源-data-source" id="/toc-数据的来源-data-source">2.1 数据的来源 Data Source</a></li>
+<li><a href="#/调查数据-survey-data" id="/toc-调查数据-survey-data">2.2 调查数据 Survey Data</a></li>
+<li><a href="#/实验数据-experimental-data" id="/toc-实验数据-experimental-data">2.3 实验数据 Experimental Data</a></li>
+<li><a href="#/数据的误差" id="/toc-数据的误差">2.4 数据的误差</a></li>
 </ul>
+</nav>
 </section>
-<section id="选题" class="slide level2">
-<h2>1.1 选题</h2>
-</section>
-<section id="选题的基本原则" class="slide level2">
-<h2>选题的基本原则</h2>
-<ul>
-<li><p><strong>兴趣驱动</strong>：选择自己感兴趣的主题，保持动力。</p></li>
-<li><p><strong>可行性</strong>：确保资源、时间和目标人群可及。</p></li>
-<li><p><strong>明确性</strong>：研究问题清晰，能转化为可量化的问卷题目。</p></li>
-<li><p><strong>社会价值</strong>：选择对学术、社会或政策有意义的主题。</p></li>
-</ul>
-</section>
-<section id="步骤1确定研究目标" class="slide level2">
-<h2>步骤1：确定研究目标</h2>
-<ul>
-<li><p>明确调查的目的：</p>
-<ul>
-<li><p>探索现象（如）</p></li>
-<li><p>验证假设（如评优与学习时长、社团活动时长角色的关系）</p></li>
-<li><p>解决问题（如共享）</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="步骤2聚焦研究领域" class="slide level2">
-<h2>步骤2：聚焦研究领域</h2>
-<ul>
-<li>从广泛领域入手，逐步聚焦：
-<ul>
-<li><strong>学术类</strong>：学习习惯、课程满意度、在线学习效果。</li>
-<li><strong>生活类</strong>：消费行为、心理健康、宿舍生活。</li>
-<li><strong>社会类</strong>：环保意识、职业规划、性别平等态度。</li>
-</ul></li>
-<li>提示：结合自身专业或社会热点。</li>
-</ul>
-</section>
-<section id="步骤3评估选题可行性" class="slide level2">
-<h2>步骤3：评估选题可行性</h2>
-<ul>
-<li><p><strong>目标人群</strong>：是否容易接触到足够样本（如本校学生）？</p></li>
-<li><p><strong>数据类型</strong>：是否适合定量或定性数据？</p></li>
-<li><p><strong>时间与资源</strong>：问卷设计、发放和分析的时间是否充足？</p></li>
-<li><p>示例：<br>
-选调生</p></li>
-</ul>
-</section>
-<section id="步骤4查阅文献与背景" class="slide level2">
-<h2>步骤4：查阅文献与背景</h2>
-<ul>
-<li><p><strong>目的</strong>：了解已有研究，避免重复，找到切入点。</p></li>
-<li><p><strong>方法</strong>：</p>
-<ul>
-<li><p>市调大赛选题。</p></li>
-<li><p>搜索关键词，如“大学生+心理健康+问卷”。</p></li>
-</ul></li>
-<li><p>示例：发现“大学生拖延症”研究较多，但“拖延症与社交媒体使用”的结合较少，可作为切入点。</p></li>
-</ul>
-</section>
-<section id="步骤5细化研究问题" class="slide level2">
-<h2>步骤5：细化研究问题</h2>
-<ul>
-<li><p>将宽泛主题转化为具体问题：</p>
-<ul>
-<li><p>宽泛：“大学生心理健康状况”。</p></li>
-<li><p>具体：“大学生学业/择业/同伴压力与焦虑水平的关系”。</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="常见选题误区" class="slide level2">
-<h2>常见选题误区</h2>
-<ul>
-<li><p><strong>过于宽泛</strong>：如“大学生生活”（需聚焦具体方面）。</p></li>
-<li><p><strong>过于敏感</strong>：如个人隐私问题，可能降低响应率。</p></li>
-<li><p><strong>缺乏新意</strong>：重复已有研究，需找到独特角度。</p></li>
-<li><p><strong>不可量化</strong>：如“大学生幸福感”（需定义可测量的指标）。</p></li>
-</ul>
-</section>
-<section id="实用建议" class="slide level2">
-<h2>实用建议</h2>
-<ul>
-<li><p><strong>头脑风暴</strong>：与同学、导师讨论，激发灵感。</p></li>
-<li><p><strong>小规模测试</strong>：先试探性询问几人，验证主题吸引力。</p></li>
-<li><p><strong>结合热点</strong>：如疫情后的学习方式变化、AI工具使用情况。</p></li>
-<li><p><strong>工具支持</strong>：使用问卷星便于数据收集。</p></li>
-</ul>
+<section class="slide level2">
+
 </section>
 <section>
-<section id="定性数据" class="title-slide slide level1 center">
-<h1>1.2 定性数据</h1>
-<p>单项选择题</p>
-<ul>
-<li>单项选择题适合收集定性/分类数据，包括 <strong>并列分类数据</strong> 或 <strong>有序分类数据</strong></li>
-</ul>
-<p>多项选择题</p>
-<ul>
-<li>每个选项是一个0-1变量</li>
-</ul>
+<section id="数据的来源-data-source" class="title-slide slide level1 center">
+<h1>2.1 数据的来源 Data Source</h1>
+
 </section>
-<section id="单项选择题" class="slide level2">
-<h2>单项选择题</h2>
+<section id="数据来源分类" class="slide level2">
+<h2>数据来源分类</h2>
 <ul>
-<li><p><strong>题干清晰</strong>：避免模糊或歧义</p></li>
-<li><p><strong>选项互斥</strong>：不同答案之间不重叠</p></li>
-<li><p><strong>顺序合理</strong>：非常不满意 → 不满意 → 一般 → 满意 → 非常满意</p></li>
-<li><p><strong>覆盖全面</strong>：提供“其他/不愿回答”选项</p></li>
+<li><strong>二手数据</strong>（Secondary data）
+<ul>
+<li>existing sources（已有来源）</li>
+</ul></li>
+<li><strong>一手数据</strong>（Primary data）
+<ul>
+<li>通过调查或实验获取</li>
+<li>surveys and experimental studies</li>
+</ul></li>
 </ul>
 </section>
-<section class="slide level2">
-
-<h3 id="题干选项简洁明确">题干选项简洁明确</h3>
-<p>避免歧义，确保每位受访者理解一致。</p>
-<p>你平时经常点外卖吗？</p>
-<p>A. 从不怎么点</p>
-<p>B. 偶尔点一下</p>
-<p>C. 经常点</p>
-<p>D. 很经常点</p>
-<p>E. 特别经常点</p>
-</section>
-<section class="slide level2">
-
-<p>题干：在过去一周，你使用外卖服务的频率是？ 选项：</p>
-<p>A. 从未</p>
-<p>B. 1–3 次</p>
-<p>C. 4–6 次</p>
-<p>D. 7次及以上</p>
-</section>
-<section class="slide level2">
-
-<p>选项互斥</p>
-<p>不同选项之间不能重叠，否则影响统计。</p>
-<p>错误示例：年龄：A. 18–25 B. 25–35 C. 35–45（25 和 35 重复）</p>
-<p>改进示例：年龄：A. 18–24 B. 25–34 C. 35–44 D. 45及以上</p>
-</section>
-<section id="单项选择题-1" class="slide level2">
-<h2>单项选择题</h2>
-<p>您希望孩子读书至少读到什么程度？</p>
-<p>1.现在就不想读书了</p>
-<p>2.小学毕业 （6 年）</p>
-<p>3.初中毕业 （9 年）</p>
-<p>4.职业高中/中专/技校 （大约 12 年）</p>
-<p>5.普通高中毕业 （12 年）</p>
-<p>6.大学专科（15 年）</p>
-<p>7.大学本科（16-17 年）</p>
-<p>8.研究生（硕士大约 19 年，博士大约 23 年）</p>
-<p>9.无所谓</p>
-</section>
-<section id="多项选择题" class="slide level2">
-<h2>多项选择题</h2>
-<p>D18 本自然村内或附近有没有以下金融机构？【多选】</p>
-<p>1.商业银行（包括邮政储蓄）</p>
-<p>2.农村信用合作社或农村资金互助社</p>
-<p>3.村村通</p>
-<p>4.其他非正规金融机构</p>
-<p>5.没有【跳至 D19】</p>
-</section>
-<section class="slide level2">
-
-</section>
-<section class="slide level2">
-
-<p>最近家庭借出给个人的款项（询问五年内印象最深刻的三笔）</p>
-<p>G463.最近五年是否借过钱给其他人？</p>
-<p>1.是 2.否【结束访问】</p>
-<p>G467 对方借款的用途</p>
-<p>1.娶媳妇 2.嫁女 3.丧事 4.看病 5.买食物</p>
-<p>6.建房 7. 购房 8.买车 9.买其他日用品</p>
-<p>10.孩子上大学 11.孩子上高中 12.孩子上初中</p>
-<p>13.孩子上小学 14.农业生产 15.做小生意</p>
-<p>16.投资办企业 17.出去打工 18.还旧债</p>
-<p>19.借给亲戚朋友 20.借给其他人</p>
-<p>21.通过抬会、摇会等民间金融组织把钱借出去 22.其他，请说明</p>
-</section>
-<section class="slide level2">
-
-<h3 id="选择-填空">选择 + 填空</h3>
-
-<img src="img/lend.png" alt="" class="r-stretch"></section></section>
-<section>
-<section id="定量数据" class="title-slide slide level1 center">
-<h1>1.3 定量数据</h1>
+<section id="宏观数据常用来源" class="slide level2">
+<h2>宏观数据常用来源</h2>
 <ul>
-<li><p>定量数据: 用数字表示、能做计算的数据。由被访者填答的填空题。</p></li>
-<li><p>提供数值区间选项的选择题，只可排序，不可计算，属于定性数据。</p></li>
+<li><p><strong>国家统计局</strong><br>
+<a href="http://www.stats.gov.cn/">http://www.stats.gov.cn/</a></p></li>
+<li><p><strong>中国政府网 / 各部门</strong><br>
+<a href="http://www.gov.cn/">http://www.gov.cn/</a></p></li>
+<li><p><strong>联合国统计司</strong><br>
+<a href="http://data.un.org/">http://data.un.org/</a></p></li>
+<li><p><strong>世界银行公开数据</strong><br>
+<a href="https://data.worldbank.org">https://data.worldbank.org</a></p></li>
 </ul>
-<p>每周点外卖的支出：</p>
-<p>A. 0 ～ 50</p>
-<p>B. 51 ~ 100</p>
-<p>C. 101 ~ 150</p>
-<p>D. 150以上</p>
 </section>
-<section class="slide level2">
-
-<p>题干明确，单位清晰</p>
-<p>明确说明要测量的数量及单位，避免歧义。</p>
-<p>示例：</p>
-<p>❌ “你每天锻炼多久？”（单位不明）</p>
-<p>✅ “你每天锻炼多少分钟？（请填写整数，单位：分钟）”</p>
+<section id="政府部门网站" class="slide level2">
+<h2>政府部门网站</h2>
+<p>外交部 · 国防部 · 发展改革委 · 教育部<br>
+公安部 · 监察部 · 民政部 · 司法部<br>
+环境保护部 · 住房城乡建设部 · 交通运输部 · 水利部<br>
+卫生计生委 · 人民银行 · 审计署 · 国资委<br>
+质检总局 · 新闻出版广电总局 · 体育总局 · 安全监管总局<br>
+知识产权局 · 旅游局 · 宗教局 · 参事室<br>
+港澳办 · 法制办 · 国研室 · 台办</p>
 </section>
-<section class="slide level2">
-
-<p>设置合理范围或提示</p>
-<p>给出上下界或参考范围，减少异常值和错误输入。</p>
-<p>示例：</p>
-<p>“你上周点外卖的次数（0–20 次）：__”</p>
-</section>
-<section class="slide level2">
-
-<p>提示填写格式</p>
-<p>指导填写整数、小数或百分比，保证数据统一性。</p>
-<p>示例：</p>
-<p>“你每天平均睡眠时间（小时，精确到 0.5 小时）：__”</p>
-</section>
-<section class="slide level2">
-
-<p>激励和易填性</p>
-<p>短题、简洁题干，提高完成率。</p>
-<p>对连续数字题目，可提供滑条或数字选择器（电子问卷）。</p>
-</section>
-<section class="slide level2">
-
-<p>分解复杂问题</p>
-<p>如果一个数字涉及多个维度，可拆分为多题。</p>
-<p>示例：</p>
-<p>学习时间</p>
-<p>题干：你在过去一周用于自主学习的总时间是多少？</p>
-<p>（1）周一至周五：__小时</p>
-<p>（2）周六至周日：__小时”</p>
-</section>
-<section class="slide level2">
-
-<h3 id="务工收入">务工收入</h3>
-<p><img src="img/outwork1.png" alt=""></p>
-<p><img src="img/outwork2.png" alt=""></p>
-</section>
-<section class="slide level2">
-
-<h3 id="教育开支">教育开支</h3>
-
-<img src="img/edu_fee.png" alt="" class="r-stretch"></section>
-<section id="多项选择题提取定量变量" class="slide level2">
-<h2>多项选择题提取定量变量</h2>
-<p>多项选择题: 允许受访者在多个选项中勾选一个或多个。</p>
+<section id="学校购买的数据库" class="slide level2">
+<h2>学校购买的数据库</h2>
+<h3 id="宏观数据库国家省级市区县级">宏观数据库（国家、省级、市、区县级）</h3>
 <ul>
-<li><p>原始数据通常是分类数据（名义变量），每个选项本身没有大小顺序。</p></li>
-<li><p>统计每位受访者勾选的选项总数。</p></li>
-<li><p>勾选的选项总数是数值型变量（定量变量），可以做加减、平均、相关等统计分析。</p></li>
+<li><strong>EPS 全球数据库</strong></li>
+<li><strong>国研网</strong></li>
+<li><strong>中国知网 · 统计数据</strong>（试用）</li>
 </ul>
-<p>题目：你喜欢的运动有哪些？（可多选）</p>
-<p>A. 足球</p>
-<p>B. 篮球</p>
-<p>C. 游泳</p>
-<p>D. 跑步</p>
+<h3 id="微观数据上市公司数据库">微观数据：上市公司数据库</h3>
+<ul>
+<li><strong>CSMAR</strong> 国泰安经济金融数据库</li>
+<li><strong>RESSET（锐思）</strong> 金融研究数据库</li>
+</ul>
 </section>
 <section class="slide level2">
 
-<p>题目：你过去一个月内使用过哪些外卖平台？（可多选）</p>
-<p>A. 美团</p>
-<p>B. 饿了么</p>
-<p>C. 京东</p>
-<p>D. 淘宝</p>
-<p>E. 商家自营平台(麦当劳/KFC/必胜客等)</p>
+<h3 id="访问数据库注意事项">访问数据库注意事项</h3>
+<ul>
+<li><p>VPN或校园网访问</p></li>
+<li><p>路径示例：图书馆主页 → 电子资源 → 中文数据库</p></li>
+<li><p><strong>不要</strong>通过百度等搜索引擎直接搜索数据库名称后访问（容易出现权限或安全问题）</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="eps-全球统计数据">EPS 全球统计数据</h3>
+<ul>
+<li>全称：Easy Professional Superior</li>
+<li>公司：北京福卡斯特信息技术有限公司</li>
+<li>网址：<a href="http://olap.epsnet.com.cn">http://olap.epsnet.com.cn</a></li>
+</ul>
+<p>主要内容包括：</p>
+<ul>
+<li>全球经济体数据</li>
+<li>中国区域经济数据库（分县级）</li>
+<li>中国区域经济数据库（分区域县）</li>
+</ul>
+<p>覆盖：基本情况、综合经济、农业、工业、投资及消费、教育、卫生和社会保障等。</p>
+</section>
+<section class="slide level2">
+
+<h3 id="国研网">国研网</h3>
+<ul>
+<li>网址：<a href="http://data.drcnet.com.cn">http://data.drcnet.com.cn</a></li>
+<li>主办：国务院发展研究中心信息中心</li>
+</ul>
+<p>主要栏目：</p>
+<ul>
+<li>世界经济数据库</li>
+<li>宏观经济数据库</li>
+<li>区域经济数据库</li>
+<li>重点行业数据库</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="中国知网-统计数据">中国知网 · 统计数据</h3>
+<ul>
+<li>网址：<a href="http://tongji.cnki.net/kns55/index.aspx">http://tongji.cnki.net/kns55/index.aspx</a></li>
+<li>中国经济与社会发展统计数据库</li>
+</ul>
+<p>可按以下维度检索：</p>
+<ul>
+<li><strong>领域</strong></li>
+<li><strong>地区</strong></li>
+<li><strong>资料类型</strong></li>
+</ul>
+<p>支持统计年鉴、调查资料等多种类型。</p>
 </section>
 <section class="slide level2">
 
 </section></section>
 <section>
-<section id="在线工具" class="title-slide slide level1 center">
-<h1>1.4 在线工具</h1>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">问卷星 <a href="https://www.wjx.cn/" target="_blank">https://www.wjx.cn/</a></p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">腾讯问卷<a href="https://wj.qq.com/" target="_blank">https://wj.qq.com/</a></p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">金数据<a href="https://jinshuju.net/" target="_blank">https://jinshuju.net/</a></p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">SurveyMonkey<a href="https://www.surveymonkey.com/" target="_blank">https://www.surveymonkey.com/</a></p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">金数据<a href="https://jinshuju.net/" target="_blank">https://jinshuju.net/</a></p>
+<section id="调查数据-survey-data" class="title-slide slide level1 center">
+<h1>2.2 调查数据 Survey Data</h1>
+
 </section>
-<section id="ai和在线工具" class="slide level2">
-<h2>AI和在线工具</h2>
-<p>SurveyMonkey Get Quick Insights with Analyze with AI</p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://help.surveymonkey.com/en/surveymonkey/analyze/analyze-with-ai/" target="_blank">https://help.surveymonkey.com/en/surveymonkey/analyze/analyze-with-ai/</a></p>
-<p>Blix 是一款专注于开放性文本分析的 AI工具，利用大语言模型对问卷中的开放性回答进行主题提取、情感分析和趋势识别，适用于市场调研、HR 调查等场景</p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://blix.ai/" target="_blank">https://blix.ai/</a></p>
-<p>SPSSPRO 众言科技开发在线统计分析平台</p>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.spsspro.com/" target="_blank">https://www.spsspro.com/</a></p>
+<section class="slide level2">
+
+<p>调查是获取一手数据最常用的方法之一。</p>
+<p>主要环节包括：</p>
+<ol type="1">
+<li>明确调查目的与问题</li>
+<li>确定调查对象与抽样框</li>
+<li>设计问卷或调查表</li>
+<li>选择调查方式（面访、电话、网络、邮寄等）</li>
+<li>实施调查与数据收集</li>
+<li>数据审核与整理</li>
+</ol>
+</section>
+<section id="调查方式常见分类" class="slide level2">
+<h2>调查方式常见分类</h2>
+<ul>
+<li><strong>全面调查</strong>（普查）</li>
+<li><strong>非全面调查</strong>
+<ul>
+<li>抽样调查</li>
+<li>重点调查</li>
+<li>典型调查</li>
+</ul></li>
+</ul>
+<p>在实际研究中，<strong>抽样调查</strong>最为常用。</p>
+</section>
+<section id="抽样调查" class="slide level2">
+<h2>抽样调查</h2>
+<ul>
+<li><strong>总体</strong>（Population）</li>
+<li><strong>样本</strong>（Sample）</li>
+<li><strong>抽样框</strong>（Sampling frame）</li>
+<li><strong>抽样方法</strong>
+<ul>
+<li>简单随机抽样</li>
+<li>分层抽样</li>
+<li>整群抽样</li>
+<li>系统抽样</li>
+<li>多阶段抽样</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section>
+<section class="slide level2">
+
+<h3 id="总体population">总体（Population）</h3>
+<p><strong>定义</strong>：<br>
+我们想要研究的<strong>全部对象</strong>所构成的集合。</p>
+<p><strong>例子</strong>： - 想了解某大学所有在校本科生的平均每周学习时间<br>
+→ 总体 = 该大学全部在校本科生 - 想研究全国高考考生的数学成绩分布<br>
+→ 总体 = 当年全部高考考生</p>
+<p><strong>注意</strong>：总体可以是有限的，也可以是无限的（理论上）。</p>
+</section>
+<section class="slide level2">
+
+<h3 id="样本sample">样本（Sample）</h3>
+<p><strong>定义</strong>：<br>
+从总体中抽取的一部分个体，用来推断总体特征。</p>
+<p><strong>例子</strong>： - 从某大学 2 万名本科生中，随机抽取 500 人进行问卷调查<br>
+→ 这 500 人就是样本 - 从全国高考考生中抽取 1 万人的成绩进行分析<br>
+→ 这 1 万人就是样本</p>
+<p><strong>核心思想</strong>：用样本的信息去估计总体的未知特征（如均值、比例等）。</p>
+</section>
+<section class="slide level2">
+
+<h3 id="抽样框sampling-frame">抽样框（Sampling Frame）</h3>
+<p><strong>定义</strong>：<br>
+实际用于抽样的<strong>完整名单或名录</strong>，是连接总体与样本的桥梁。</p>
+<p><strong>理想情况</strong>：抽样框 = 总体<br>
+<strong>实际情况</strong>：抽样框常常与总体不完全一致</p>
+<p><strong>例子</strong>： - 调查某市居民对公共交通的满意度<br>
+- 理想总体：全市所有常住居民<br>
+- 实际抽样框：可能是该市固定电话号码簿、或某平台注册用户名单</p>
+<p><strong>常见问题</strong>： - 覆盖不全（有些人没被列入） - 包含不合格对象（已搬走、已去世等） - 重复登记</p>
+</section>
+<section id="抽样方法总览" class="slide level2">
+<h2>抽样方法总览</h2>
+<p>常见概率抽样方法：</p>
+<ol type="1">
+<li><strong>简单随机抽样</strong>（Simple Random Sampling）</li>
+<li><strong>分层抽样</strong>（Stratified Sampling）</li>
+<li><strong>整群抽样</strong>（Cluster Sampling）</li>
+<li><strong>系统抽样</strong>（Systematic Sampling）</li>
+<li><strong>多阶段抽样</strong>（Multi-stage Sampling）</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<h3 id="简单随机抽样simple-random-sampling">简单随机抽样（Simple Random Sampling）</h3>
+<p><strong>定义</strong>：<br>
+总体中每一个个体被抽中的概率完全相同，且抽取过程相互独立（或等概率无放回）。</p>
+<p><strong>优点</strong>：简单、统计理论性质好<br>
+<strong>缺点</strong>：需要完整抽样框；当总体很大时实施成本高</p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/simple.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section id="分层抽样stratified-sampling" class="slide level2">
+<h2>分层抽样（Stratified Sampling）</h2>
+<p><strong>定义</strong>：<br>
+先将总体按照某个特征分成若干互不重叠的<strong>层</strong>（strata），再从每一层中独立进行随机抽样。 <strong>优点</strong>： - 保证各层都有代表性 - 通常能提高估计精度 - 可对每层单独分析</p>
+<p><strong>适用情况</strong>：总体内部差异较大，且可按重要特征分层时。</p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/stratified.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section class="slide level2">
+
+
+<img data-src="img/stratified2.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<section id="整群抽样cluster-sampling" class="slide level2">
+<h2>3. 整群抽样（Cluster Sampling）</h2>
+<p><strong>定义</strong>：<br>
+先将总体分成若干群（clusters），然后随机抽取一部分群，对抽中的群进行<strong>全部调查</strong>（或再抽样）。</p>
+<p><strong>例子</strong>： 想调查某市小学生的视力情况。<br>
+以“学校”为群，随机抽取 20 所小学，然后调查这 20 所小学的全部学生。</p>
+<p><strong>优点</strong>：实施方便、节省成本（尤其当个体分散时）<br>
+<strong>缺点</strong>：精度通常低于简单随机抽样（因为同一群内个体往往较相似）</p>
+</section>
+<section id="系统抽样systematic-sampling" class="slide level2">
+<h2>4. 系统抽样（Systematic Sampling）</h2>
+<p><strong>定义</strong>：<br>
+将总体按一定顺序排列，先随机确定一个起点，然后按固定间隔抽取个体。</p>
+<p><strong>操作步骤</strong>： 1. 计算抽样间隔 <span class="math inline">\(k = N/n\)</span>（总体量 / 样本量） 2. 在 1 ~ <span class="math inline">\(k\)</span> 中随机选一个起点 3. 之后每隔 <span class="math inline">\(k\)</span> 个抽取一个</p>
+<p><strong>例子</strong>： 某流水线每天生产 1000 件产品，想抽 50 件检验。<br>
+间隔 <span class="math inline">\(k = 1000/50 = 20\)</span>。<br>
+随机选第 7 件作为起点，然后抽第 27、47、67…件。</p>
+<p><strong>优点</strong>：操作简单、样本分布较均匀<br>
+<strong>缺点</strong>：如果总体有周期性，可能产生偏差</p>
+</section>
+<section id="多阶段抽样multi-stage-sampling" class="slide level2">
+<h2>5. 多阶段抽样（Multi-stage Sampling）</h2>
+<p><strong>定义</strong>：<br>
+分多个阶段进行抽样，每个阶段使用不同的抽样单位。</p>
+<p><strong>典型例子</strong>（全国性入户调查）： 1. <strong>第一阶段</strong>：抽取省份 / 城市 2. <strong>第二阶段</strong>：在抽中的城市中抽取区县 3. <strong>第三阶段</strong>：在抽中的区县中抽取街道 / 村 4. <strong>第四阶段</strong>：在抽中的街道中抽取住户</p>
+<p><strong>优点</strong>：特别适合大规模、分散的总体，成本可控<br>
+<strong>缺点</strong>：设计与方差估计较复杂</p>
+</section>
+<section id="抽样方法对比小结" class="slide level2">
+<h2>抽样方法对比小结</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 34%">
+<col style="width: 22%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>核心特点</th>
+<th>优点</th>
+<th>主要局限</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>简单随机抽样</td>
+<td>每个个体等概率</td>
+<td>理论简单、公平</td>
+<td>需要完整名单，成本高</td>
+</tr>
+<tr class="even">
+<td>分层抽样</td>
+<td>先分层再抽样</td>
+<td>精度高、代表性好</td>
+<td>需要分层变量信息</td>
+</tr>
+<tr class="odd">
+<td>整群抽样</td>
+<td>抽取整群并调查群内全部</td>
+<td>实施方便、省钱</td>
+<td>精度较低</td>
+</tr>
+<tr class="even">
+<td>系统抽样</td>
+<td>等间隔抽取</td>
+<td>操作简单、分布均匀</td>
+<td>怕周期性波动</td>
+</tr>
+<tr class="odd">
+<td>多阶段抽样</td>
+<td>分</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="实验数据-experimental-data" class="title-slide slide level1 center">
+<h1>2.3 实验数据 Experimental Data</h1>
+
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="数据的误差" class="title-slide slide level1 center">
+<h1>2.4 数据的误差</h1>
+
+</section>
+<section class="slide level2">
+
+<p>数据误差主要分为两大类：</p>
+</section>
+<section id="抽样误差sampling-error" class="slide level2">
+<h2>抽样误差（Sampling error）</h2>
+<ul>
+<li><p>由随机抽样引起</p></li>
+<li><p>可以计算和控制</p></li>
+<li><p>样本越大，抽样误差通常越小</p></li>
+</ul>
+</section>
+<section id="非抽样误差non-sampling-error" class="slide level2">
+<h2>非抽样误差（Non-sampling error）</h2>
+<ul>
+<li><p>人为因素引起</p></li>
+<li><p>往往更难发现和控制</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="非抽样误差的主要来源">非抽样误差的主要来源</h3>
+<ul>
+<li><strong>覆盖误差</strong>：抽样框不完整或不准确</li>
+<li><strong>无回答误差</strong>：拒访、找不到被调查者</li>
+<li><strong>测量误差</strong>：问卷设计不当、访问员偏差、被访者记忆偏差</li>
+<li><strong>处理误差</strong>：编码、录入、数据清洗错误</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="减少误差的主要措施">减少误差的主要措施</h3>
+<ul>
+<li>完善抽样框</li>
+<li>提高回答率（激励、多次回访）</li>
+<li>规范问卷设计与访问流程</li>
+<li>加强访员培训与督导</li>
+<li>数据双录与逻辑校验</li>
+<li>对缺失值和异常值进行审慎处理</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="数据质量评价的基本维度">数据质量评价的基本维度</h3>
+<ul>
+<li><strong>准确性</strong>（Accuracy）</li>
+<li><strong>完整性</strong>（Completeness）</li>
+<li><strong>及时性</strong>（Timeliness）</li>
+<li><strong>一致性</strong>（Consistency）</li>
+<li><strong>可比性</strong>（Comparability）</li>
+</ul>
+<p>好的数据是统计分析可靠的前提。</p>
+</section>
+<section id="第2章小结" class="slide level2">
+<h2>第2章小结</h2>
+<ul>
+<li><p>数据可分为<strong>一手数据</strong>与<strong>二手数据</strong></p></li>
+<li><p>二手数据来源广泛（统计局、国际组织、商业数据库等 ）</p></li>
+<li><p>调查数据和实验数据</p></li>
+<li><p>抽样调查</p></li>
+<li><p>抽样误差与非抽样误差</p></li>
+</ul>
 
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="https://lizongzhang.github.io/stat26" class="uri">https://lizongzhang.github.io/stat26</a><br>© Li Zongzhang</p>
+<p><a href="https://lizongzhang.github.io/stat26">STAT</a> | © 2026, <a href="https://space.bilibili.com/590872906/">Li Zongzhang</a></p>
 </div>
 </div></div>
 
@@ -517,8 +834,8 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide"},
+'chalkboard': {"buttons":true,"board-canvas-background":"#f0f0f0"},
 'smaller': false,
  
         // Display controls in the bottom right corner
