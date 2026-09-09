@@ -246,7 +246,9 @@ data %>%
 
 # Excel习题
 
-## 习题1 毕业生.xlsx
+## 习题1 毕业生数据分析
+
+<img src="img/download.png" alt="Excel" style="width: 24px; height: 24px; margin-right: 10px;"><a href="ex3_1.xlsx" download>下载：习题1配套数据.xlsx</a>
 
 数据文件：毕业生.xlsx(数据文件在QQ 群文件夹中），用Excel完成以下任务：
 
