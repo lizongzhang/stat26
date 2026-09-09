@@ -95,7 +95,7 @@
     "href": "chap2.html",
     "title": "第2章",
     "section": "",
-    "text": "L2 Slides\n问卷设计"
+    "text": "L2数据的搜集 Slides\n问卷设计"
   },
   {
     "objectID": "chap2.html#题目1",
@@ -2462,5 +2462,19 @@
     "title": "第2章 数据的搜集",
     "section": "第2章重点",
     "text": "第2章重点\n\n抽样框\n概率抽样\n\n简单随机抽样simple random sampling\n分层抽样 stratified sampling\n整群抽样 cluster sampling\n系统抽样 systematic sampling\n多阶段抽样 multi-stage sampling\n\n抽样误差与非抽样误差"
+  },
+  {
+    "objectID": "chap2.html#习题1",
+    "href": "chap2.html#习题1",
+    "title": "第2章",
+    "section": "习题1",
+    "text": "习题1\n\n\n点击展开\n\n\n下载：习题1配套数据.xlsx\n\n\n\n数据清洗–习题1讲评"
+  },
+  {
+    "objectID": "chap2.html#习题2",
+    "href": "chap2.html#习题2",
+    "title": "第2章",
+    "section": "习题2",
+    "text": "习题2\n\n\n点击展开\n\n下载：习题2配套数据.xlsx\n\n\n\n数据清洗–习题2讲评"
   }
 ]
