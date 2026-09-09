@@ -250,7 +250,7 @@ data %>%
 
 <img src="img/download.png" alt="Excel" style="width: 24px; height: 24px; margin-right: 10px;"><a href="ex3_1.xlsx" download>下载：习题1配套数据.xlsx</a>
 
-数据文件：毕业生.xlsx(数据文件在QQ 群文件夹中），用Excel完成以下任务：
+用Excel完成以下任务：
 
 1.1	绘制毕业生性别分布的频数分布表，在表中列出男性和女性的人数及比重。
 
