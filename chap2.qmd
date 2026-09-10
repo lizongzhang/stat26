@@ -81,7 +81,11 @@ title: "第2章"
     
 ## 公众号
 
-微信公众号**抽样调查之家** > 市调大赛
+微信公众号**抽样调查之家** 市调大赛
+
+## 文本分析在线工具
+
+<img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"> 在线词云图工具 <https://www.wordclouds.com/>{target="_blank"} 
 
 
 ## 问卷调查示例
@@ -90,6 +94,9 @@ title: "第2章"
 
 
 <img src="img/video.png" style="width: 24px; height: 24px;margin-right: 10px">[B站影视飓风: Win还是Mac?](https://b23.tv/oW2Clpf)
+
+
+
 
 
 
