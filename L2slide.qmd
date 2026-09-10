@@ -298,11 +298,6 @@ showtext_auto()
 
 ![](img/stratified.png){width=45% fig-align="center"}
 
----
-
-![](img/stratified2.png){width=45% fig-align="center"}
-
-
 
 ---
 
@@ -348,11 +343,10 @@ showtext_auto()
 
 分多个阶段进行抽样，每个阶段使用不同的抽样单位。
 
-![](img/multi.png){width=45% fig-align="center"}
 
 ----
 
-![](img/one_percent.jpeg){width=45% fig-align="center"}
+![](img/1percent.png){width=45% fig-align="center"}
 
 
 
