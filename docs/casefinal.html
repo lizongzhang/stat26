@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="李宗璋">
-  <meta name="dcterms.date" content="2026-09-03">
+  <meta name="dcterms.date" content="2026-09-11">
   <title>统计学26秋 – 《统计学》 案例汇报要求</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -199,7 +199,7 @@
   right: 20px;
   z-index: 1000;
 ">
-  <a href="https://lizongzhang.github.io/metrics26i" style="
+  <a href="https://lizongzhang.github.io/stat26" style="
        display: inline-flex;
        align-items: center;
        gap: 8px;
@@ -235,6 +235,213 @@
        " alt="logo">
 </div>
 
+<!-- ============================================================
+     Reveal.js slide zoom
+     Cmd/Ctrl +  : 放大幻灯片
+     Cmd/Ctrl -  : 缩小幻灯片
+     Cmd/Ctrl 0  : 恢复默认
+     ============================================================ -->
+
+<script>
+(function () {
+
+  let userZoom = 1;
+
+  const ZOOM_STEP = 1.10;
+  const MIN_ZOOM = 0.50;
+  const MAX_ZOOM = 2.50;
+
+  function getSlides() {
+    return document.querySelector('.reveal .slides');
+  }
+
+  /*
+   * Reveal.js 自己负责计算适合当前窗口的 scale。
+   *
+   * 我们只在 Reveal.js 的 scale 上再乘一个 userZoom。
+   */
+  function applyUserZoom() {
+
+    const slides = getSlides();
+
+    if (!slides || typeof Reveal === 'undefined') {
+      return;
+    }
+
+    const revealScale = Reveal.getScale();
+
+    if (!revealScale || !isFinite(revealScale)) {
+      return;
+    }
+
+    /*
+     * Reveal.js 当前版本使用 CSS zoom 来缩放 .slides。
+     * 因此直接在它计算出的 scale 上叠加我们的倍率。
+     */
+    slides.style.zoom = String(revealScale * userZoom);
+  }
+
+
+  function setUserZoom(value) {
+
+    userZoom = Math.max(
+      MIN_ZOOM,
+      Math.min(MAX_ZOOM, value)
+    );
+
+    applyUserZoom();
+  }
+
+
+  function zoomIn() {
+    setUserZoom(userZoom * ZOOM_STEP);
+  }
+
+
+  function zoomOut() {
+    setUserZoom(userZoom / ZOOM_STEP);
+  }
+
+
+  function resetZoom() {
+    setUserZoom(1);
+  }
+
+
+  /*
+   * Cmd/Ctrl + / -
+   *
+   * 注意：
+   * 我们主动阻止浏览器的默认网页缩放。
+   * 因此 Cmd+ 会真正控制幻灯片，而不是整个网页。
+   */
+  document.addEventListener('keydown', function (event) {
+
+    if (!(event.metaKey || event.ctrlKey)) {
+      return;
+    }
+
+    /*
+     * 如果用户正在输入框、文本框或可编辑区域，
+     * 不干扰正常的 Cmd+/Cmd- 操作。
+     */
+    const target = event.target;
+
+    if (
+      target &&
+      (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.tagName === 'SELECT' ||
+        target.isContentEditable
+      )
+    ) {
+      return;
+    }
+
+
+    /*
+     * Cmd/Ctrl +
+     *
+     * Mac Chrome/Safari:
+     * event.key 通常是 "+" 或 "="
+     */
+    if (
+      event.key === '+' ||
+      event.key === '='
+    ) {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      zoomIn();
+
+      return;
+    }
+
+
+    /*
+     * Cmd/Ctrl -
+     */
+    if (event.key === '-') {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      zoomOut();
+
+      return;
+    }
+
+
+    /*
+     * Cmd/Ctrl 0
+     */
+    if (event.key === '0') {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      resetZoom();
+
+      return;
+    }
+
+  }, true);
+
+
+  /*
+   * Reveal.js 初始化完成以后执行。
+   */
+  function initializeZoomControl() {
+
+    if (typeof Reveal === 'undefined') {
+      setTimeout(initializeZoomControl, 100);
+      return;
+    }
+
+
+    /*
+     * Reveal.js ready
+     */
+    Reveal.on('ready', function () {
+
+      userZoom = 1;
+
+      setTimeout(function () {
+        applyUserZoom();
+      }, 0);
+
+    });
+
+
+    /*
+     * Reveal.js 每次重新计算 slide scale 时都会触发 resize。
+     *
+     * 例如：
+     * - 浏览器窗口改变大小
+     * - 全屏
+     * - 改变屏幕
+     * - Reveal.layout()
+     *
+     * 这时重新叠加我们的 userZoom。
+     */
+    Reveal.on('resize', function () {
+
+      setTimeout(function () {
+        applyUserZoom();
+      }, 0);
+
+    });
+
+  }
+
+
+  initializeZoomControl();
+
+})();
+</script>
+
 <!-- 加载楷体风格字体 Noto Serif SC（中国镜像） -->
 <link href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
   <div class="reveal">
@@ -251,7 +458,7 @@
 </div>
 </div>
 
-  <p class="date">2026-09-03</p>
+  <p class="date">2026-09-11</p>
 </section>
 <section id="汇报要求" class="slide level2">
 <h2>汇报要求</h2>

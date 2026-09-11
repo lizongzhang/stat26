@@ -747,6 +747,8 @@ ggplot(df_ts, aes(x = year, y = gdp / 10000)) +
   
 - *Statistics for Business and Economics* (8th Edition)
   - David R. Anderson et al., China Machine Press
+  
+- <img src="img/download.png" style="width: 24px; height: 24px;margin-right: 10px"/>[百度网盘参考书](https://pan.baidu.com/s/1yJ_6AiYyXOfm3d9izGCB5w?pwd=6666)  
 
 ---
 
