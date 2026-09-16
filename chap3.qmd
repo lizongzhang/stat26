@@ -4,7 +4,7 @@ title: "第3章"
 
 # 第3章 图表工具
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap3.html){target="_blank"}
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat26/L3slide.html){target="_blank"}
 
 # 课堂练习
 
@@ -277,7 +277,6 @@ data %>%
 1.12	绘制毕业生月薪的频数折线图、累积百分比折线图，在图中标注出频数或累积百分比。在870位毕业生中，月薪小于等于4000、小于等于6000的各占比多少？。
 
 1.13	绘制毕业生月薪的箱线图，在箱线图中标注出第1个四分位数、中位数和第3个四分位数。
-
 
 
 # 习题讲评视频
