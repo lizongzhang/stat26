@@ -1,8 +1,11 @@
 ---
 title: "小组作业"
+format:
+  html:
+    link-external-newwindow: true
 ---
 
-**提交分组信息：<https://www.wjx.top/vm/rXASrvi.aspx#> **
+**提交选题信息：[https://v.wjx.cn/vm/PyK7c7f.aspx#](https://v.wjx.cn/vm/PyK7c7f.aspx#){target="_blank"}**
 
 # 组队原则与管理
 

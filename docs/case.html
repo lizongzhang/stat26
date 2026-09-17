@@ -244,7 +244,7 @@ window.Quarto = {
 </header>
 
 
-<p><strong>提交分组信息：<a href="https://www.wjx.top/vm/rXASrvi.aspx#" class="uri">https://www.wjx.top/vm/rXASrvi.aspx#</a> </strong></p>
+<p><strong>提交选题信息：<a href="https://v.wjx.cn/vm/PyK7c7f.aspx#" target="_blank">https://v.wjx.cn/vm/PyK7c7f.aspx#</a></strong></p>
 <section id="组队原则与管理" class="level1">
 <h1>组队原则与管理</h1>
 <section id="组队标准" class="level2">
@@ -570,6 +570,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

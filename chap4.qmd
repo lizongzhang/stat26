@@ -4,7 +4,7 @@ title: "第4章"
 
 # 第4章 数据的概括性度
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap4.html){target="_blank"}
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat26/L4slide.html){target="_blank"}
 
 # Excel教学视频
 

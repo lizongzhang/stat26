@@ -5,7 +5,7 @@ title: "第7章"
 # 第7章 参数估计
 
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap7.html)
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat26/L7slide.html)
 
 # 教学视频
 
