@@ -47,6 +47,10 @@ title: "小组作业"
 
 ## 案例选题  (第3-4周)
 
+**提交选题信息: <https://v.wjx.cn/vm/PyK7c7f.aspx#>**
+
+<img src="img/link.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[选题反馈建议](https://lizongzhang.github.io/stat26/case_topic.html){target="_blank"}
+
 -   讨论问题：
 
     -   选题方向 
@@ -225,7 +229,7 @@ A：填空题。需要考虑被访者能否容易回答，数据质量是否可�
 
 -  APP使用情况
 
-## Q4:单选题中，将选项设成数值区间，收集的是定量数据吗？
+## Q4: 单选题中，将选项设成数值区间，收集的是定量数据吗？
 
 您的税前月收入水平是？（单选）
 
