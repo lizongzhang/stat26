@@ -191,6 +191,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#第3章-图表工具" id="toc-第3章-图表工具" class="nav-link active" data-scroll-target="#第3章-图表工具">第3章 图表工具</a></li>
+  <li><a href="#本章难点" id="toc-本章难点" class="nav-link" data-scroll-target="#本章难点">本章难点</a>
+  <ul class="collapse">
+  <li><a href="#箱线图-boxplot" id="toc-箱线图-boxplot" class="nav-link" data-scroll-target="#箱线图-boxplot">箱线图 boxplot</a></li>
+  <li><a href="#左偏还是右偏" id="toc-左偏还是右偏" class="nav-link" data-scroll-target="#左偏还是右偏">左偏还是右偏？</a></li>
+  </ul></li>
   <li><a href="#课堂练习" id="toc-课堂练习" class="nav-link" data-scroll-target="#课堂练习">课堂练习</a>
   <ul class="collapse">
   <li><a href="#题目1-饼图" id="toc-题目1-饼图" class="nav-link" data-scroll-target="#题目1-饼图">题目1 饼图</a></li>
@@ -239,6 +244,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="第3章-图表工具" class="level1">
 <h1>第3章 图表工具</h1>
 <p><img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://lizongzhang.github.io/stat26/L3slide.html" target="_blank">讲义</a></p>
+</section>
+<section id="本章难点" class="level1">
+<h1>本章难点</h1>
+<section id="箱线图-boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="箱线图-boxplot">箱线图 boxplot</h2>
+<details>
+<p><img src="img/boxplot.png" class="img-fluid"></p>
+</details></section>
+<section id="左偏还是右偏" class="level2">
+<h2 class="anchored" data-anchor-id="左偏还是右偏">左偏还是右偏？</h2>
+<details>
+<ul>
+<li><p>尾巴在哪边，就往哪边偏</p>
+<ul>
+<li><p>右偏（正偏）：尾巴拖在右边 → 大多数数据集中在左边，右边有少数较大的值。</p></li>
+<li><p>左偏（负偏）：尾巴拖在左边 → 大多数数据集中在右边，左边有少数较小的值。</p></li>
+</ul></li>
+</ul>
+<p><img src="img/skew2.png" class="img-fluid"></p>
+</details></section>
 </section>
 <section id="课堂练习" class="level1">
 <h1>课堂练习</h1>
@@ -538,8 +563,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="学生习作讲评" class="level1">
 <h1>学生习作讲评</h1>
-<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"> <a href="https://lizongzhang.github.io/stat25/chap3ex.html" target="_blank">教材第3章习题学生习作点评</a></p>
-</section>
+<p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"> <a href="https://lizongzhang.github.io/stat26/chap3ex.html" target="_blank">教材第3章习题学生习作点评</a></p>
+<p>作业提交时间分布统计(25工商1-2班 ch3 教材习题)</p>
+<details>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">交卷日期</th>
+<th style="text-align: center;">交卷人数</th>
+<th style="text-align: center;">占比（已完成）</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2026/09/16</td>
+<td style="text-align: center;"><strong>10人</strong></td>
+<td style="text-align: center;">15.2%</td>
+<td style="text-align: left;">全部学生主动提交</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026/09/17</td>
+<td style="text-align: center;"><strong>11人</strong></td>
+<td style="text-align: center;">16.7%</td>
+<td style="text-align: left;">全部学生主动提交</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026/09/18</td>
+<td style="text-align: center;"><strong>3人</strong></td>
+<td style="text-align: center;">4.5%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026/09/19</td>
+<td style="text-align: center;"><strong>6人</strong></td>
+<td style="text-align: center;">9.1%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026/09/20</td>
+<td style="text-align: center;"><strong>2人</strong></td>
+<td style="text-align: center;">3.0%</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026/09/21</td>
+<td style="text-align: center;"><strong>17人</strong></td>
+<td style="text-align: center;">25.8%</td>
+<td style="text-align: left;">交卷高峰日</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026/09/22</td>
+<td style="text-align: center;"><strong>17人</strong></td>
+<td style="text-align: center;">25.8%</td>
+<td style="text-align: left;">其中5人为系统自动提交</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>已完成合计</strong></td>
+<td style="text-align: center;"><strong>66人</strong></td>
+<td style="text-align: center;"><strong>100%</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>未完成</strong></td>
+<td style="text-align: center;"><strong>11人</strong></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">无交卷记录</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>总人数</strong></td>
+<td style="text-align: center;"><strong>77人</strong></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>9月16日 按小时交卷人数分布</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">时间段</th>
+<th style="text-align: center;">交卷人数</th>
+<th style="text-align: left;">学生名单</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">21:00 – 21:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">杨语含</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">22:00 – 22:59</td>
+<td style="text-align: center;">4人</td>
+<td style="text-align: left;">邓涵蕾、黄心怡、高宇婷、任思涵</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23:00 – 23:59</td>
+<td style="text-align: center;">5人</td>
+<td style="text-align: left;">张家鑫、林尹珊、朱浩弘、陈俊韬、范伟彤</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>合计</strong></td>
+<td style="text-align: center;"><strong>10人</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>9月17日 按小时交卷人数分布</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">时间段</th>
+<th style="text-align: center;">交卷人数</th>
+<th style="text-align: left;">学生名单</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">00:00 – 00:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">温绮晴</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">06:00 – 06:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">冯楚悦</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12:00 – 12:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">余建航</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13:00 – 13:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">张杨</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15:00 – 15:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">张玉奇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18:00 – 18:59</td>
+<td style="text-align: center;">2人</td>
+<td style="text-align: left;">洪博嘉、郑纬杰</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">20:00 – 20:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">雷彤</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">22:00 – 22:59</td>
+<td style="text-align: center;">1人</td>
+<td style="text-align: left;">宁檬</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23:00 – 23:59</td>
+<td style="text-align: center;">2人</td>
+<td style="text-align: left;">胡雅诗、黄碧瑜</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>合计</strong></td>
+<td style="text-align: center;"><strong>11人</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</details></section>
 <section id="拓展资源" class="level1">
 <h1>拓展资源</h1>
 <p><img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"> 在线词云图工具 <a href="https://www.wordclouds.com/" target="_blank">https://www.wordclouds.com/</a></p>
