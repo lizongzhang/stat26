@@ -31,6 +31,8 @@ title: "第4章"
 
 4. 将毕业生按照性别分组，计算男、女毕业生月薪的均值、最大值、最小值、样本标准差和样本方差。
 
+<img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[数据透视表中的统计计算](https://www.bilibili.com/video/BV1Hr421g75i?){target="_blank"}
+
 # 教材习题
 
 教材P72 习题4.2，4.3，4.5和4.6
