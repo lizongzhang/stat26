@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第4章 – 统计学26秋</title>
+<title>R中的基础绘图工具 – 统计学26秋</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -104,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">第3章</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./chap4.html" aria-current="page"> 
+    <a class="nav-link" href="./chap4.html"> 
 <span class="menu-text">第4章</span></a>
   </li>  
   <li class="nav-item">
@@ -156,16 +190,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#第4章-数据的概括性度" id="toc-第4章-数据的概括性度" class="nav-link active" data-scroll-target="#第4章-数据的概括性度">第4章 数据的概括性度</a></li>
-  <li><a href="#excel教学视频" id="toc-excel教学视频" class="nav-link" data-scroll-target="#excel教学视频">Excel教学视频</a></li>
-  <li><a href="#excel习题" id="toc-excel习题" class="nav-link" data-scroll-target="#excel习题">Excel习题</a>
-  <ul class="collapse">
-  <li><a href="#习题1-毕业生数据分析" id="toc-习题1-毕业生数据分析" class="nav-link" data-scroll-target="#习题1-毕业生数据分析">习题1 毕业生数据分析</a></li>
-  </ul></li>
-  <li><a href="#教材习题" id="toc-教材习题" class="nav-link" data-scroll-target="#教材习题">教材习题</a></li>
-  <li><a href="#习题讲评" id="toc-习题讲评" class="nav-link" data-scroll-target="#习题讲评">习题讲评</a></li>
-  <li><a href="#拓展资源" id="toc-拓展资源" class="nav-link" data-scroll-target="#拓展资源">拓展资源</a></li>
-  <li><a href="#r入门" id="toc-r入门" class="nav-link" data-scroll-target="#r入门">R入门</a></li>
+  <li><a href="#直方图" id="toc-直方图" class="nav-link active" data-scroll-target="#直方图">直方图</a></li>
+  <li><a href="#箱线图" id="toc-箱线图" class="nav-link" data-scroll-target="#箱线图">箱线图</a></li>
+  <li><a href="#条形图" id="toc-条形图" class="nav-link" data-scroll-target="#条形图">条形图</a></li>
+  <li><a href="#散点图" id="toc-散点图" class="nav-link" data-scroll-target="#散点图">散点图</a></li>
   </ul>
 </nav>
     </div>
@@ -174,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第4章</h1>
+<h1 class="title">R中的基础绘图工具</h1>
 </div>
 
 
@@ -191,53 +219,124 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="第4章-数据的概括性度" class="level1">
-<h1>第4章 数据的概括性度</h1>
-<p><img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://lizongzhang.github.io/stat26/L4slide.html" target="_blank">讲义</a></p>
+<section id="直方图" class="level1">
+<h1>直方图</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="co"># 绘制直方图</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="co"># 填充颜色</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"white"</span>, <span class="co"># 边框颜色</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of Miles Per Gallon"</span>, <span class="co"># 主标题</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Miles/(US) gallon"</span>, <span class="co"># X轴标签</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequency"</span>, <span class="co"># Y轴标签</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">14</span>), <span class="co"># Y轴范围</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span> <span class="co"># 刻度标签水平</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>     )  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="R1_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="excel教学视频" class="level1">
-<h1>Excel教学视频</h1>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1va411A7Db/" target="_blank">Excel 计算描述性统计量的函数</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV19S4y1r7E4/" target="_blank">EXCEL数据分析加载项</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1Sy4y1r78g/" target="_blank">Excel 数据分析加载项中的描述统计功能</a></p>
+<section id="箱线图" class="level1">
+<h1>箱线图</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am), mtcars<span class="sc">$</span>mpg, <span class="co"># 绘制箱线图</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"lightblue"</span>, <span class="st">"salmon"</span>),  <span class="co"># 填充颜色</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">1.5</span>,  <span class="co"># 点的大小</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Transmission Type &amp; MPG"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Transmission (0 = automatic, 1 = manual)"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Miles/(US) gallon"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="R1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>查看颜色代码：<a href="https://htmlcolorcodes.com/">https://htmlcolorcodes.com/</a></p>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl), mtcars<span class="sc">$</span>mpg,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#8DA0CB"</span>, <span class="st">"#FC8D62"</span>, <span class="st">"#66C2A5"</span>), </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">1.5</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"MPG by Number of Cylinders"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Cylinders"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Miles/(US) gallon"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">horizontal =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="R1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="excel习题" class="level1">
-<h1>Excel习题</h1>
-<section id="习题1-毕业生数据分析" class="level2">
-<h2 class="anchored" data-anchor-id="习题1-毕业生数据分析">习题1 毕业生数据分析</h2>
-<p><img src="img/download.png" alt="Excel" style="width: 24px; height: 24px; margin-right: 10px;"><a href="ex4_1.xlsx" download="">下载：习题1配套数据.xlsx</a></p>
-<p>用Excel完成以下任务：</p>
-<ol type="1">
-<li><p>计算毕业生性别、专业、就业单位类型的众数。</p></li>
-<li><p>毕业生月薪的分布是左偏分布、对称分布还是右偏分布？是尖峰分布、正态分布还是平峰分布？简要说明理由。</p></li>
-<li><p>将毕业生按照专业分组，计算各专业毕业生月薪的均值、最大值、最小值、样本标准差和样本方差。</p></li>
-<li><p>将毕业生按照性别分组，计算男、女毕业生月薪的均值、最大值、最小值、样本标准差和样本方差。</p></li>
-</ol>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1Hr421g75i?" target="_blank">数据透视表中的统计计算</a></p>
+<section id="条形图" class="level1">
+<h1>条形图</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl), </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#8DA0CB"</span>, <span class="st">"#FC8D62"</span>, <span class="st">"#66C2A5"</span>), </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"gray50"</span>,                     <span class="co"># 边框微调为中灰，更柔和</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,                               <span class="co"># 刻度数字水平</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of Cylinders"</span>,    <span class="co"># 标题</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Cylinders"</span>,          <span class="co"># X轴标签</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">font.main =</span> <span class="dv">2</span>,                         <span class="co"># 标题加粗</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>)                        <span class="co">#调整Y轴刻度范围</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="R1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl), <span class="co"># 绘制柱状图</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am), <span class="co"># 绘制分组变量</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"lightblue"</span>, <span class="st">"salmon"</span>), <span class="co"># 设置颜色</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Cylinders vs Transmission"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Cylinders"</span>, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Transmission (0=Auto, 1=Manual)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="R1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-</section>
-<section id="教材习题" class="level1">
-<h1>教材习题</h1>
-<p>教材P72 习题4.2，4.3，4.5和4.6</p>
-</section>
-<section id="习题讲评" class="level1">
-<h1>习题讲评</h1>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1nL411Q79r/" target="_blank">教材第4章习题讲评</a></p>
-</section>
-<section id="拓展资源" class="level1">
-<h1>拓展资源</h1>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1ju4gz3Euv/" target="_blank">Napkin AI 文本一键可视化!</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1uc41177Mn/" target="_blank">Excel数据清洗</a></p>
-</section>
-<section id="r入门" class="level1">
-<h1>R入门</h1>
-<p><img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://lizongzhang.github.io/stat26/R1.html" target="_blank">R1基础绘图</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV12u411D7uP/" target="_blank">如何安装R扩展包</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1ZB4y127oJ/" target="_blank">R Studio中的Project–如何高效管理数据、代码、图形</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1Sb4y1N78Y" target="_blank">那些让你头疼的R代码报错！——拼写错误/误用中文标点/违背命名规则</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1KM4m197E5" target="_blank">R语言代码风格：如何写出易读且美观的代码？</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV15Ds6etEaZ/" target="_blank">R语言如何快速学习R函数帮助文档？</a></p>
-<p><img src="img/video.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px"><a href="https://www.bilibili.com/video/BV1gi4y1m7pD/" target="_blank">RStudio如何导入EXCEL文件</a></p>
+<section id="散点图" class="level1">
+<h1>散点图</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>mpg,    <span class="co"># 设置 X 轴(重量)与 Y 轴(油耗)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"skyblue"</span>,          <span class="co"># 颜色：天蓝</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,                 <span class="co"># 点型：实心圆</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">1.5</span>,                <span class="co"># 倍率：1.5倍大小</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,                  <span class="co"># 刻度：标签水平</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Weight &amp; MPG"</span>,    <span class="co"># 主标题</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Weight (1000 lbs)"</span>,      <span class="co"># X轴标签</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Miles/(US) gallon"</span>       <span class="co"># Y轴标签</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="R1_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>

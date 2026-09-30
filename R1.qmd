@@ -1,0 +1,104 @@
+---
+title: "R中的基础绘图工具"
+---
+
+# 直方图
+
+```{r}
+#| echo: true
+hist(mtcars$mpg, # 绘制直方图
+     col = "lightblue", # 填充颜色
+     border = "white", # 边框颜色
+     main = "Distribution of Miles Per Gallon", # 主标题
+     xlab = "Miles/(US) gallon", # X轴标签
+     ylab = "Frequency", # Y轴标签
+     ylim = c(0, 14), # Y轴范围
+     las = 1 # 刻度标签水平
+     )  
+```
+
+
+
+
+
+# 箱线图
+
+```{r}
+#| echo: true
+plot(as.factor(mtcars$am), mtcars$mpg, # 绘制箱线图
+     col = c("lightblue", "salmon"),  # 填充颜色
+     cex = 1.5,  # 点的大小
+     main = "Transmission Type & MPG",
+     xlab = "Transmission (0 = automatic, 1 = manual)",
+     ylab = "Miles/(US) gallon",
+     las = 1
+)
+```
+
+
+查看颜色代码：[https://htmlcolorcodes.com/](https://htmlcolorcodes.com/)
+
+---
+
+
+```{r}
+#| echo: true
+plot(as.factor(mtcars$cyl), mtcars$mpg,
+     col = c("#8DA0CB", "#FC8D62", "#66C2A5"), 
+     cex = 1.5,
+     main = "MPG by Number of Cylinders",
+     xlab = "Number of Cylinders",
+     ylab = "Miles/(US) gallon",
+     las = 1,
+     horizontal = TRUE
+)
+```
+
+
+# 条形图
+
+```{r}
+#| echo: true
+plot(as.factor(mtcars$cyl), 
+     col = c("#8DA0CB", "#FC8D62", "#66C2A5"), 
+     border = "gray50",                     # 边框微调为中灰，更柔和
+     las = 1,                               # 刻度数字水平
+     main = "Distribution of Cylinders",    # 标题
+     xlab = "Number of Cylinders",          # X轴标签
+     font.main = 2,                         # 标题加粗
+     ylim = c(0, 15)                        #调整Y轴刻度范围
+)
+```
+
+
+## 堆栈条形图
+
+```{r}
+#| echo: true
+plot(as.factor(mtcars$cyl), # 绘制柱状图
+     as.factor(mtcars$am), # 绘制分组变量
+     col = c("lightblue", "salmon"), # 设置颜色
+     main = "Cylinders vs Transmission",
+     xlab = "Cylinders", 
+     ylab = "Transmission (0=Auto, 1=Manual)")
+```
+
+
+
+# 散点图
+
+```{r}
+#| echo: true
+plot(mtcars$wt, mtcars$mpg,    # 设置 X 轴(重量)与 Y 轴(油耗)
+     col = "skyblue",          # 颜色：天蓝
+     pch = 19,                 # 点型：实心圆
+     cex = 1.5,                # 倍率：1.5倍大小
+     las = 1,                  # 刻度：标签水平
+     main = "Weight & MPG",    # 主标题
+     xlab = "Weight (1000 lbs)",      # X轴标签
+     ylab = "Miles/(US) gallon"       # Y轴标签
+     )
+```
+
+
+
