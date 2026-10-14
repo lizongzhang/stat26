@@ -1789,6 +1789,27 @@
     "href": "R1.html",
     "title": "R中的基础绘图工具",
     "section": "",
-    "text": "直方图\n\nhist(mtcars$mpg, # 绘制直方图\n     col = \"lightblue\", # 填充颜色\n     border = \"white\", # 边框颜色\n     main = \"Distribution of Miles Per Gallon\", # 主标题\n     xlab = \"Miles/(US) gallon\", # X轴标签\n     ylab = \"Frequency\", # Y轴标签\n     ylim = c(0, 14), # Y轴范围\n     las = 1 # 刻度标签水平\n     )  \n\n\n\n\n\n\n\n\n\n\n箱线图\n\nplot(as.factor(mtcars$am), mtcars$mpg, # 绘制箱线图\n     col = c(\"lightblue\", \"salmon\"),  # 填充颜色\n     cex = 1.5,  # 点的大小\n     main = \"Transmission Type & MPG\",\n     xlab = \"Transmission (0 = automatic, 1 = manual)\",\n     ylab = \"Miles/(US) gallon\",\n     las = 1\n)\n\n\n\n\n\n\n\n\n查看颜色代码：https://htmlcolorcodes.com/\n\n\nplot(as.factor(mtcars$cyl), mtcars$mpg,\n     col = c(\"#8DA0CB\", \"#FC8D62\", \"#66C2A5\"), \n     cex = 1.5,\n     main = \"MPG by Number of Cylinders\",\n     xlab = \"Number of Cylinders\",\n     ylab = \"Miles/(US) gallon\",\n     las = 1,\n     horizontal = TRUE\n)\n\n\n\n\n\n\n\n\n\n\n条形图\n\nplot(as.factor(mtcars$cyl), \n     col = c(\"#8DA0CB\", \"#FC8D62\", \"#66C2A5\"), \n     border = \"gray50\",                     # 边框微调为中灰，更柔和\n     las = 1,                               # 刻度数字水平\n     main = \"Distribution of Cylinders\",    # 标题\n     xlab = \"Number of Cylinders\",          # X轴标签\n     font.main = 2,                         # 标题加粗\n     ylim = c(0, 15)                        #调整Y轴刻度范围\n)\n\n\n\n\n\n\n\n\n\n\nplot(as.factor(mtcars$cyl), # 绘制柱状图\n     as.factor(mtcars$am), # 绘制分组变量\n     col = c(\"lightblue\", \"salmon\"), # 设置颜色\n     main = \"Cylinders vs Transmission\",\n     xlab = \"Cylinders\", \n     ylab = \"Transmission (0=Auto, 1=Manual)\")\n\n\n\n\n\n\n\n\n\n\n散点图\n\nplot(mtcars$wt, mtcars$mpg,    # 设置 X 轴(重量)与 Y 轴(油耗)\n     col = \"skyblue\",          # 颜色：天蓝\n     pch = 19,                 # 点型：实心圆\n     cex = 1.5,                # 倍率：1.5倍大小\n     las = 1,                  # 刻度：标签水平\n     main = \"Weight & MPG\",    # 主标题\n     xlab = \"Weight (1000 lbs)\",      # X轴标签\n     ylab = \"Miles/(US) gallon\"       # Y轴标签\n     )"
+    "text": "hist(mtcars$mpg, # 绘制直方图\n     col = \"lightblue\", # 填充颜色\n     border = \"white\", # 边框颜色\n     main = \"Distribution of Miles Per Gallon\", # 主标题\n     xlab = \"Miles/(US) gallon\", # X轴标签\n     ylab = \"Frequency\", # Y轴标签\n     ylim = c(0, 14), # Y轴范围\n     las = 1 # 刻度标签水平\n     )"
+  },
+  {
+    "objectID": "case.html#第3-4-7章讨论课-第8-9周",
+    "href": "case.html#第3-4-7章讨论课-第8-9周",
+    "title": "小组作业",
+    "section": "第3, 4, 7章讨论课 (第8-9周)",
+    "text": "第3, 4, 7章讨论课 (第8-9周)\n\n在Excel中整理、清洗数据\n\n变量命名：使用简洁、语义明确的中文(控制在2-6个汉字以内)或英文命名，严禁使用系统默认无序代号（如 Q1, Q2, X1, X2..)\n完整性与逻辑筛查\n\n缺失值筛除，凡包含缺失值的记录直接整行移除。\n矛盾取值筛除：剔除违反常识或前后矛盾的样本（例如：年龄小于工作年限、婚姻状况为未婚但配偶收入有取值等）\n取值范围超限：筛除超出问卷预设界限或现实物理边界的取值（例如：李克特 5 级量表出现数值 6，周工时大于 168 小时等）\n\n异常值检测：直接剔除判定为极端值的记录。\n\n基于四分位距 IQR 规则：\\(3 \\times IQR\\) 规则剔除极端值：\\(Value &gt; Q3 + 3 \\times IQR\\) 或 \\(Value &lt; Q1 - 3 \\times IQR\\)\n\n定性变量分类优化：若某个分类下的个案数量 少于 20 个，必须进行合并。合并后建议每组样本数 \\(&gt; 30\\)。保留最大的三类，其余合并为“其他”。\n\n第一步（频数降序排列表）：统计各定性变量所有类别的样本量并由大到小排序；\n第二步（主体保留）：严格保留样本量最大的前 3 个类别；\n第三步（长尾归并）：将其余所有低频、分散类别统一重编码并合并为“其他”分类；\n特殊边界复核：若排名前 3 的某个类别本身样本量仍不足 20，需进一步结合专业背景或相近属性进行业务归并。\n\n\n运用第3, 4, 7章方法分析数据\n\n图表工具\n\n选取一个定量变量绘制频数分布表\n选取一个定量变量绘制直方图\n选取一个定量变量绘制累积百分比折线图\n选取一个定量变量绘制箱线图\n选取一个定性变量绘制频数分布表\n选取一个定性变量绘制帕累托图\n选取一个定性变量绘制饼图\n选取一个定性变量绘制瀑布图\n选取两个定性变量绘制树状图\n\n描述性统计量的报告\n\n报告均值、标准差、中位数、最小值、最大值、偏度、峰度等描述性统计量\n\n参数估计方法的运用\n\n选取一个定量变量对其总体均值进行区间估计\n选取一个定量变量对其总体方差进行区间估计\n\n\n准备的文件\nExcel数据文件,将上述分析存放在不同的表单中"
+  },
+  {
+    "objectID": "R1.html#堆栈条形图",
+    "href": "R1.html#堆栈条形图",
+    "title": "R中的基础绘图工具",
+    "section": "堆栈条形图",
+    "text": "堆栈条形图\n\nplot(as.factor(mtcars$cyl), # 绘制柱状图\n     as.factor(mtcars$am), # 绘制分组变量\n     col = c(\"lightblue\", \"salmon\"), # 设置颜色\n     main = \"Cylinders vs Transmission\",\n     xlab = \"Cylinders\", \n     ylab = \"Transmission (0=Auto, 1=Manual)\")"
+  },
+  {
+    "objectID": "chap6.html#第7周作业提交统计25工商1-2班",
+    "href": "chap6.html#第7周作业提交统计25工商1-2班",
+    "title": "第6章",
+    "section": "第7周作业提交统计(25工商1-2班)",
+    "text": "第7周作业提交统计(25工商1-2班)\n\n\n表1：作业提交次数频数阶梯分布\n\n\n\n\n\n\n\n\n\n\n\n提交次数\n完成比例\n学生人数\n组内占比\n累计占比\n学业执行力判定\n\n\n\n\n8 次\n100.0%\n48\n61.54%\n61.54%\n全勤优秀（学习积极性与自律性极高）\n\n\n7 次\n87.5%\n8\n10.26%\n71.79%\n良好跟进（仅缺交 1 项，状态稳定）\n\n\n6 次\n75.0%\n5\n6.41%\n78.21%\n达标过关（完成绝大部分核心作业）\n\n\n4–5 次\n50.0%–62.5%\n8\n10.26%\n88.46%\n中游边缘（存在阶段性拖延或漏交）\n\n\n1–3 次\n12.5%–37.5%\n7\n8.97%\n97.44%\n学业预警（缺交过半，存在挂科风险）\n\n\n0 次\n0.0%\n2\n2.56%\n100.00%\n红线脱管（完全未参与任何作业考核）\n\n\n\n\n\n表2：各项作业任务提交率降序明细\n\n\n\n\n\n\n\n\n\n\n\n任务类型\n具体作业名称\n提交人数\n未交人数\n提交率\n任务难度与反馈评价\n\n\n\n\n图表软件实操\n绘制N(0,1) PDF曲线和CDF曲线\n71\n7\n91.03%\n提交率最高，上机作图操作成就感强\n\n\n线上随堂测验\nch1-2-quiz\n67\n11\n85.90%\n线上即时反馈，打卡阻力小\n\n\n线上随堂测验\nch3-4_quiz\n67\n11\n85.90%\n与前测提交人群高度重合（相关性极高）\n\n\n图表软件实操\n用EXCEL绘制标准正态分布函数表\n67\n11\n85.90%\n工具应用型作业，完成度良好\n\n\n图表软件实操\n绘制N(0,1)、N(1, 4)、N(-2, 0.25)的概率密度曲线\n66\n12\n84.62%\n多参数对比作图，执行情况扎实\n\n\n图表软件实操\nch3 毕业生图表工具\n62\n16\n79.49%\n属于早期实验任务，提交率略有波折\n\n\n教材书面习题\nch3_教材习题-\n60\n18\n76.92%\n书面手写与计算推导存在心理摩擦\n\n\n教材书面习题\nch4_教材习题\n59\n19\n75.64%\n全场提交洼地，近四分之一学生缺交"
   }
 ]

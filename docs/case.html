@@ -199,7 +199,7 @@ window.Quarto = {
   <li><a href="#讨论课安排" id="toc-讨论课安排" class="nav-link" data-scroll-target="#讨论课安排">讨论课安排</a>
   <ul class="collapse">
   <li><a href="#案例选题-第3-4周" id="toc-案例选题-第3-4周" class="nav-link" data-scroll-target="#案例选题-第3-4周">案例选题 (第3-4周)</a></li>
-  <li><a href="#第3-4-7章讨论课-第10-11周" id="toc-第3-4-7章讨论课-第10-11周" class="nav-link" data-scroll-target="#第3-4-7章讨论课-第10-11周">第3, 4, 7章讨论课 (第10-11周)</a></li>
+  <li><a href="#第3-4-7章讨论课-第8-9周" id="toc-第3-4-7章讨论课-第8-9周" class="nav-link" data-scroll-target="#第3-4-7章讨论课-第8-9周">第3, 4, 7章讨论课 (第8-9周)</a></li>
   <li><a href="#第8-9-10-11章讨论课-第14-15周" id="toc-第8-9-10-11章讨论课-第14-15周" class="nav-link" data-scroll-target="#第8-9-10-11章讨论课-第14-15周">第8, 9, 10, 11章讨论课 (第14-15周)</a></li>
   </ul></li>
   <li><a href="#期末汇报-第15-16周" id="toc-期末汇报-第15-16周" class="nav-link" data-scroll-target="#期末汇报-第15-16周">期末汇报 (第15-16周)</a></li>
@@ -317,10 +317,30 @@ window.Quarto = {
 <li><p>请带笔记本电脑。</p></li>
 </ul>
 </section>
-<section id="第3-4-7章讨论课-第10-11周" class="level2">
-<h2 class="anchored" data-anchor-id="第3-4-7章讨论课-第10-11周">第3, 4, 7章讨论课 (第10-11周)</h2>
+<section id="第3-4-7章讨论课-第8-9周" class="level2">
+<h2 class="anchored" data-anchor-id="第3-4-7章讨论课-第8-9周">第3, 4, 7章讨论课 (第8-9周)</h2>
 <ul>
-<li><p>在Excel中整理好收集的数据。</p></li>
+<li><p>在Excel中整理、清洗数据</p>
+<ul>
+<li><p>变量命名：使用简洁、语义明确的中文(控制在2-6个汉字以内)或英文命名，严禁使用系统默认无序代号（如 Q1, Q2, X1, X2..)</p></li>
+<li><p>完整性与逻辑筛查</p>
+<ul>
+<li><p>缺失值筛除，凡包含缺失值的记录直接整行移除。</p></li>
+<li><p>矛盾取值筛除：剔除违反常识或前后矛盾的样本（例如：年龄小于工作年限、婚姻状况为未婚但配偶收入有取值等）</p></li>
+<li><p>取值范围超限：筛除超出问卷预设界限或现实物理边界的取值（例如：李克特 5 级量表出现数值 6，周工时大于 168 小时等）</p></li>
+</ul></li>
+<li><p>异常值检测：直接剔除判定为极端值的记录。</p>
+<ul>
+<li>基于四分位距 IQR 规则：<strong><span class="math inline">\(3 \times IQR\)</span></strong> 规则剔除极端值：<span class="math inline">\(Value &gt; Q3 + 3 \times IQR\)</span> 或 <span class="math inline">\(Value &lt; Q1 - 3 \times IQR\)</span></li>
+</ul></li>
+<li><p>定性变量分类优化：若某个分类下的个案数量 <strong>少于 20 个</strong>，必须进行合并。合并后建议每组样本数 <span class="math inline">\(&gt; 30\)</span>。保留最大的三类，其余合并为“其他”。</p>
+<ul>
+<li><p>第一步（频数降序排列表）：统计各定性变量所有类别的样本量并由大到小排序；</p></li>
+<li><p>第二步（主体保留）：严格保留样本量最大的前 3 个类别；</p></li>
+<li><p>第三步（长尾归并）：将其余所有低频、分散类别统一重编码并合并为“其他”分类；</p></li>
+<li><p>特殊边界复核：若排名前 3 的某个类别本身样本量仍不足 20，需进一步结合专业背景或相近属性进行业务归并。</p></li>
+</ul></li>
+</ul></li>
 <li><p>运用第3, 4, 7章方法分析数据</p>
 <ul>
 <li><p>图表工具</p>
@@ -347,13 +367,6 @@ window.Quarto = {
 </ul></li>
 <li><p>准备的文件</p></li>
 <li><p>Excel数据文件,将上述分析存放在不同的表单中</p></li>
-<li><p>PPT文件(15-20页)</p>
-<ul>
-<li><p>数据来源</p></li>
-<li><p>变量含义</p></li>
-<li><p>Excel的输出结果</p></li>
-<li><p>主要结论</p></li>
-</ul></li>
 </ul>
 </section>
 <section id="第8-9-10-11章讨论课-第14-15周" class="level2">

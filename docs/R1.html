@@ -192,7 +192,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#直方图" id="toc-直方图" class="nav-link active" data-scroll-target="#直方图">直方图</a></li>
   <li><a href="#箱线图" id="toc-箱线图" class="nav-link" data-scroll-target="#箱线图">箱线图</a></li>
-  <li><a href="#条形图" id="toc-条形图" class="nav-link" data-scroll-target="#条形图">条形图</a></li>
+  <li><a href="#条形图" id="toc-条形图" class="nav-link" data-scroll-target="#条形图">条形图</a>
+  <ul class="collapse">
+  <li><a href="#堆栈条形图" id="toc-堆栈条形图" class="nav-link" data-scroll-target="#堆栈条形图">堆栈条形图</a></li>
+  </ul></li>
   <li><a href="#散点图" id="toc-散点图" class="nav-link" data-scroll-target="#散点图">散点图</a></li>
   </ul>
 </nav>
@@ -300,7 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<hr>
+<section id="堆栈条形图" class="level2">
+<h2 class="anchored" data-anchor-id="堆栈条形图">堆栈条形图</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl), <span class="co"># 绘制柱状图</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am), <span class="co"># 绘制分组变量</span></span>
@@ -316,6 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="散点图" class="level1">
 <h1>散点图</h1>
