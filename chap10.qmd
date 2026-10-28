@@ -4,7 +4,7 @@ title: "第10章"
 
 # 第10章 方差分析
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap10.html)
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/L10slide.html)
 
 # 教学视频 
 

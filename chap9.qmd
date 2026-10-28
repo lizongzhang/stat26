@@ -4,7 +4,7 @@ title: "第9章"
 
 # 第9章 分类数据
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap9.html)
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/L9slide.html)
 
 # 教学视频 
 

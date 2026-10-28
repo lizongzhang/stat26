@@ -4,7 +4,7 @@ title: "第13章"
 
 # 第13章 时间序列
 
-<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/chap13.html)
+<img src="img/teacher.png" alt="讲义" style="width: 24px; height: 24px;margin-right: 10px">[讲义](https://lizongzhang.github.io/stat/L13slide.html)
 
 # 教学视频
 
