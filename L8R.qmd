@@ -122,7 +122,7 @@ after <- c(85, 89.5, 101.5, 96, 86,
 
 # 配对检验长数据结构
 df_paired <- data.frame(
-  id = factor(rep(1:10, 2)),                                      # 必须包含被试 ID
+  id = factor(rep(1:10, 2)),                                      # 必须包含id
   stage = factor(rep(c("训练前", "训练后"), each = 10)),
   weight = c(before, after)
 )
@@ -133,6 +133,7 @@ ggwithinstats(
   data = df_paired,
   x = stage,
   y = weight,
+  subject.id = id,
   type = "parametric"   # 配对 t 检验 (Paired t-test),差值的均值是否等于0
 )
 ```
@@ -161,6 +162,7 @@ ggwithinstats(
   data = df_long,
   x = stage,
   y = weight,
+  subject.id = id,
   type = "parametric",
   alternative = "less",
   title = "配对 t 检验（检验差值是否显著大于 8.5）"
