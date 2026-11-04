@@ -126,6 +126,7 @@ df_paired <- data.frame(
   stage = factor(rep(c("训练前", "训练后"), each = 10)),
   weight = c(before, after)
 )
+df_paired 
 
 # 真正的配对检验函数
 ggwithinstats(
@@ -193,14 +194,15 @@ method_A <- c(31, 34, 29, 32, 35, 38, 34, 30, 29, 32, 31, 26)
 method_B <- c(26, 24, 28, 29, 30, 29, 32, 26, 31, 29, 32, 28)
 
 # 2. 构建长数据框 (Long format)
-df_assembly <- data.frame(
+df <- data.frame(
   time = c(method_A, method_B),
   method = factor(rep(c("甲方法", "乙方法"), each = 12))
 )
+df
 
 # 3. 使用 ggbetweenstats 执行独立两样本 t 检验与绘图
 p <- ggbetweenstats(
-  data = df_assembly,
+  data = df,
   x = method,                   # 分组变量
   y = time,                     # 连续数值变量（装配时间）
   type = "parametric",          # 参数检验 (Student's t-test)
