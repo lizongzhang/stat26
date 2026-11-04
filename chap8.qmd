@@ -109,9 +109,13 @@ title: "第8章"
 
 <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px"> [第8章教材习题学生习作点评](https://lizongzhang.github.io/stat25/chap8ex.html){target="_blank"}
 
+# R中的统计检验
+
+[假设检验在R中的实现](https://lizongzhang.github.io/stat26/L8solution.html){target="_blank"}
+
+[R中假设检验的可视化图形工具:ggstatsplot](https://lizongzhang.github.io/stat26/L8R.html){target="_blank"}
 
 # 拓展资源
-
 
 <img src="img/link.png" style="width: 24px; height: 24px;margin-right: 10px">P值和临界值示意图 <https://www.geogebra.org/m/YRh9H3t5>{target="_blank"}
 
