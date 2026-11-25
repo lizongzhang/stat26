@@ -669,7 +669,7 @@
     "href": "chap10.html",
     "title": "第10章",
     "section": "",
-    "text": "第10章 方差分析\n讲义\n\n\n教学视频\n\n\nExcel操作视频\nEXCEL 单因素方差分析\nEXCEL 双因素方差分析\n\n\n课堂练习\n\n\n根据Excel输出结果回答问题\n\n\n\n\n\n习题讲评\n教材第10章习题讲评\n教材习题10.3在SPSS中的实现: 单因素方差分析\n\n\n拓展资源\n方差分析数值演示 https://www.geogebra.org/m/dTCH4EKG"
+    "text": "第10章 方差分析\n讲义\n\n\n教学视频\n\n\nExcel操作视频\nEXCEL 单因素方差分析\nEXCEL 双因素方差分析\n\n\n应用举例\n北上广深数据分析岗薪酬差异的方差分析\n\n\n课堂练习\n\n\n根据Excel输出结果回答问题\n\n\n\n\n\n习题讲评\n教材第10章习题讲评\n教材习题10.3在SPSS中的实现: 单因素方差分析\n\n\n拓展资源\n方差分析数值演示 https://www.geogebra.org/m/dTCH4EKG"
   },
   {
     "objectID": "chap2ques.html#大纲",
@@ -1902,5 +1902,194 @@
     "title": "L8 ggstatsplot",
     "section": "统计学(第8版)P164 习题8.10",
     "text": "统计学(第8版)P164 习题8.10\n\n\nlibrary(ggstatsplot)\n\n# 1. 录入数据\nmethod_A &lt;- c(31, 34, 29, 32, 35, 38, 34, 30, 29, 32, 31, 26)\nmethod_B &lt;- c(26, 24, 28, 29, 30, 29, 32, 26, 31, 29, 32, 28)\n\n# 2. 构建长数据框 (Long format)\ndf &lt;- data.frame(\n  time = c(method_A, method_B),\n  method = factor(rep(c(\"甲方法\", \"乙方法\"), each = 12))\n)\ndf\n\n   time method\n1    31 甲方法\n2    34 甲方法\n3    29 甲方法\n4    32 甲方法\n5    35 甲方法\n6    38 甲方法\n7    34 甲方法\n8    30 甲方法\n9    29 甲方法\n10   32 甲方法\n11   31 甲方法\n12   26 甲方法\n13   26 乙方法\n14   24 乙方法\n15   28 乙方法\n16   29 乙方法\n17   30 乙方法\n18   29 乙方法\n19   32 乙方法\n20   26 乙方法\n21   31 乙方法\n22   29 乙方法\n23   32 乙方法\n24   28 乙方法\n\n# 3. 使用 ggbetweenstats 执行独立两样本 t 检验与绘图\np &lt;- ggbetweenstats(\n  data = df,\n  x = method,                   # 分组变量\n  y = time,                     # 连续数值变量（装配时间）\n  type = \"parametric\",          # 参数检验 (Student's t-test)\n  var.equal = TRUE,             # 题设已知方差相同，等方差 t 检验\n  pairwise.comparisons = TRUE,  # 显示组间两两比较\n  title = \"两种装配方法的平均装配时间差异检验\",\n  xlab = \"装配方法\",\n  ylab = \"装配时间 (分钟)\"\n)\n\n# 4. 打印图表\nprint(p)\n\n\n\n\n\n\n\n\n\n两种方法的装配时长的方差是否相等？显著性水平为0.05.\n\n\n甲 &lt;- c(31, 34, 29, 32, 35, 38, \n       34, 30, 29, 32, 31, 26)\n乙 &lt;- c(26, 24, 28, 29, 30, 29, \n       32, 26, 31, 29, 32, 28)\n\nvar.test(甲,乙)\n\n\n    F test to compare two variances\n\ndata:  甲 and 乙\nF = 1.6838, num df = 11, denom df = 11, p-value = 0.4009\nalternative hypothesis: true ratio of variances is not equal to 1\n95 percent confidence interval:\n 0.4847138 5.8488408\nsample estimates:\nratio of variances \n           1.68375 \n\n\nP值等于0.4，在0.05的显著性水平下，不拒绝“方差相等的原假设”\n\n能否认为甲方法装配时长的均值显著高于乙方法装配时长的均值？显著性水平为0.05.\n\n方差相等的t检验\n\nt.test(甲,乙, alternative = \"greater\",\n       var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  甲 and 乙\nt = 2.6484, df = 22, p-value = 0.007339\nalternative hypothesis: true difference in means is greater than 0\n95 percent confidence interval:\n 1.084184      Inf\nsample estimates:\nmean of x mean of y \n 31.75000  28.66667 \n\n\nP值等于0.007，在0.05的显著性水平下，拒绝“miu_甲&lt;=miu_乙”的原假设。\n认为甲方法装配时长的均值显著高于乙方法装配时长的均值"
+  },
+  {
+    "objectID": "L10.html#问题引入男生和女生薪酬比较",
+    "href": "L10.html#问题引入男生和女生薪酬比较",
+    "title": "第10章 方差分析",
+    "section": "问题引入：男生和女生薪酬比较",
+    "text": "问题引入：男生和女生薪酬比较\n用什么方法分析男生和女生的薪酬差异？"
+  },
+  {
+    "objectID": "L10.html#拓展问题五个学院薪酬分布的箱线图",
+    "href": "L10.html#拓展问题五个学院薪酬分布的箱线图",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "如果对五个学院进行两两比较，需要进行 \\(C_5^2 = 10\\) 次检验：\n\n\n\n经管 VS. 资环\n经管 VS. 数信\n经管 VS. 农学\n经管 VS. 艺术\n资环 VS. 数信\n\n\n\n资环 VS. 农学\n资环 VS. 艺术\n数信 VS. 农学\n数信 VS. 艺术\n农学 VS. 艺术\n\n\n\n\n\n\n\n\\[\n\\begin{aligned}\nH_0: \\mu_1 = \\mu_2 \\quad &\\text{vs.} \\quad H_1: \\mu_1 \\neq \\mu_2 \\\\\nH_0: \\mu_1 = \\mu_3 \\quad &\\text{vs.} \\quad H_1: \\mu_1 \\neq \\mu_3 \\\\\n\\vdots \\quad &\\qquad \\qquad \\vdots \\\\\nH_0: \\mu_4 = \\mu_5 \\quad &\\text{vs.} \\quad H_1: \\mu_4 \\neq \\mu_5\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n使用两个总体均值的假设检验（8.3.2 节的方法）做 10 次检验存在明显缺陷：\n\n每一次假设检验只利用两组样本的信息。\n\n\n\n若将每次假设检验的显著性水平定为 \\(\\alpha = 0.05\\)：\n\n每次检验中犯第一类错误的概率上限为 \\(0.05\\)，不犯第一类错误的概率下限为 \\(0.95\\)。\n在 10 次独立检验中，每次都不犯第一类错误的联合概率为： \\[0.95^{10} = 0.599\\]\n至少有 1 次犯第一类错误的概率上升为： \\[1 - 0.599 = 0.401\\]\n\n\n\n\n\n\n\n\n\n结论\n\n\n\n做 10 次假设检验不仅繁琐、耗时，而且犯第一类错误的风险大大增加！"
+  },
+  {
+    "objectID": "L10.html#多个总体均值的比较方差分析",
+    "href": "L10.html#多个总体均值的比较方差分析",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "方差分析与做 10 次两两假设检验不等价。\n做 10 次假设检验会使犯第一类错误的风险大幅膨胀。\n\n\n\n\n\n核心目的：讨论多个总体均值的相等性。\n核心优势：\n\n同时比较多个总体均值是否相等。\n避免了做多次两两假设检验导致犯第一类错误概率增加的风险。"
+  },
+  {
+    "objectID": "L10.html#统计学家ronald-fisher",
+    "href": "L10.html#统计学家ronald-fisher",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "Ronald Fisher (1890–1962)\n\nBritish statistician and geneticist.\nFrom 1919 onward, he worked at the Rothamsted Experimental Station for 14 years; there, he analysed its immense data from crop experiments since the 1840s, and developed the analysis of variance (ANOVA).\nIn 1921, published Studies in Crop Variation, marking his first application of the analysis of variance (ANOVA).\n参考：Wikipedia — Ronald Fisher\n\n\n\n\n\n\n主要学术贡献：\n\n\\(F\\) 分布\n实验设计（Experimental Design）\nFisher 判别分析\n极大似然估计\n\n\n\n\n\n\n\n\n学界评价\n\n\n\n\n“A genius who almost single-handedly created the foundations for modern statistical science.” — Hald, Anders (1998), A History of Mathematical Statistics, New York: Wiley.\n“The single most important figure in 20th century statistics.” — Efron, Bradley (1998), R. A. Fisher in the 21st century, Statistical Science, 13(2): 95–122."
+  },
+  {
+    "objectID": "L10.html#方差分析的原假设和备择假设",
+    "href": "L10.html#方差分析的原假设和备择假设",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "\\[\n\\begin{aligned}\nH_0 &: \\mu_1 = \\mu_2 = \\cdots = \\mu_k \\\\\nH_1 &: \\mu_1, \\mu_2, \\cdots, \\mu_k \\text{ 不全相等}\n\\end{aligned}\n\\]\n\n原假设 \\(H_0\\)：不同组别（因子水平）下，定量变量的总体均值相等。\n备择假设 \\(H_1\\)：不同组别（因子水平）下，定量变量的总体均值不全相等（即至少有两个总体的均值不相等。\n\n\n\n\n\n\n\n\n常见误区\n\n\n\n\\(H_1\\) 不能表达成：\\(\\mu_1 \\neq \\mu_2 \\neq \\cdots \\neq \\mu_k\\)！ “不全相等”是指即至少有两个总体的均值不相等，而非所有总体均值两两都不相等。"
+  },
+  {
+    "objectID": "L10.html#方差分析中的术语",
+    "href": "L10.html#方差分析中的术语",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "因素 / 因子（Factor）：定性变量\n水平（Level）/ 处理（Treatment）：定性变量的具体取值\n定量变量"
+  },
+  {
+    "objectID": "L10.html#方差分析的假定anova-assumptions-p208209",
+    "href": "L10.html#方差分析的假定anova-assumptions-p208209",
+    "title": "第10章 方差分析",
+    "section": "方差分析的假定（ANOVA Assumptions, P208–209）",
+    "text": "方差分析的假定（ANOVA Assumptions, P208–209）\n\n正态性：各个总体服从正态分布（The populations are normally distributed.）\n方差齐性：各个总体的方差相同（The populations have equal standard deviations.）\n独立性：观测值是相互独立的（The samples are selected independently.）\n\n\n\n\n\n\n\n实践注意\n\n\n\n对于大样本，即使总体不严格满足“正态分布”和“方差齐性”，ANOVA 的检验结论仍然稳健。\n对于小样本，如果总体非正态且方差不齐，应改用非参数检验方法，如 Kruskal–Wallis 检验等。"
+  },
+  {
+    "objectID": "L10.html#方差分析思想总平方和的分解",
+    "href": "L10.html#方差分析思想总平方和的分解",
+    "title": "第10章 方差分析",
+    "section": "方差分析思想：总平方和的分解",
+    "text": "方差分析思想：总平方和的分解\n\\[SST = SSA + SSE\\]\n\n\\(SST\\)（Sum of Squares Total，总平方和）：全部观测值的总变异。\n\\(SSA\\)（Sum of Squares due to Treatment，组间平方和）：因子效应，反映系统误差（因子水平差异造成）和随机误差。\n\\(SSE\\)（Sum of Squares due to Error，组内平方和）：残差效应，仅反映随机误差。\n\n\n\n总平方和 \\(SST\\)（Total Sum of Squares）\n\\[SST = \\sum_{i=1}^{k} \\sum_{j=1}^{n_i} (x_{ij} -\\bar{\\bar{x}})^2\\]\n\n\\(SST\\)：反映了所有观测值围绕总均值的变异。\n\\(x_{ij}\\)：第 \\(i\\) 个因子水平下的第 \\(j\\) 个观测值。\n\\(\\bar{\\bar{x}}\\)：总均值（the overall mean）。\n\n\n\n\n组间平方和 \\(SSA\\)\n\\[SSA = \\sum_{i=1}^{k} n_i (\\bar{x}_i - \\bar{\\bar{x}})^2\\]\n\n\\(\\bar{x}_i\\)：第 \\(i\\) 组的组内均值（treatment mean）。\n\\(SSA\\)：反映了各组内均值围绕总均值的变异。\n\\(SSA\\) 的统计含义：因子效应，反映了系统误差（由因子水平差异造成）\\(+\\) 随机误差的总和。\n\n\n\n\n组内平方和 \\(SSE\\)\n\\[SSE = \\sum_{i=1}^{k} \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i)^2\\]\n\n\\(\\bar{x}_i\\)：第 \\(i\\) 组的组内均值（treatment mean）。\n\\(SSE\\)：反映了各观测值围绕其所在组内均值的变异。\n\\(SSE\\) 的统计含义：残差效应，仅反映了随机误差。\n\n\n\n\n总平方和的分解示意图\n\n\n\n\n\n\n\n\n数学推导：总平方和 \\(=\\) 组内平方和 \\(+\\) 组间平方和\n\n\\[\n\\begin{aligned}\nSST &= \\sum_{i=1}^{k}\\sum_{j=1}^{n_i}(x_{ij} - \\bar{\\bar{x}})^2 \\\\\n    &= \\sum_{i=1}^{k}\\sum_{j=1}^{n_i}\\big[(x_{ij} - \\bar{x}_i) + (\\bar{x}_i - \\bar{\\bar{x}})\\big]^2 \\\\\n    &= \\underbrace{\\sum_{i=1}^{k}\\sum_{j=1}^{n_i}(x_{ij} - \\bar{x}_i)^2}_{\\text{组内平方和 } SSE}\n     + \\underbrace{\\sum_{i=1}^{k} n_i (\\bar{x}_i - \\bar{\\bar{x}})^2}_{\\text{组间平方和 } SSA}\n     + 2\\sum_{i=1}^{k}\\sum_{j=1}^{n_i}(x_{ij} - \\bar{x}_i)(\\bar{x}_i - \\bar{\\bar{x}})\n\\end{aligned}\n\\]\n\n\n\n\n证明：交叉项等于 0\n\n\\[\n\\begin{aligned}\n\\sum_{i=1}^{k} \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i)(\\bar{x}_i - \\overline{\\overline{x}})\n&= \\sum_{i=1}^{k} \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i)\\bar{x}_i\n- \\sum_{i=1}^{k} \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i)\\overline{\\overline{x}} \\\\\n&= \\sum_{i=1}^{k} \\bar{x}_i \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i)\n- \\overline{\\overline{x}} \\sum_{i=1}^{k} \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i) \\\\\n&= \\sum_{i=1}^{k} \\bar{x}_i\n   \\underbrace{\\left( \\sum_{j=1}^{n_i} x_{ij} - \\sum_{j=1}^{n_i} \\bar{x}_i \\right)}_{= \\, 0}\n- \\overline{\\overline{x}} \\sum_{i=1}^{k}\n   \\underbrace{\\left( \\sum_{j=1}^{n_i} (x_{ij} - \\bar{x}_i) \\right)}_{= \\, 0}\n= 0\n\\end{aligned}\n\\]\n\\[\n\\text{因为：} \\sum_{j=1}^{n_i} x_{ij} - \\sum_{j=1}^{n_i} \\bar{x}_i\n= \\sum_{j=1}^{n_i} x_{ij} - n_i \\bar{x}_i = 0\n\\]\n\n因此恒有：\n\\[SST = SSA + SSE\\]"
+  },
+  {
+    "objectID": "L10.html#单因素方差分析表",
+    "href": "L10.html#单因素方差分析表",
+    "title": "第10章 方差分析",
+    "section": "单因素方差分析表",
+    "text": "单因素方差分析表\n\n\n\n\n\n\n\n\n\n\n\n\n\n误差来源\n平方和 (\\(SS\\))\n自由度 (\\(df\\))\n均方 (\\(MS\\))\n\\(F\\) 值\n\\(P\\) 值\n\\(F\\) 临界值\n\n\n\n\n组间\n\\(SSA\\)\n\\(k - 1\\)\n\\(MSA = \\dfrac{SSA}{k - 1}\\)\n\\(F = \\dfrac{MSA}{MSE}\\)\n\\(P\\)\n\\(F_\\alpha(k-1, n-k)\\)\n\n\n组内\n\\(SSE\\)\n\\(n - k\\)\n\\(MSE = \\dfrac{SSE}{n - k}\\)\n\n\n\n\n\n总和\n\\(SST\\)\n\\(n - 1\\)"
+  },
+  {
+    "objectID": "L10.html#方差分析决策规则",
+    "href": "L10.html#方差分析决策规则",
+    "title": "第10章 方差分析",
+    "section": "方差分析决策规则",
+    "text": "方差分析决策规则\n检验统计量：\n\\[F = \\frac{MSA}{MSE} = \\frac{SSA / (k - 1)}{SSE / (n - k)} \\sim F(k - 1, \\, n - k)\\]\n\n\\(SSA\\) 越大，说明组间差异越大，不同因子水平下的均值差异越大。\n\\(SSA\\) 越大、\\(SSE\\) 越小，则 \\(F\\) 值越大；\\(F\\) 值越大，越倾向于拒绝原假设。\n\n\n\n\n\n\n\n\n决策规则（右侧检验）\n\n\n\n\n临界值法：若 \\(F &gt; F_\\alpha(k - 1, \\, n - k)\\)（上 \\(\\alpha\\) 分位点），拒绝 \\(H_0\\)。\n\\(P\\) 值法：若 \\(P &lt; \\alpha\\)，拒绝 \\(H_0\\)。"
+  },
+  {
+    "objectID": "L10.html#单因素方差分析实例",
+    "href": "L10.html#单因素方差分析实例",
+    "title": "第10章 方差分析",
+    "section": "单因素方差分析实例",
+    "text": "单因素方差分析实例\n\n实例 1：三种职业间的工作压力是否有明显区别？\n\n\n\n\n\n\n\n\n实例 2：学生对教师的评价与学习成绩是否相关？\n\n\n\n\n\n\n\n\nExcel 单因素方差分析输出结果\n\n\n\n\n\n\n\n\n实例 3：五个学院薪酬的单因素方差分析（SPSS 输出）\n\\[\n\\begin{aligned}\nH_0 &: \\mu_1 = \\mu_2 = \\mu_3 = \\mu_4 = \\mu_5 \\\\\nH_1 &: \\mu_1, \\mu_2, \\mu_3, \\mu_4, \\mu_5 \\text{ 不全相等}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "L10.html#什么是双因素方差分析",
+    "href": "L10.html#什么是双因素方差分析",
+    "title": "第10章 方差分析",
+    "section": "什么是双因素方差分析？",
+    "text": "什么是双因素方差分析？\n\n涉及两个定性变量（行因素 \\(A\\)、列因素 \\(B\\)）。\n研究在满足两个定性变量条件的组合下，定量变量（响应变量）的观测值差异。\n包含两组（或三组）假设检验：\n\n检验行因素对因变量有无显著影响；\n检验列因素对因变量有无显著影响；\n（可重复试验时）检验行因素与列因素的交互作用有无显著影响。"
+  },
+  {
+    "objectID": "L10.html#无重复的双因素方差分析",
+    "href": "L10.html#无重复的双因素方差分析",
+    "title": "第10章 方差分析",
+    "section": "无重复的双因素方差分析",
+    "text": "无重复的双因素方差分析\n总平方和分解为三部分：\nSST = SSR + SSC + SSE"
+  },
+  {
+    "objectID": "L10.html#考虑交互作用的双因素方差分析可重复",
+    "href": "L10.html#考虑交互作用的双因素方差分析可重复",
+    "title": "第10章 方差分析",
+    "section": "考虑交互作用的双因素方差分析（可重复）",
+    "text": "考虑交互作用的双因素方差分析（可重复）\n总平方和分解为四部分：\nSST = SSR + SSC + SSRC + SSE"
+  },
+  {
+    "objectID": "L10.html#第-10-章重点",
+    "href": "L10.html#第-10-章重点",
+    "title": "第10章 方差分析",
+    "section": "第 10 章重点",
+    "text": "第 10 章重点\n\n单因素方差分析\n\n原假设与备择假设\n基本假定\n方差分析表、\\(F\\)检验决策规则\n\n双因素方差分析\n\n无重复双因素方差分析\n可重复双因素方差分析"
+  },
+  {
+    "objectID": "L10.html#方差分析的假定",
+    "href": "L10.html#方差分析的假定",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "正态性：各个总体服从正态分布\n方差齐性：各个总体的方差相同\n独立性：观测值是相互独立的\n\n\n\n\n\n\n\n\n实践注意\n\n\n\n\n对于大样本，即使总体不严格满足“正态分布”和“方差齐性”，ANOVA 的检验结论仍然稳健。\n对于小样本，如果总体非正态且方差不齐，应改用非参数检验方法，如 Kruskal–Wallis 检验等。"
+  },
+  {
+    "objectID": "L10.html#无重复双因素方差分析",
+    "href": "L10.html#无重复双因素方差分析",
+    "title": "第10章 方差分析",
+    "section": "无重复双因素方差分析",
+    "text": "无重复双因素方差分析\n总平方和分解为三部分：\n\\[SST = SSR + SSC + SSE\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n误差来源\n平方和 (\\(SS\\))\n自由度 (\\(df\\))\n均方 (\\(MS\\))\n\\(F\\) 值\n\\(P\\) 值\n\\(F\\) 临界值\n\n\n\n\n行因素\n\\(SSR\\)\n\\(k - 1\\)\n\\(MSR\\)\n\\(F_R = \\dfrac{MSR}{MSE}\\)\n\\(P_R\\)\n\\(F_\\alpha\\)\n\n\n列因素\n\\(SSC\\)\n\\(r - 1\\)\n\\(MSC\\)\n\\(F_C = \\dfrac{MSC}{MSE}\\)\n\\(P_C\\)\n\\(F_\\alpha\\)\n\n\n误差\n\\(SSE\\)\n\\((k - 1)(r - 1)\\)\n\\(MSE\\)\n\n\n\n\n\n总和\n\\(SST\\)\n\\(kr - 1\\)\n\n\n\n\n\n\n\n\n\n\n实例：Two-Way Analysis of Variance\n\n因子 A：对教师的评价\n因子 B：每周的自学时数\n响应变量：学生的成绩\n\n\n\n\n\n\n\n\n\nExcel 双因素方差分析输出结果\n\n\n\n\n\n\n\n\n实例：分学院分性别月薪的箱线图"
+  },
+  {
+    "objectID": "L10.html#可重复双因素方差分析",
+    "href": "L10.html#可重复双因素方差分析",
+    "title": "第10章 方差分析",
+    "section": "可重复双因素方差分析",
+    "text": "可重复双因素方差分析\n总平方和分解为四部分：\n\\[SST = SSR + SSC + SSRC + SSE\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n误差来源\n平方和 (\\(SS\\))\n自由度 (\\(df\\))\n均方 (\\(MS\\))\n\\(F\\) 值\n\\(P\\) 值\n\\(F\\) 临界值\n\n\n\n\n行因素\n\\(SSR\\)\n\\(k - 1\\)\n\\(MSR\\)\n\\(F_R = \\dfrac{MSR}{MSE}\\)\n\\(P_R\\)\n\\(F_\\alpha\\)\n\n\n列因素\n\\(SSC\\)\n\\(r - 1\\)\n\\(MSC\\)\n\\(F_C = \\dfrac{MSC}{MSE}\\)\n\\(P_C\\)\n\\(F_\\alpha\\)\n\n\n交互作用\n\\(SSRC\\)\n\\((k - 1)(r - 1)\\)\n\\(MSRC\\)\n\\(F_{RC} = \\dfrac{MSRC}{MSE}\\)\n\\(P_{RC}\\)\n\\(F_\\alpha\\)\n\n\n误差\n\\(SSE\\)\n\\(kr(m - 1)\\)\n\\(MSE\\)\n\n\n\n\n\n总和\n\\(SST\\)\n\\(n - 1\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n其中 \\(m\\) 为每个水平组合下重复观测的样本行数，总样本量 \\(n = krm\\)。"
+  },
+  {
+    "objectID": "boss.html",
+    "href": "boss.html",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "",
+    "text": "本报告基于清洗后的招聘数据 boss.xlsx（共 1,116 条有效月薪岗位记录，无缺失值），使用 ggstatsplot 对折算年薪（万）在不同城市、学历要求、经验要求、公司规模下的差异进行方差相等的单因素方差分析（Fisher’s ANOVA）与事后多重比较。\n\n\nCode\n# 加载核心包\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(ggstatsplot)\n\n# 读取数据\nboss &lt;- read_excel(\"data/boss.xlsx\", sheet = \"Sheet1\")\n\n# 设置合理的因子顺序，并将含括号的数值列重命名以便后续调用\nboss &lt;- boss |&gt;\n  mutate(\n    城市 = factor(城市, levels = c(\"北京\", \"上海\", \"深圳\", \"广州\")),\n    经验要求 = factor(\n      经验要求,\n      levels = c(\"在校/应届\", \"经验不限\", \"1年以内\", \"1-3年\", \"3-5年\", \"5-10年\", \"10年以上\")\n    ),\n    学历要求 = factor(\n      学历要求,\n      levels = c(\"中专/中技\", \"高中\", \"大专\", \"学历不限\", \"本科\", \"硕士\")\n    ),\n    公司规模 = factor(\n      公司规模,\n      levels = c(\"0-20人\", \"20-99人\", \"100-499人\", \"500-999人\", \"1000-9999人\", \"10000人以上\")\n    ),\n    折算年薪 = `折算年薪(万)`,\n    月薪均值 = `月薪均值(K)`\n  )\n\n# 统一定义放大字体的 ggplot2 组件，供后续 ggbetweenstats 复用\nbig_font_component &lt;- list(\n  theme(\n    plot.title    = element_text(size = 18, face = \"bold\"),\n    plot.subtitle = element_text(size = 14),\n    axis.title    = element_text(size = 15, face = \"bold\"),\n    axis.text     = element_text(size = 14),\n    plot.caption  = element_text(size = 12)\n  )\n)\n\nglimpse(boss)\n\n\nRows: 1,116\nColumns: 12\n$ 城市           &lt;fct&gt; 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京,…\n$ 经验要求       &lt;fct&gt; 5-10年, 3-5年, 经验不限, 经验不限, 1-3年, 5-10年, 3-5年, 5-10年, 3-5年…\n$ 学历要求       &lt;fct&gt; 本科, 学历不限, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本…\n$ 公司名称       &lt;chr&gt; \"美团服务体验中心\", \"快手\", \"易娱网络\", \"神州租车\", \"BOSS直聘\", \"去哪儿网\", \"优赛…\n$ 公司规模       &lt;fct&gt; 10000人以上, 10000人以上, 100-499人, 10000人以上, 1000-9999人, 100…\n$ `薪资下限(K)`  &lt;dbl&gt; 20, 30, 25, 20, 20, 30, 20, 20, 15, 10, 17, 25, 10, 8, …\n$ `薪资上限(K)`  &lt;dbl&gt; 35, 35, 35, 40, 35, 40, 40, 40, 25, 15, 27, 50, 15, 10,…\n$ `月薪均值(K)`  &lt;dbl&gt; 27.5, 32.5, 30.0, 30.0, 27.5, 35.0, 30.0, 30.0, 20.0, 1…\n$ 发薪月数       &lt;dbl&gt; 15, 16, 14, 12, 16, 16, 14, 12, 13, 12, 15, 14, 14, 12,…\n$ `折算年薪(万)` &lt;dbl&gt; 41.25, 52.00, 42.00, 36.00, 44.00, 56.00, 42.00, 36.00,…\n$ 折算年薪       &lt;dbl&gt; 41.25, 52.00, 42.00, 36.00, 44.00, 56.00, 42.00, 36.00,…\n$ 月薪均值       &lt;dbl&gt; 27.5, 32.5, 30.0, 30.0, 27.5, 35.0, 30.0, 30.0, 20.0, 1…"
+  },
+  {
+    "objectID": "boss.html#数据准备与包加载",
+    "href": "boss.html#数据准备与包加载",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "",
+    "text": "本报告基于清洗后的招聘数据 boss.xlsx（共 1,116 条有效月薪岗位记录，无缺失值），使用 ggstatsplot 对折算年薪（万）在不同城市、学历要求、经验要求、公司规模下的差异进行方差相等的单因素方差分析（Fisher’s ANOVA）与事后多重比较。\n\n\nCode\n# 加载核心包\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(ggstatsplot)\n\n# 读取数据\nboss &lt;- read_excel(\"data/boss.xlsx\", sheet = \"Sheet1\")\n\n# 设置合理的因子顺序，并将含括号的数值列重命名以便后续调用\nboss &lt;- boss |&gt;\n  mutate(\n    城市 = factor(城市, levels = c(\"北京\", \"上海\", \"深圳\", \"广州\")),\n    经验要求 = factor(\n      经验要求,\n      levels = c(\"在校/应届\", \"经验不限\", \"1年以内\", \"1-3年\", \"3-5年\", \"5-10年\", \"10年以上\")\n    ),\n    学历要求 = factor(\n      学历要求,\n      levels = c(\"中专/中技\", \"高中\", \"大专\", \"学历不限\", \"本科\", \"硕士\")\n    ),\n    公司规模 = factor(\n      公司规模,\n      levels = c(\"0-20人\", \"20-99人\", \"100-499人\", \"500-999人\", \"1000-9999人\", \"10000人以上\")\n    ),\n    折算年薪 = `折算年薪(万)`,\n    月薪均值 = `月薪均值(K)`\n  )\n\n# 统一定义放大字体的 ggplot2 组件，供后续 ggbetweenstats 复用\nbig_font_component &lt;- list(\n  theme(\n    plot.title    = element_text(size = 18, face = \"bold\"),\n    plot.subtitle = element_text(size = 14),\n    axis.title    = element_text(size = 15, face = \"bold\"),\n    axis.text     = element_text(size = 14),\n    plot.caption  = element_text(size = 12)\n  )\n)\n\nglimpse(boss)\n\n\nRows: 1,116\nColumns: 12\n$ 城市           &lt;fct&gt; 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京,…\n$ 经验要求       &lt;fct&gt; 5-10年, 3-5年, 经验不限, 经验不限, 1-3年, 5-10年, 3-5年, 5-10年, 3-5年…\n$ 学历要求       &lt;fct&gt; 本科, 学历不限, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本…\n$ 公司名称       &lt;chr&gt; \"美团服务体验中心\", \"快手\", \"易娱网络\", \"神州租车\", \"BOSS直聘\", \"去哪儿网\", \"优赛…\n$ 公司规模       &lt;fct&gt; 10000人以上, 10000人以上, 100-499人, 10000人以上, 1000-9999人, 100…\n$ `薪资下限(K)`  &lt;dbl&gt; 20, 30, 25, 20, 20, 30, 20, 20, 15, 10, 17, 25, 10, 8, …\n$ `薪资上限(K)`  &lt;dbl&gt; 35, 35, 35, 40, 35, 40, 40, 40, 25, 15, 27, 50, 15, 10,…\n$ `月薪均值(K)`  &lt;dbl&gt; 27.5, 32.5, 30.0, 30.0, 27.5, 35.0, 30.0, 30.0, 20.0, 1…\n$ 发薪月数       &lt;dbl&gt; 15, 16, 14, 12, 16, 16, 14, 12, 13, 12, 15, 14, 14, 12,…\n$ `折算年薪(万)` &lt;dbl&gt; 41.25, 52.00, 42.00, 36.00, 44.00, 56.00, 42.00, 36.00,…\n$ 折算年薪       &lt;dbl&gt; 41.25, 52.00, 42.00, 36.00, 44.00, 56.00, 42.00, 36.00,…\n$ 月薪均值       &lt;dbl&gt; 27.5, 32.5, 30.0, 30.0, 27.5, 35.0, 30.0, 30.0, 20.0, 1…"
+  },
+  {
+    "objectID": "boss.html#不同城市的折算年薪方差分析",
+    "href": "boss.html#不同城市的折算年薪方差分析",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "2. 不同城市的折算年薪方差分析",
+    "text": "2. 不同城市的折算年薪方差分析\n使用 ggbetweenstats() 并设定 var.equal = TRUE，执行经典方差相等的单因素方差分析（Fisher’s \\(F\\) 检验），并采用 Holm 校正后的合并方差 Student’s \\(t\\) 检验进行两两事后比较。\n\n\nCode\nggbetweenstats(\n  data = boss,\n  x = 城市,\n  y = 折算年薪,\n  type = \"parametric\",                 # 参数检验\n  var.equal = TRUE,                    # 方差相等的 Fisher F 检验（事后检验为 Student's t）\n  pairwise.display = \"significant\",    # 仅标注具有统计显著性的两两比较\n  p.adjust.method = \"holm\",            # 多重比较 p 值校正方法\n  centrality.plotting = TRUE,          # 显示各组均值点与数值标签\n  centrality.label.args = list(size = 5, nudge_x = 0.35),\n  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),\n  xlab = \"城市\",\n  ylab = \"折算年薪（万元）\",\n  title = \"北上广深数据分析岗位折算年薪的单因素方差分析（Fisher ANOVA）\",\n  caption = \"注：折算年薪 = 月薪均值 × 发薪月数 / 10；横轴括号内为各组样本量。\",\n  ggtheme = theme_minimal(base_size = 16),\n  ggplot.component = big_font_component\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n检验结论与现实意义\n\n\n\n\n统计检验结论：方差相等的 Fisher \\(F\\) 检验高度显著（\\(F(3, 1112) = 32.81, p &lt; 0.001, \\hat{\\omega}^2 = 0.08\\)），表明北上广深四座城市的数据分析岗位年薪存在显著的组间差异。四城年薪均值排序为：北京（27.57万）&gt; 深圳（22.36万）&gt; 上海（21.72万）&gt; 广州（17.33万）。事后两两比较显示，上海与深圳之间无显著差异（\\(p_{\\text{Holm}} = 0.53\\)），其余所有城市配对均存在极显著差异（\\(p_{\\text{Holm}} &lt; 0.001\\)）。\n现实意义：国内一线城市的数据分析薪酬呈现清晰的“三梯队格局”——北京作为头部互联网大厂与科技总部聚集地领跑第一梯队；上海与深圳旗鼓相当，构成第二梯队；广州则以相对温和的薪酬位居第三梯队。求职者在跨城选择时，不能仅看名义年薪差距（如北京比广州高出约 10.24 万），还应结合当地房价、通勤与生活成本综合评估实际可支配结余。\n\n\n\n\n2.1 非参数稳健性检验（Kruskal-Wallis 检验）\n考虑到薪酬数据通常呈右偏分布，使用 type = \"nonparametric\" 执行 Kruskal-Wallis 秩和检验与 Dunn 事后检验，验证上述城市薪酬梯队结论的稳健性。\n\n\nCode\nggbetweenstats(\n  data = boss,\n  x = 城市,\n  y = 折算年薪,\n  type = \"nonparametric\",              # 非参数检验（Kruskal-Wallis + Dunn）\n  pairwise.display = \"significant\",\n  p.adjust.method = \"holm\",\n  centrality.label.args = list(size = 5, nudge_x = 0.35),\n  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),\n  xlab = \"城市\",\n  ylab = \"折算年薪（万元）\",\n  title = \"北上广深数据分析岗位折算年薪的非参数检验（Kruskal-Wallis）\",\n  ggtheme = theme_minimal(base_size = 16),\n  ggplot.component = big_font_component\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n检验结论与现实意义\n\n\n\n\n统计检验结论：非参数 Kruskal-Wallis 检验同样极显著（\\(\\chi^2(3) = 84.22, p &lt; 0.001\\)），四城折算年薪中位数分别为北京 26.00 万、上海 19.20 万、深圳 19.20 万、广州 15.00 万，事后 Dunn 检验的显著性格局与参数 Fisher \\(F\\) 检验完全一致。\n现实意义：各城市年薪均值均略高于中位数，印证了行业薪酬存在“高薪长尾拉高均值”的右偏特征；但无论看均值还是看更能代表普通从业者水平的中位数，北京显著领先、沪深持平、广州偏低的市场格局均高度稳健。"
+  },
+  {
+    "objectID": "boss.html#不同学历要求的折算年薪方差分析",
+    "href": "boss.html#不同学历要求的折算年薪方差分析",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "3. 不同学历要求的折算年薪方差分析",
+    "text": "3. 不同学历要求的折算年薪方差分析\n原始数据中 高中（\\(n = 1\\)）与 中专/中技（\\(n = 1\\)）样本量仅为 1，无法计算组内方差，因此筛选保留 4 个主要学历组别（大专、学历不限、本科、硕士）。\n\n\nCode\nboss_edu &lt;- boss |&gt;\n  filter(学历要求 %in% c(\"大专\", \"学历不限\", \"本科\", \"硕士\")) |&gt;\n  mutate(学历要求 = droplevels(学历要求))\n\nggbetweenstats(\n  data = boss_edu,\n  x = 学历要求,\n  y = 折算年薪,\n  type = \"parametric\",\n  var.equal = TRUE,\n  pairwise.display = \"significant\",\n  p.adjust.method = \"holm\",\n  centrality.label.args = list(size = 5, nudge_x = 0.35),\n  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),\n  xlab = \"学历要求\",\n  ylab = \"折算年薪（万元）\",\n  title = \"不同学历要求下数据分析岗位折算年薪的方差分析（Fisher ANOVA）\",\n  caption = \"注：已剔除样本量 n = 1 的“高中”与“中专/中技”组。\",\n  ggtheme = theme_minimal(base_size = 16),\n  ggplot.component = big_font_component\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n检验结论与现实意义\n\n\n\n\n统计检验结论：Fisher \\(F\\) 检验极显著（\\(F(3, 1110) = 36.93, p &lt; 0.001, \\hat{\\omega}^2 = 0.09\\)）。各组年薪均值依次为：大专（11.57万）&lt; 学历不限（18.65万）&lt; 本科（23.45万）&lt; 硕士（26.48万）。事后多重比较表明，大专组显著低于其余所有组别（比本科低 11.88 万、比硕士低 14.91 万，\\(p_{\\text{Holm}} &lt; 0.001\\)）；但本科与硕士之间的均值差（3.03 万）在 0.05 水平下未达到统计显著（\\(p_{\\text{Holm}} = 0.066\\)），学历不限与本科之间亦无显著差异（\\(p_{\\text{Holm}} = 0.066\\)）。\n现实意义：本科学历是数据分析岗位的核心“入场券”与薪酬分水岭——跨过大专到本科的门槛后，平均年薪几乎翻倍；而本科与硕士之间的直接起薪溢价在全样本下并不算悬殊，说明该岗位更看重实战能力、业务理解与工具熟练度。此外，“学历不限”岗位均值高达 18.65 万，往往对应注重资深项目经验或特定业务背景的社会招聘，而非低端岗位。"
+  },
+  {
+    "objectID": "boss.html#不同经验要求的折算年薪方差分析",
+    "href": "boss.html#不同经验要求的折算年薪方差分析",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "4. 不同经验要求的折算年薪方差分析",
+    "text": "4. 不同经验要求的折算年薪方差分析\n为保证各组统计检验的稳健性，仅保留样本容量大于 30 的经验组别（自动剔除 在校/应届 \\(n = 22\\) 与 10年以上 \\(n = 4\\)），共保留 5 组进行方差相等的 Fisher \\(F\\) 检验。\n\n\nCode\nboss_exp &lt;- boss |&gt;\n  group_by(经验要求) |&gt;\n  filter(n() &gt; 30) |&gt;\n  ungroup() |&gt;\n  mutate(经验要求 = droplevels(经验要求))\n\nggbetweenstats(\n  data = boss_exp,\n  x = 经验要求,\n  y = 折算年薪,\n  type = \"parametric\",\n  var.equal = TRUE,\n  pairwise.display = \"significant\",\n  p.adjust.method = \"holm\",\n  centrality.label.args = list(size = 5, nudge_x = 0.35),\n  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),\n  xlab = \"经验要求\",\n  ylab = \"折算年薪（万元）\",\n  title = \"不同经验要求下数据分析岗位折算年薪的方差分析（n &gt; 30，Fisher ANOVA）\",\n  caption = \"注：已剔除样本量 ≤ 30 的组别（在校/应届 n = 22，10年以上 n = 4）。\",\n  ggtheme = theme_minimal(base_size = 16),\n  ggplot.component = big_font_component\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n检验结论与现实意义\n\n\n\n\n统计检验结论：Fisher \\(F\\) 检验高度显著（\\(F(4, 1085) = 77.03, p &lt; 0.001, \\hat{\\omega}^2 = 0.22\\)），工作经验的效应量在所有单因素中最大（解释了约 22% 的年薪变异）。各组年薪均值呈明显阶梯式跃升：1年以内（12.41万）&lt; 1-3年（16.80万）&lt; 经验不限（20.19万）&lt; 3-5年（27.02万）&lt; 5-10年（33.94万），且任意两组之间的事后两两比较均达到统计显著（所有 \\(p_{\\text{Holm}} &lt; 0.05\\)）。\n现实意义：数据分析是典型的“强经验驱动型”职业。入行 1–3 年到 3–5 年是薪酬跃升最剧烈的黄金期（均值一次性跳涨超过 10 万元），5–10 年资深岗位年薪均值突破 33 万元。值得注意的是，“经验不限”组均值（20.19 万）高于 1–3 年组且离散度很大（标准差 14.43 万），反映出该标签既包含基础岗，也包含大厂不限年限、按能力定级的校招或社招高薪岗。"
+  },
+  {
+    "objectID": "boss.html#不同公司规模的折算年薪方差分析",
+    "href": "boss.html#不同公司规模的折算年薪方差分析",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "5. 不同公司规模的折算年薪方差分析",
+    "text": "5. 不同公司规模的折算年薪方差分析\n\n\nCode\nggbetweenstats(\n  data = boss,\n  x = 公司规模,\n  y = 折算年薪,\n  type = \"parametric\",\n  var.equal = TRUE,\n  pairwise.display = \"significant\",\n  p.adjust.method = \"holm\",\n  centrality.label.args = list(size = 5, nudge_x = 0.35),\n  ggsignif.args = list(textsize = 4.2, tip_length = 0.01),\n  xlab = \"公司规模\",\n  ylab = \"折算年薪（万元）\",\n  title = \"不同公司规模下数据分析岗位折算年薪的方差分析（Fisher ANOVA）\",\n  ggtheme = theme_minimal(base_size = 16),\n  ggplot.component = big_font_component\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n检验结论与现实意义\n\n\n\n\n统计检验结论：Fisher \\(F\\) 检验高度显著（\\(F(5, 1110) = 58.02, p &lt; 0.001, \\hat{\\omega}^2 = 0.20\\)），效应量仅次于工作经验。折算年薪均值随企业规模严格单调递增：0-20人（16.55万）≈ 20-99人（16.79万）&lt; 100-499人（20.13万）&lt; 500-999人（25.33万）≈ 1000-9999人（28.34万）&lt; 10000人以上（32.11万）。事后检验显示，除 0-20人 与 20-99人 之间（\\(p_{\\text{Holm}} = 0.83\\)）、500-999人 与 1000-9999人 之间（\\(p_{\\text{Holm}} = 0.077\\)）无显著差异外，其余跨规模阶梯的两两比较均显著。\n现实意义：数据分析岗位存在极强的“大厂/平台溢价”——万人以上大型企业的年薪均值（32.11 万）几乎是百人以下小微企业（约 16.7 万）的 2 倍。这背后的逻辑在于：大型企业拥有海量业务数据、成熟的数据中台体系以及更高的年终多薪（15–18 薪），数据分析直接撬动大规模营收，因此企业支付意愿和能力显著更强。"
+  },
+  {
+    "objectID": "boss.html#分组方差分析按城市分面比较核心学历的薪酬差异",
+    "href": "boss.html#分组方差分析按城市分面比较核心学历的薪酬差异",
+    "title": "北上广深数据分析岗位薪酬差异的方差分析",
+    "section": "6. 分组方差分析：按城市分面比较核心学历的薪酬差异",
+    "text": "6. 分组方差分析：按城市分面比较核心学历的薪酬差异\n使用 grouped_ggbetweenstats() 按城市分面，分别在四座城市内部执行方差相等的 Fisher \\(F\\) 检验，比较 大专、本科、硕士 三类核心学历的年薪差异。\n\n\nCode\nboss_edu_core &lt;- boss |&gt;\n  filter(学历要求 %in% c(\"大专\", \"本科\", \"硕士\")) |&gt;\n  mutate(学历要求 = droplevels(学历要求))\n\ngrouped_ggbetweenstats(\n  data = boss_edu_core,\n  x = 学历要求,\n  y = 折算年薪,\n  grouping.var = 城市,\n  type = \"parametric\",\n  var.equal = TRUE,\n  pairwise.display = \"significant\",\n  p.adjust.method = \"holm\",\n  centrality.label.args = list(size = 4.5, nudge_x = 0.35),\n  ggsignif.args = list(textsize = 4.2, tip_length = 0.01),\n  xlab = \"学历要求\",\n  ylab = \"折算年薪（万元）\",\n  plotgrid.args = list(nrow = 2, ncol = 2),\n  annotation.args = list(\n    title = \"北上广深各城市内部不同学历的折算年薪方差分析（Fisher ANOVA）\",\n    theme = theme(plot.title = element_text(size = 18, face = \"bold\", hjust = 0.5))\n  ),\n  ggtheme = theme_minimal(base_size = 14),\n  ggplot.component = list(\n    theme(\n      plot.title    = element_text(size = 15, face = \"bold\"),\n      plot.subtitle = element_text(size = 11.5),\n      axis.title    = element_text(size = 13, face = \"bold\"),\n      axis.text     = element_text(size = 12)\n    )\n  )\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n检验结论与现实意义\n\n\n\n\n统计检验结论：四座城市内部的学历方差分析均达到统计显著（北京 \\(F(2,268)=4.64, p=0.010\\)；上海 \\(F(2,262)=8.76, p&lt;0.001\\)；深圳 \\(F(2,276)=21.98, p&lt;0.001\\)；广州 \\(F(2,266)=17.23, p&lt;0.001\\)）。共性在于：在全部四座城市中，本科与硕士的年薪均显著高于大专；差异在于：仅在广州，硕士（24.76 万）显著高于本科（18.59 万，\\(p_{\\text{Holm}} = 0.037\\)），而在北京（本科 28.32 万 vs 硕士 26.14 万）、上海（22.34 万 vs 26.20 万）和深圳（24.10 万 vs 28.01 万），本科与硕士之间均未呈现统计显著差异（\\(p_{\\text{Holm}} &gt; 0.14\\)）。\n现实意义：分城检验揭示了一个极有价值的求职洞察——“本科门槛”在全国一线城市高度一致，大专学历在四城均值均停留在 11–14 万元区间，很难突破薪酬天花板；而研究生学历的边际回报存在城市差异——在广州市场，硕士标签能带来更显著的相对薪资跃升（尽管广州硕士岗位样本较少，\\(n = 9\\)）；而在北京、上海、深圳的高密度科技市场中，本科生只要具备扎实的技术栈与项目经验，完全可以拿到与硕士相当甚至更高的薪酬。"
+  },
+  {
+    "objectID": "L10.html",
+    "href": "L10.html",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "两个总体均值的t检验\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n回顾\n\n\n\n比较两个总体均值是否相等时，可以使用第 8 章（8.3.2 节）的两独立样本 \\(t\\) 检验。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n如果对五个学院进行两两比较，需要进行 \\(C_5^2 = 10\\) 次检验：\n\n\n\n经管 VS. 资环\n经管 VS. 数信\n经管 VS. 农学\n经管 VS. 艺术\n资环 VS. 数信\n\n\n\n资环 VS. 农学\n资环 VS. 艺术\n数信 VS. 农学\n数信 VS. 艺术\n农学 VS. 艺术\n\n\n\n\n\n\n\n\\[\n\\begin{aligned}\nH_0: \\mu_1 = \\mu_2 \\quad &\\text{vs.} \\quad H_1: \\mu_1 \\neq \\mu_2 \\\\\nH_0: \\mu_1 = \\mu_3 \\quad &\\text{vs.} \\quad H_1: \\mu_1 \\neq \\mu_3 \\\\\n\\vdots \\quad &\\qquad \\qquad \\vdots \\\\\nH_0: \\mu_4 = \\mu_5 \\quad &\\text{vs.} \\quad H_1: \\mu_4 \\neq \\mu_5\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n使用两个总体均值的假设检验（8.3.2 节的方法）做 10 次检验存在明显缺陷：\n\n每一次假设检验只利用两组样本的信息。\n\n\n\n若将每次假设检验的显著性水平定为 \\(\\alpha = 0.05\\)：\n\n每次检验中犯第一类错误的概率上限为 \\(0.05\\)，不犯第一类错误的概率下限为 \\(0.95\\)。\n在 10 次独立检验中，每次都不犯第一类错误的联合概率为： \\[0.95^{10} = 0.599\\]\n至少有 1 次犯第一类错误的概率上升为： \\[1 - 0.599 = 0.401\\]\n\n\n\n\n\n\n\n\n\n结论\n\n\n\n做 10 次假设检验不仅繁琐、耗时，而且犯第一类错误的风险大大增加！\n\n\n\n\n\n\n\n\n\n\n\n\n方差分析与做 10 次两两假设检验不等价。\n做 10 次假设检验会使犯第一类错误的风险大幅膨胀。\n\n\n\n\n\n核心目的：讨论多个总体均值的相等性。\n核心优势：\n\n同时比较多个总体均值是否相等。\n避免了做多次两两假设检验导致犯第一类错误概率增加的风险。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRonald Fisher (1890–1962)\n\nBritish statistician and geneticist.\nFrom 1919 onward, he worked at the Rothamsted Experimental Station for 14 years; there, he analysed its immense data from crop experiments since the 1840s, and developed the analysis of variance (ANOVA).\nIn 1921, published Studies in Crop Variation, marking his first application of the analysis of variance (ANOVA).\n参考：Wikipedia — Ronald Fisher\n\n\n\n\n\n\n主要学术贡献：\n\n\\(F\\) 分布\n实验设计（Experimental Design）\nFisher 判别分析\n极大似然估计\n\n\n\n\n\n\n\n\n学界评价\n\n\n\n\n“A genius who almost single-handedly created the foundations for modern statistical science.” — Hald, Anders (1998), A History of Mathematical Statistics, New York: Wiley.\n“The single most important figure in 20th century statistics.” — Efron, Bradley (1998), R. A. Fisher in the 21st century, Statistical Science, 13(2): 95–122.\n\n\n\n\n\n\n\n\\[\n\\begin{aligned}\nH_0 &: \\mu_1 = \\mu_2 = \\cdots = \\mu_k \\\\\nH_1 &: \\mu_1, \\mu_2, \\cdots, \\mu_k \\text{ 不全相等}\n\\end{aligned}\n\\]\n\n原假设 \\(H_0\\)：不同组别（因子水平）下，定量变量的总体均值相等。\n备择假设 \\(H_1\\)：不同组别（因子水平）下，定量变量的总体均值不全相等（即至少有两个总体的均值不相等。\n\n\n\n\n\n\n\n\n常见误区\n\n\n\n\\(H_1\\) 不能表达成：\\(\\mu_1 \\neq \\mu_2 \\neq \\cdots \\neq \\mu_k\\)！ “不全相等”是指即至少有两个总体的均值不相等，而非所有总体均值两两都不相等。\n\n\n\n\n\n\n\n因素 / 因子（Factor）：定性变量\n水平（Level）/ 处理（Treatment）：定性变量的具体取值\n定量变量\n\n\n\n\n\n\n正态性：各个总体服从正态分布\n方差齐性：各个总体的方差相同\n独立性：观测值是相互独立的\n\n\n\n\n\n\n\n\n实践注意\n\n\n\n\n对于大样本，即使总体不严格满足“正态分布”和“方差齐性”，ANOVA 的检验结论仍然稳健。\n对于小样本，如果总体非正态且方差不齐，应改用非参数检验方法，如 Kruskal–Wallis 检验等。"
+  },
+  {
+    "objectID": "L10.html#男生和女生薪酬比较",
+    "href": "L10.html#男生和女生薪酬比较",
+    "title": "第10章 方差分析",
+    "section": "",
+    "text": "两个总体均值的t检验\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n回顾\n\n\n\n比较两个总体均值是否相等时，可以使用第 8 章（8.3.2 节）的两独立样本 \\(t\\) 检验。"
   }
 ]

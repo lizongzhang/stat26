@@ -1,0 +1,270 @@
+---
+title: "北上广深数据分析岗位薪酬差异的方差分析"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-copy: true
+    code-tools: true
+execute:
+  warning: false
+  message: false
+  echo: true
+---
+
+```{r}
+#| include: false
+# 指定图形的中文字体
+par(family = "STKaiti")
+# install.packages("showtext")
+library(showtext)
+showtext_auto()
+```
+
+## 1. 数据准备与包加载
+
+本报告基于清洗后的招聘数据 `boss.xlsx`（共 1,116 条有效月薪岗位记录，无缺失值），使用 `ggstatsplot` 对**折算年薪（万）**在不同**城市、学历要求、经验要求、公司规模**下的差异进行**方差相等的单因素方差分析（Fisher's ANOVA）**与事后多重比较。
+
+```{r}
+#| label: setup
+
+# 加载核心包
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(ggstatsplot)
+
+# 读取数据
+boss <- read_excel("data/boss.xlsx", sheet = "Sheet1")
+
+# 设置合理的因子顺序，并将含括号的数值列重命名以便后续调用
+boss <- boss |>
+  mutate(
+    城市 = factor(城市, levels = c("北京", "上海", "深圳", "广州")),
+    经验要求 = factor(
+      经验要求,
+      levels = c("在校/应届", "经验不限", "1年以内", "1-3年", "3-5年", "5-10年", "10年以上")
+    ),
+    学历要求 = factor(
+      学历要求,
+      levels = c("中专/中技", "高中", "大专", "学历不限", "本科", "硕士")
+    ),
+    公司规模 = factor(
+      公司规模,
+      levels = c("0-20人", "20-99人", "100-499人", "500-999人", "1000-9999人", "10000人以上")
+    ),
+    折算年薪 = `折算年薪(万)`,
+    月薪均值 = `月薪均值(K)`
+  )
+
+# 统一定义放大字体的 ggplot2 组件，供后续 ggbetweenstats 复用
+big_font_component <- list(
+  theme(
+    plot.title    = element_text(size = 18, face = "bold"),
+    plot.subtitle = element_text(size = 14),
+    axis.title    = element_text(size = 15, face = "bold"),
+    axis.text     = element_text(size = 14),
+    plot.caption  = element_text(size = 12)
+  )
+)
+
+glimpse(boss)
+```
+
+---
+
+## 2. 不同城市的折算年薪方差分析
+
+使用 `ggbetweenstats()` 并设定 `var.equal = TRUE`，执行经典**方差相等的单因素方差分析（Fisher's $F$ 检验）**，并采用 Holm 校正后的合并方差 Student's $t$ 检验进行两两事后比较。
+
+```{r}
+#| label: anova-city
+#| fig-width: 10
+#| fig-height: 7.2
+
+ggbetweenstats(
+  data = boss,
+  x = 城市,
+  y = 折算年薪,
+  type = "parametric",                 # 参数检验
+  var.equal = TRUE,                    # 方差相等的 Fisher F 检验（事后检验为 Student's t）
+  pairwise.display = "significant",    # 仅标注具有统计显著性的两两比较
+  p.adjust.method = "holm",            # 多重比较 p 值校正方法
+  centrality.plotting = TRUE,          # 显示各组均值点与数值标签
+  centrality.label.args = list(size = 5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),
+  xlab = "城市",
+  ylab = "折算年薪（万元）",
+  title = "北上广深数据分析岗位折算年薪的单因素方差分析（Fisher ANOVA）",
+  caption = "注：折算年薪 = 月薪均值 × 发薪月数 / 10；横轴括号内为各组样本量。",
+  ggtheme = theme_minimal(base_size = 16),
+  ggplot.component = big_font_component
+)
+```
+
+::: {.callout-note title="检验结论与现实意义"}
+- **统计检验结论**：方差相等的 Fisher $F$ 检验高度显著（$F(3, 1112) = 32.81, p < 0.001, \hat{\omega}^2 = 0.08$），表明北上广深四座城市的数据分析岗位年薪存在显著的组间差异。四城年薪均值排序为：**北京（27.57万）> 深圳（22.36万）> 上海（21.72万）> 广州（17.33万）**。事后两两比较显示，**上海与深圳之间无显著差异**（$p_{\text{Holm}} = 0.53$），其余所有城市配对均存在极显著差异（$p_{\text{Holm}} < 0.001$）。
+- **现实意义**：国内一线城市的数据分析薪酬呈现清晰的“**三梯队格局**”——北京作为头部互联网大厂与科技总部聚集地领跑第一梯队；上海与深圳旗鼓相当，构成第二梯队；广州则以相对温和的薪酬位居第三梯队。求职者在跨城选择时，不能仅看名义年薪差距（如北京比广州高出约 10.24 万），还应结合当地房价、通勤与生活成本综合评估实际可支配结余。
+:::
+---
+
+## 3. 不同学历要求的折算年薪方差分析
+
+原始数据中 `高中`（$n = 1$）与 `中专/中技`（$n = 1$）样本量仅为 1，无法计算组内方差，因此筛选保留 4 个主要学历组别（`大专`、`学历不限`、`本科`、`硕士`）。
+
+```{r}
+#| label: anova-edu
+#| fig-width: 10
+#| fig-height: 7.2
+
+boss_edu <- boss |>
+  filter(学历要求 %in% c("大专", "学历不限", "本科", "硕士")) |>
+  mutate(学历要求 = droplevels(学历要求))
+
+ggbetweenstats(
+  data = boss_edu,
+  x = 学历要求,
+  y = 折算年薪,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),
+  xlab = "学历要求",
+  ylab = "折算年薪（万元）",
+  title = "不同学历要求下数据分析岗位折算年薪的方差分析（Fisher ANOVA）",
+  caption = "注：已剔除样本量 n = 1 的“高中”与“中专/中技”组。",
+  ggtheme = theme_minimal(base_size = 16),
+  ggplot.component = big_font_component
+)
+```
+
+::: {.callout-note title="检验结论与现实意义"}
+- **统计检验结论**：Fisher $F$ 检验极显著（$F(3, 1110) = 36.93, p < 0.001, \hat{\omega}^2 = 0.09$）。各组年薪均值依次为：**大专（11.57万）< 学历不限（18.65万）< 本科（23.45万）< 硕士（26.48万）**。事后多重比较表明，**大专组显著低于其余所有组别**（比本科低 11.88 万、比硕士低 14.91 万，$p_{\text{Holm}} < 0.001$）；但**本科与硕士之间的均值差（3.03 万）在 0.05 水平下未达到统计显著**（$p_{\text{Holm}} = 0.066$），学历不限与本科之间亦无显著差异（$p_{\text{Holm}} = 0.066$）。
+- **现实意义**：**本科学历是数据分析岗位的核心“入场券”与薪酬分水岭**——跨过大专到本科的门槛后，平均年薪几乎翻倍；而本科与硕士之间的直接起薪溢价在全样本下并不算悬殊，说明该岗位更看重实战能力、业务理解与工具熟练度。此外，“学历不限”岗位均值高达 18.65 万，往往对应注重资深项目经验或特定业务背景的社会招聘，而非低端岗位。
+:::
+
+---
+
+## 4. 不同经验要求的折算年薪方差分析
+
+为保证各组统计检验的稳健性，仅保留样本容量大于 30 的经验组别（自动剔除 `在校/应届` $n = 22$ 与 `10年以上` $n = 4$），共保留 5 组进行方差相等的 Fisher $F$ 检验。
+
+```{r}
+#| label: anova-exp
+#| fig-width: 11
+#| fig-height: 7.4
+
+boss_exp <- boss |>
+  group_by(经验要求) |>
+  filter(n() > 30) |>
+  ungroup() |>
+  mutate(经验要求 = droplevels(经验要求))
+
+ggbetweenstats(
+  data = boss_exp,
+  x = 经验要求,
+  y = 折算年薪,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 4.5, tip_length = 0.01),
+  xlab = "经验要求",
+  ylab = "折算年薪（万元）",
+  title = "不同经验要求下数据分析岗位折算年薪的方差分析（n > 30，Fisher ANOVA）",
+  caption = "注：已剔除样本量 ≤ 30 的组别（在校/应届 n = 22，10年以上 n = 4）。",
+  ggtheme = theme_minimal(base_size = 16),
+  ggplot.component = big_font_component
+)
+```
+
+::: {.callout-note title="检验结论与现实意义"}
+- **统计检验结论**：Fisher $F$ 检验高度显著（$F(4, 1085) = 77.03, p < 0.001, \hat{\omega}^2 = 0.22$），**工作经验的效应量在所有单因素中最大**（解释了约 22% 的年薪变异）。各组年薪均值呈明显阶梯式跃升：**1年以内（12.41万）< 1-3年（16.80万）< 经验不限（20.19万）< 3-5年（27.02万）< 5-10年（33.94万）**，且**任意两组之间的事后两两比较均达到统计显著**（所有 $p_{\text{Holm}} < 0.05$）。
+- **现实意义**：数据分析是典型的**“强经验驱动型”职业**。入行 1–3 年到 3–5 年是薪酬跃升最剧烈的黄金期（均值一次性跳涨超过 10 万元），5–10 年资深岗位年薪均值突破 33 万元。值得注意的是，“经验不限”组均值（20.19 万）高于 1–3 年组且离散度很大（标准差 14.43 万），反映出该标签既包含基础岗，也包含大厂不限年限、按能力定级的校招或社招高薪岗。
+:::
+
+---
+
+## 5. 不同公司规模的折算年薪方差分析
+
+```{r}
+#| label: anova-scale
+#| fig-width: 11.5
+#| fig-height: 7.4
+
+ggbetweenstats(
+  data = boss,
+  x = 公司规模,
+  y = 折算年薪,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 4.2, tip_length = 0.01),
+  xlab = "公司规模",
+  ylab = "折算年薪（万元）",
+  title = "不同公司规模下数据分析岗位折算年薪的方差分析（Fisher ANOVA）",
+  ggtheme = theme_minimal(base_size = 16),
+  ggplot.component = big_font_component
+)
+```
+
+::: {.callout-note title="检验结论与现实意义"}
+- **统计检验结论**：Fisher $F$ 检验高度显著（$F(5, 1110) = 58.02, p < 0.001, \hat{\omega}^2 = 0.20$），效应量仅次于工作经验。折算年薪均值随企业规模严格单调递增：**0-20人（16.55万）≈ 20-99人（16.79万）< 100-499人（20.13万）< 500-999人（25.33万）≈ 1000-9999人（28.34万）< 10000人以上（32.11万）**。事后检验显示，除 `0-20人` 与 `20-99人` 之间（$p_{\text{Holm}} = 0.83$）、`500-999人` 与 `1000-9999人` 之间（$p_{\text{Holm}} = 0.077$）无显著差异外，其余跨规模阶梯的两两比较均显著。
+- **现实意义**：数据分析岗位存在极强的**“大厂/平台溢价”**——万人以上大型企业的年薪均值（32.11 万）几乎是百人以下小微企业（约 16.7 万）的 **2 倍**。这背后的逻辑在于：大型企业拥有海量业务数据、成熟的数据中台体系以及更高的年终多薪（15–18 薪），数据分析直接撬动大规模营收，因此企业支付意愿和能力显著更强。
+:::
+
+---
+
+## 6. 分组方差分析：按城市分面比较核心学历的薪酬差异
+
+使用 `grouped_ggbetweenstats()` 按**城市**分面，分别在四座城市内部执行方差相等的 Fisher $F$ 检验，比较 `大专`、`本科`、`硕士` 三类核心学历的年薪差异。
+
+```{r}
+#| label: anova-grouped
+#| fig-width: 14
+#| fig-height: 11
+
+boss_edu_core <- boss |>
+  filter(学历要求 %in% c("大专", "本科", "硕士")) |>
+  mutate(学历要求 = droplevels(学历要求))
+
+grouped_ggbetweenstats(
+  data = boss_edu_core,
+  x = 学历要求,
+  y = 折算年薪,
+  grouping.var = 城市,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 4.5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 4.2, tip_length = 0.01),
+  xlab = "学历要求",
+  ylab = "折算年薪（万元）",
+  plotgrid.args = list(nrow = 2, ncol = 2),
+  annotation.args = list(
+    title = "北上广深各城市内部不同学历的折算年薪方差分析（Fisher ANOVA）",
+    theme = theme(plot.title = element_text(size = 18, face = "bold", hjust = 0.5))
+  ),
+  ggtheme = theme_minimal(base_size = 14),
+  ggplot.component = list(
+    theme(
+      plot.title    = element_text(size = 15, face = "bold"),
+      plot.subtitle = element_text(size = 11.5),
+      axis.title    = element_text(size = 13, face = "bold"),
+      axis.text     = element_text(size = 12)
+    )
+  )
+)
+```
+
+::: {.callout-note title="检验结论与现实意义"}
+- **统计检验结论**：四座城市内部的学历方差分析均达到统计显著（北京 $F(2,268)=4.64, p=0.010$；上海 $F(2,262)=8.76, p<0.001$；深圳 $F(2,276)=21.98, p<0.001$；广州 $F(2,266)=17.23, p<0.001$）。共性在于：**在全部四座城市中，本科与硕士的年薪均显著高于大专**；差异在于：**仅在广州，硕士（24.76 万）显著高于本科（18.59 万，$p_{\text{Holm}} = 0.037$）**，而在北京（本科 28.32 万 vs 硕士 26.14 万）、上海（22.34 万 vs 26.20 万）和深圳（24.10 万 vs 28.01 万），本科与硕士之间均未呈现统计显著差异（$p_{\text{Holm}} > 0.14$）。
+- **现实意义**：分城检验揭示了一个极有价值的求职洞察——**“本科门槛”在全国一线城市高度一致**，大专学历在四城均值均停留在 11–14 万元区间，很难突破薪酬天花板；而**研究生学历的边际回报存在城市差异**——在广州市场，硕士标签能带来更显著的相对薪资跃升（尽管广州硕士岗位样本较少，$n = 9$）；而在北京、上海、深圳的高密度科技市场中，本科生只要具备扎实的技术栈与项目经验，完全可以拿到与硕士相当甚至更高的薪酬。
+:::

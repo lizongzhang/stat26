@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>北上广深数据分析岗位薪酬差异的方差分析 – 统计学26秋</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-01d0f5b1183453c76aab6ce154aa53c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">统计学26秋</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap1.html"> 
+<span class="menu-text">第1章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap2.html"> 
+<span class="menu-text">第2章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap3.html"> 
+<span class="menu-text">第3章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap4.html"> 
+<span class="menu-text">第4章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap6.html"> 
+<span class="menu-text">第6章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap7.html"> 
+<span class="menu-text">第7章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap8.html"> 
+<span class="menu-text">第8章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap9.html"> 
+<span class="menu-text">第9章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap10.html"> 
+<span class="menu-text">第10章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap11.html"> 
+<span class="menu-text">第11章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chap13.html"> 
+<span class="menu-text">第13章</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./case.html"> 
+<span class="menu-text">小组作业</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="./lizongzhang9@qq.com" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-envelope"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#数据准备与包加载" id="toc-数据准备与包加载" class="nav-link active" data-scroll-target="#数据准备与包加载">1. 数据准备与包加载</a></li>
+  <li><a href="#不同城市的折算年薪方差分析" id="toc-不同城市的折算年薪方差分析" class="nav-link" data-scroll-target="#不同城市的折算年薪方差分析">2. 不同城市的折算年薪方差分析</a>
+  <ul class="collapse">
+  <li><a href="#非参数稳健性检验kruskal-wallis-检验" id="toc-非参数稳健性检验kruskal-wallis-检验" class="nav-link" data-scroll-target="#非参数稳健性检验kruskal-wallis-检验">2.1 非参数稳健性检验（Kruskal-Wallis 检验）</a></li>
+  </ul></li>
+  <li><a href="#不同学历要求的折算年薪方差分析" id="toc-不同学历要求的折算年薪方差分析" class="nav-link" data-scroll-target="#不同学历要求的折算年薪方差分析">3. 不同学历要求的折算年薪方差分析</a></li>
+  <li><a href="#不同经验要求的折算年薪方差分析" id="toc-不同经验要求的折算年薪方差分析" class="nav-link" data-scroll-target="#不同经验要求的折算年薪方差分析">4. 不同经验要求的折算年薪方差分析</a></li>
+  <li><a href="#不同公司规模的折算年薪方差分析" id="toc-不同公司规模的折算年薪方差分析" class="nav-link" data-scroll-target="#不同公司规模的折算年薪方差分析">5. 不同公司规模的折算年薪方差分析</a></li>
+  <li><a href="#分组方差分析按城市分面比较核心学历的薪酬差异" id="toc-分组方差分析按城市分面比较核心学历的薪酬差异" class="nav-link" data-scroll-target="#分组方差分析按城市分面比较核心学历的薪酬差异">6. 分组方差分析：按城市分面比较核心学历的薪酬差异</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">北上广深数据分析岗位薪酬差异的方差分析</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="数据准备与包加载" class="level2">
+<h2 class="anchored" data-anchor-id="数据准备与包加载">1. 数据准备与包加载</h2>
+<p>本报告基于清洗后的招聘数据 <code>boss.xlsx</code>（共 1,116 条有效月薪岗位记录，无缺失值），使用 <code>ggstatsplot</code> 对<strong>折算年薪（万）</strong>在不同<strong>城市、学历要求、经验要求、公司规模</strong>下的差异进行<strong>方差相等的单因素方差分析（Fisher’s ANOVA）</strong>与事后多重比较。</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载核心包</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取数据</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>boss <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/boss.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Sheet1"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置合理的因子顺序，并将含括号的数值列重命名以便后续调用</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>boss <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    城市 <span class="ot">=</span> <span class="fu">factor</span>(城市, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"北京"</span>, <span class="st">"上海"</span>, <span class="st">"深圳"</span>, <span class="st">"广州"</span>)),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    经验要求 <span class="ot">=</span> <span class="fu">factor</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      经验要求,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"在校/应届"</span>, <span class="st">"经验不限"</span>, <span class="st">"1年以内"</span>, <span class="st">"1-3年"</span>, <span class="st">"3-5年"</span>, <span class="st">"5-10年"</span>, <span class="st">"10年以上"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    学历要求 <span class="ot">=</span> <span class="fu">factor</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      学历要求,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"中专/中技"</span>, <span class="st">"高中"</span>, <span class="st">"大专"</span>, <span class="st">"学历不限"</span>, <span class="st">"本科"</span>, <span class="st">"硕士"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    公司规模 <span class="ot">=</span> <span class="fu">factor</span>(</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      公司规模,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0-20人"</span>, <span class="st">"20-99人"</span>, <span class="st">"100-499人"</span>, <span class="st">"500-999人"</span>, <span class="st">"1000-9999人"</span>, <span class="st">"10000人以上"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    折算年薪 <span class="ot">=</span> <span class="st">`</span><span class="at">折算年薪(万)</span><span class="st">`</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    月薪均值 <span class="ot">=</span> <span class="st">`</span><span class="at">月薪均值(K)</span><span class="st">`</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 统一定义放大字体的 ggplot2 组件，供后续 ggbetweenstats 复用</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>big_font_component <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(boss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,116
+Columns: 12
+$ 城市           &lt;fct&gt; 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京, 北京,…
+$ 经验要求       &lt;fct&gt; 5-10年, 3-5年, 经验不限, 经验不限, 1-3年, 5-10年, 3-5年, 5-10年, 3-5年…
+$ 学历要求       &lt;fct&gt; 本科, 学历不限, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本科, 本…
+$ 公司名称       &lt;chr&gt; "美团服务体验中心", "快手", "易娱网络", "神州租车", "BOSS直聘", "去哪儿网", "优赛…
+$ 公司规模       &lt;fct&gt; 10000人以上, 10000人以上, 100-499人, 10000人以上, 1000-9999人, 100…
+$ `薪资下限(K)`  &lt;dbl&gt; 20, 30, 25, 20, 20, 30, 20, 20, 15, 10, 17, 25, 10, 8, …
+$ `薪资上限(K)`  &lt;dbl&gt; 35, 35, 35, 40, 35, 40, 40, 40, 25, 15, 27, 50, 15, 10,…
+$ `月薪均值(K)`  &lt;dbl&gt; 27.5, 32.5, 30.0, 30.0, 27.5, 35.0, 30.0, 30.0, 20.0, 1…
+$ 发薪月数       &lt;dbl&gt; 15, 16, 14, 12, 16, 16, 14, 12, 13, 12, 15, 14, 14, 12,…
+$ `折算年薪(万)` &lt;dbl&gt; 41.25, 52.00, 42.00, 36.00, 44.00, 56.00, 42.00, 36.00,…
+$ 折算年薪       &lt;dbl&gt; 41.25, 52.00, 42.00, 36.00, 44.00, 56.00, 42.00, 36.00,…
+$ 月薪均值       &lt;dbl&gt; 27.5, 32.5, 30.0, 30.0, 27.5, 35.0, 30.0, 30.0, 20.0, 1…</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="不同城市的折算年薪方差分析" class="level2">
+<h2 class="anchored" data-anchor-id="不同城市的折算年薪方差分析">2. 不同城市的折算年薪方差分析</h2>
+<p>使用 <code>ggbetweenstats()</code> 并设定 <code>var.equal = TRUE</code>，执行经典<strong>方差相等的单因素方差分析（Fisher’s <span class="math inline">\(F\)</span> 检验）</strong>，并采用 Holm 校正后的合并方差 Student’s <span class="math inline">\(t\)</span> 检验进行两两事后比较。</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 城市,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,                 <span class="co"># 参数检验</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,                    <span class="co"># 方差相等的 Fisher F 检验（事后检验为 Student's t）</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,    <span class="co"># 仅标注具有统计显著性的两两比较</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,            <span class="co"># 多重比较 p 值校正方法</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.plotting =</span> <span class="cn">TRUE</span>,          <span class="co"># 显示各组均值点与数值标签</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"城市"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"北上广深数据分析岗位折算年薪的单因素方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"注：折算年薪 = 月薪均值 × 发薪月数 / 10；横轴括号内为各组样本量。"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boss_files/figure-html/anova-city-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="检验结论与现实意义">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+检验结论与现实意义
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>统计检验结论</strong>：方差相等的 Fisher <span class="math inline">\(F\)</span> 检验高度显著（<span class="math inline">\(F(3, 1112) = 32.81, p &lt; 0.001, \hat{\omega}^2 = 0.08\)</span>），表明北上广深四座城市的数据分析岗位年薪存在显著的组间差异。四城年薪均值排序为：<strong>北京（27.57万）&gt; 深圳（22.36万）&gt; 上海（21.72万）&gt; 广州（17.33万）</strong>。事后两两比较显示，<strong>上海与深圳之间无显著差异</strong>（<span class="math inline">\(p_{\text{Holm}} = 0.53\)</span>），其余所有城市配对均存在极显著差异（<span class="math inline">\(p_{\text{Holm}} &lt; 0.001\)</span>）。</li>
+<li><strong>现实意义</strong>：国内一线城市的数据分析薪酬呈现清晰的“<strong>三梯队格局</strong>”——北京作为头部互联网大厂与科技总部聚集地领跑第一梯队；上海与深圳旗鼓相当，构成第二梯队；广州则以相对温和的薪酬位居第三梯队。求职者在跨城选择时，不能仅看名义年薪差距（如北京比广州高出约 10.24 万），还应结合当地房价、通勤与生活成本综合评估实际可支配结余。</li>
+</ul>
+</div>
+</div>
+<section id="非参数稳健性检验kruskal-wallis-检验" class="level3">
+<h3 class="anchored" data-anchor-id="非参数稳健性检验kruskal-wallis-检验">2.1 非参数稳健性检验（Kruskal-Wallis 检验）</h3>
+<p>考虑到薪酬数据通常呈右偏分布，使用 <code>type = "nonparametric"</code> 执行 <strong>Kruskal-Wallis 秩和检验</strong>与 <strong>Dunn 事后检验</strong>，验证上述城市薪酬梯队结论的稳健性。</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 城市,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"nonparametric"</span>,              <span class="co"># 非参数检验（Kruskal-Wallis + Dunn）</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"城市"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"北上广深数据分析岗位折算年薪的非参数检验（Kruskal-Wallis）"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boss_files/figure-html/anova-city-np-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="检验结论与现实意义">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+检验结论与现实意义
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>统计检验结论</strong>：非参数 Kruskal-Wallis 检验同样极显著（<span class="math inline">\(\chi^2(3) = 84.22, p &lt; 0.001\)</span>），四城折算年薪中位数分别为<strong>北京 26.00 万、上海 19.20 万、深圳 19.20 万、广州 15.00 万</strong>，事后 Dunn 检验的显著性格局与参数 Fisher <span class="math inline">\(F\)</span> 检验完全一致。</li>
+<li><strong>现实意义</strong>：各城市年薪均值均略高于中位数，印证了行业薪酬存在“高薪长尾拉高均值”的右偏特征；但无论看均值还是看更能代表普通从业者水平的<strong>中位数</strong>，北京显著领先、沪深持平、广州偏低的市场格局均高度稳健。</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="不同学历要求的折算年薪方差分析" class="level2">
+<h2 class="anchored" data-anchor-id="不同学历要求的折算年薪方差分析">3. 不同学历要求的折算年薪方差分析</h2>
+<p>原始数据中 <code>高中</code>（<span class="math inline">\(n = 1\)</span>）与 <code>中专/中技</code>（<span class="math inline">\(n = 1\)</span>）样本量仅为 1，无法计算组内方差，因此筛选保留 4 个主要学历组别（<code>大专</code>、<code>学历不限</code>、<code>本科</code>、<code>硕士</code>）。</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>boss_edu <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(学历要求 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"大专"</span>, <span class="st">"学历不限"</span>, <span class="st">"本科"</span>, <span class="st">"硕士"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(学历要求 <span class="ot">=</span> <span class="fu">droplevels</span>(学历要求))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss_edu,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 学历要求,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"学历要求"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"不同学历要求下数据分析岗位折算年薪的方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"注：已剔除样本量 n = 1 的“高中”与“中专/中技”组。"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boss_files/figure-html/anova-edu-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="检验结论与现实意义">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+检验结论与现实意义
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>统计检验结论</strong>：Fisher <span class="math inline">\(F\)</span> 检验极显著（<span class="math inline">\(F(3, 1110) = 36.93, p &lt; 0.001, \hat{\omega}^2 = 0.09\)</span>）。各组年薪均值依次为：<strong>大专（11.57万）&lt; 学历不限（18.65万）&lt; 本科（23.45万）&lt; 硕士（26.48万）</strong>。事后多重比较表明，<strong>大专组显著低于其余所有组别</strong>（比本科低 11.88 万、比硕士低 14.91 万，<span class="math inline">\(p_{\text{Holm}} &lt; 0.001\)</span>）；但<strong>本科与硕士之间的均值差（3.03 万）在 0.05 水平下未达到统计显著</strong>（<span class="math inline">\(p_{\text{Holm}} = 0.066\)</span>），学历不限与本科之间亦无显著差异（<span class="math inline">\(p_{\text{Holm}} = 0.066\)</span>）。</li>
+<li><strong>现实意义</strong>：<strong>本科学历是数据分析岗位的核心“入场券”与薪酬分水岭</strong>——跨过大专到本科的门槛后，平均年薪几乎翻倍；而本科与硕士之间的直接起薪溢价在全样本下并不算悬殊，说明该岗位更看重实战能力、业务理解与工具熟练度。此外，“学历不限”岗位均值高达 18.65 万，往往对应注重资深项目经验或特定业务背景的社会招聘，而非低端岗位。</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="不同经验要求的折算年薪方差分析" class="level2">
+<h2 class="anchored" data-anchor-id="不同经验要求的折算年薪方差分析">4. 不同经验要求的折算年薪方差分析</h2>
+<p>为保证各组统计检验的稳健性，仅保留样本容量大于 30 的经验组别（自动剔除 <code>在校/应届</code> <span class="math inline">\(n = 22\)</span> 与 <code>10年以上</code> <span class="math inline">\(n = 4\)</span>），共保留 5 组进行方差相等的 Fisher <span class="math inline">\(F\)</span> 检验。</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>boss_exp <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(经验要求) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(经验要求 <span class="ot">=</span> <span class="fu">droplevels</span>(经验要求))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss_exp,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 经验要求,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"经验要求"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"不同经验要求下数据分析岗位折算年薪的方差分析（n &gt; 30，Fisher ANOVA）"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"注：已剔除样本量 ≤ 30 的组别（在校/应届 n = 22，10年以上 n = 4）。"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boss_files/figure-html/anova-exp-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="检验结论与现实意义">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+检验结论与现实意义
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>统计检验结论</strong>：Fisher <span class="math inline">\(F\)</span> 检验高度显著（<span class="math inline">\(F(4, 1085) = 77.03, p &lt; 0.001, \hat{\omega}^2 = 0.22\)</span>），<strong>工作经验的效应量在所有单因素中最大</strong>（解释了约 22% 的年薪变异）。各组年薪均值呈明显阶梯式跃升：<strong>1年以内（12.41万）&lt; 1-3年（16.80万）&lt; 经验不限（20.19万）&lt; 3-5年（27.02万）&lt; 5-10年（33.94万）</strong>，且<strong>任意两组之间的事后两两比较均达到统计显著</strong>（所有 <span class="math inline">\(p_{\text{Holm}} &lt; 0.05\)</span>）。</li>
+<li><strong>现实意义</strong>：数据分析是典型的<strong>“强经验驱动型”职业</strong>。入行 1–3 年到 3–5 年是薪酬跃升最剧烈的黄金期（均值一次性跳涨超过 10 万元），5–10 年资深岗位年薪均值突破 33 万元。值得注意的是，“经验不限”组均值（20.19 万）高于 1–3 年组且离散度很大（标准差 14.43 万），反映出该标签既包含基础岗，也包含大厂不限年限、按能力定级的校招或社招高薪岗。</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="不同公司规模的折算年薪方差分析" class="level2">
+<h2 class="anchored" data-anchor-id="不同公司规模的折算年薪方差分析">5. 不同公司规模的折算年薪方差分析</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 公司规模,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.2</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"公司规模"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"不同公司规模下数据分析岗位折算年薪的方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boss_files/figure-html/anova-scale-1.png" class="img-fluid figure-img" width="1104"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="检验结论与现实意义">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+检验结论与现实意义
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>统计检验结论</strong>：Fisher <span class="math inline">\(F\)</span> 检验高度显著（<span class="math inline">\(F(5, 1110) = 58.02, p &lt; 0.001, \hat{\omega}^2 = 0.20\)</span>），效应量仅次于工作经验。折算年薪均值随企业规模严格单调递增：<strong>0-20人（16.55万）≈ 20-99人（16.79万）&lt; 100-499人（20.13万）&lt; 500-999人（25.33万）≈ 1000-9999人（28.34万）&lt; 10000人以上（32.11万）</strong>。事后检验显示，除 <code>0-20人</code> 与 <code>20-99人</code> 之间（<span class="math inline">\(p_{\text{Holm}} = 0.83\)</span>）、<code>500-999人</code> 与 <code>1000-9999人</code> 之间（<span class="math inline">\(p_{\text{Holm}} = 0.077\)</span>）无显著差异外，其余跨规模阶梯的两两比较均显著。</li>
+<li><strong>现实意义</strong>：数据分析岗位存在极强的<strong>“大厂/平台溢价”</strong>——万人以上大型企业的年薪均值（32.11 万）几乎是百人以下小微企业（约 16.7 万）的 <strong>2 倍</strong>。这背后的逻辑在于：大型企业拥有海量业务数据、成熟的数据中台体系以及更高的年终多薪（15–18 薪），数据分析直接撬动大规模营收，因此企业支付意愿和能力显著更强。</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="分组方差分析按城市分面比较核心学历的薪酬差异" class="level2">
+<h2 class="anchored" data-anchor-id="分组方差分析按城市分面比较核心学历的薪酬差异">6. 分组方差分析：按城市分面比较核心学历的薪酬差异</h2>
+<p>使用 <code>grouped_ggbetweenstats()</code> 按<strong>城市</strong>分面，分别在四座城市内部执行方差相等的 Fisher <span class="math inline">\(F\)</span> 检验，比较 <code>大专</code>、<code>本科</code>、<code>硕士</code> 三类核心学历的年薪差异。</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>boss_edu_core <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(学历要求 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"大专"</span>, <span class="st">"本科"</span>, <span class="st">"硕士"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(学历要求 <span class="ot">=</span> <span class="fu">droplevels</span>(学历要求))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grouped_ggbetweenstats</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss_edu_core,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 学历要求,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">grouping.var =</span> 城市,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="fl">4.5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.2</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"学历要求"</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">plotgrid.args =</span> <span class="fu">list</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation.args =</span> <span class="fu">list</span>(</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"北上广深各城市内部不同学历的折算年薪方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>),</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> <span class="fu">list</span>(</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">11.5</span>),</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boss_files/figure-html/anova-grouped-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="检验结论与现实意义">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+检验结论与现实意义
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>统计检验结论</strong>：四座城市内部的学历方差分析均达到统计显著（北京 <span class="math inline">\(F(2,268)=4.64, p=0.010\)</span>；上海 <span class="math inline">\(F(2,262)=8.76, p&lt;0.001\)</span>；深圳 <span class="math inline">\(F(2,276)=21.98, p&lt;0.001\)</span>；广州 <span class="math inline">\(F(2,266)=17.23, p&lt;0.001\)</span>）。共性在于：<strong>在全部四座城市中，本科与硕士的年薪均显著高于大专</strong>；差异在于：<strong>仅在广州，硕士（24.76 万）显著高于本科（18.59 万，<span class="math inline">\(p_{\text{Holm}} = 0.037\)</span>）</strong>，而在北京（本科 28.32 万 vs 硕士 26.14 万）、上海（22.34 万 vs 26.20 万）和深圳（24.10 万 vs 28.01 万），本科与硕士之间均未呈现统计显著差异（<span class="math inline">\(p_{\text{Holm}} &gt; 0.14\)</span>）。</li>
+<li><strong>现实意义</strong>：分城检验揭示了一个极有价值的求职洞察——<strong>“本科门槛”在全国一线城市高度一致</strong>，大专学历在四城均值均停留在 11–14 万元区间，很难突破薪酬天花板；而<strong>研究生学历的边际回报存在城市差异</strong>——在广州市场，硕士标签能带来更显著的相对薪资跃升（尽管广州硕士岗位样本较少，<span class="math inline">\(n = 9\)</span>）；而在北京、上海、深圳的高密度科技市场中，本科生只要具备扎实的技术栈与项目经验，完全可以拿到与硕士相当甚至更高的薪酬。</li>
+</ul>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "北上广深数据分析岗位薪酬差异的方差分析"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 指定图形的中文字体</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family =</span> <span class="st">"STKaiti"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("showtext")</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 数据准备与包加载</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>本报告基于清洗后的招聘数据 <span class="in">`boss.xlsx`</span>（共 1,116 条有效月薪岗位记录，无缺失值），使用 <span class="in">`ggstatsplot`</span> 对**折算年薪（万）**在不同**城市、学历要求、经验要求、公司规模**下的差异进行**方差相等的单因素方差分析（Fisher's ANOVA）**与事后多重比较。</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载核心包</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取数据</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>boss <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/boss.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Sheet1"</span>)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置合理的因子顺序，并将含括号的数值列重命名以便后续调用</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>boss <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    城市 <span class="ot">=</span> <span class="fu">factor</span>(城市, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"北京"</span>, <span class="st">"上海"</span>, <span class="st">"深圳"</span>, <span class="st">"广州"</span>)),</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    经验要求 <span class="ot">=</span> <span class="fu">factor</span>(</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>      经验要求,</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"在校/应届"</span>, <span class="st">"经验不限"</span>, <span class="st">"1年以内"</span>, <span class="st">"1-3年"</span>, <span class="st">"3-5年"</span>, <span class="st">"5-10年"</span>, <span class="st">"10年以上"</span>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    学历要求 <span class="ot">=</span> <span class="fu">factor</span>(</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>      学历要求,</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"中专/中技"</span>, <span class="st">"高中"</span>, <span class="st">"大专"</span>, <span class="st">"学历不限"</span>, <span class="st">"本科"</span>, <span class="st">"硕士"</span>)</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    公司规模 <span class="ot">=</span> <span class="fu">factor</span>(</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>      公司规模,</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0-20人"</span>, <span class="st">"20-99人"</span>, <span class="st">"100-499人"</span>, <span class="st">"500-999人"</span>, <span class="st">"1000-9999人"</span>, <span class="st">"10000人以上"</span>)</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    折算年薪 <span class="ot">=</span> <span class="st">`</span><span class="at">折算年薪(万)</span><span class="st">`</span>,</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    月薪均值 <span class="ot">=</span> <span class="st">`</span><span class="at">月薪均值(K)</span><span class="st">`</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="co"># 统一定义放大字体的 ggplot2 组件，供后续 ggbetweenstats 复用</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>big_font_component <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(boss)</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. 不同城市的折算年薪方差分析</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>使用 <span class="in">`ggbetweenstats()`</span> 并设定 <span class="in">`var.equal = TRUE`</span>，执行经典**方差相等的单因素方差分析（Fisher's $F$ 检验）**，并采用 Holm 校正后的合并方差 Student's $t$ 检验进行两两事后比较。</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-city</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7.2</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss,</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 城市,</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,                 <span class="co"># 参数检验</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,                    <span class="co"># 方差相等的 Fisher F 检验（事后检验为 Student's t）</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,    <span class="co"># 仅标注具有统计显著性的两两比较</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,            <span class="co"># 多重比较 p 值校正方法</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.plotting =</span> <span class="cn">TRUE</span>,          <span class="co"># 显示各组均值点与数值标签</span></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"城市"</span>,</span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"北上广深数据分析岗位折算年薪的单因素方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"注：折算年薪 = 月薪均值 × 发薪月数 / 10；横轴括号内为各组样本量。"</span>,</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="检验结论与现实意义"}</span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**统计检验结论**：方差相等的 Fisher $F$ 检验高度显著（$F(3, 1112) = 32.81, p &lt; 0.001, \hat{\omega}^2 = 0.08$），表明北上广深四座城市的数据分析岗位年薪存在显著的组间差异。四城年薪均值排序为：**北京（27.57万）&gt; 深圳（22.36万）&gt; 上海（21.72万）&gt; 广州（17.33万）**。事后两两比较显示，**上海与深圳之间无显著差异**（$p_{\text{Holm}} = 0.53$），其余所有城市配对均存在极显著差异（$p_{\text{Holm}} &lt; 0.001$）。</span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**现实意义**：国内一线城市的数据分析薪酬呈现清晰的“**三梯队格局**”——北京作为头部互联网大厂与科技总部聚集地领跑第一梯队；上海与深圳旗鼓相当，构成第二梯队；广州则以相对温和的薪酬位居第三梯队。求职者在跨城选择时，不能仅看名义年薪差距（如北京比广州高出约 10.24 万），还应结合当地房价、通勤与生活成本综合评估实际可支配结余。</span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.1 非参数稳健性检验（Kruskal-Wallis 检验）</span></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>考虑到薪酬数据通常呈右偏分布，使用 <span class="in">`type = "nonparametric"`</span> 执行 **Kruskal-Wallis 秩和检验**与 **Dunn 事后检验**，验证上述城市薪酬梯队结论的稳健性。</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-city-np</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7.2</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss,</span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 城市,</span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"nonparametric"</span>,              <span class="co"># 非参数检验（Kruskal-Wallis + Dunn）</span></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"城市"</span>,</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"北上广深数据分析岗位折算年薪的非参数检验（Kruskal-Wallis）"</span>,</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="检验结论与现实意义"}</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**统计检验结论**：非参数 Kruskal-Wallis 检验同样极显著（$\chi^2(3) = 84.22, p &lt; 0.001$），四城折算年薪中位数分别为**北京 26.00 万、上海 19.20 万、深圳 19.20 万、广州 15.00 万**，事后 Dunn 检验的显著性格局与参数 Fisher $F$ 检验完全一致。</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**现实意义**：各城市年薪均值均略高于中位数，印证了行业薪酬存在“高薪长尾拉高均值”的右偏特征；但无论看均值还是看更能代表普通从业者水平的**中位数**，北京显著领先、沪深持平、广州偏低的市场格局均高度稳健。</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. 不同学历要求的折算年薪方差分析</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>原始数据中 <span class="in">`高中`</span>（$n = 1$）与 <span class="in">`中专/中技`</span>（$n = 1$）样本量仅为 1，无法计算组内方差，因此筛选保留 4 个主要学历组别（<span class="in">`大专`</span>、<span class="in">`学历不限`</span>、<span class="in">`本科`</span>、<span class="in">`硕士`</span>）。</span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-edu</span></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7.2</span></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>boss_edu <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(学历要求 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"大专"</span>, <span class="st">"学历不限"</span>, <span class="st">"本科"</span>, <span class="st">"硕士"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(学历要求 <span class="ot">=</span> <span class="fu">droplevels</span>(学历要求))</span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss_edu,</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 学历要求,</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"学历要求"</span>,</span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"不同学历要求下数据分析岗位折算年薪的方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"注：已剔除样本量 n = 1 的“高中”与“中专/中技”组。"</span>,</span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="检验结论与现实意义"}</span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**统计检验结论**：Fisher $F$ 检验极显著（$F(3, 1110) = 36.93, p &lt; 0.001, \hat{\omega}^2 = 0.09$）。各组年薪均值依次为：**大专（11.57万）&lt; 学历不限（18.65万）&lt; 本科（23.45万）&lt; 硕士（26.48万）**。事后多重比较表明，**大专组显著低于其余所有组别**（比本科低 11.88 万、比硕士低 14.91 万，$p_{\text{Holm}} &lt; 0.001$）；但**本科与硕士之间的均值差（3.03 万）在 0.05 水平下未达到统计显著**（$p_{\text{Holm}} = 0.066$），学历不限与本科之间亦无显著差异（$p_{\text{Holm}} = 0.066$）。</span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**现实意义**：**本科学历是数据分析岗位的核心“入场券”与薪酬分水岭**——跨过大专到本科的门槛后，平均年薪几乎翻倍；而本科与硕士之间的直接起薪溢价在全样本下并不算悬殊，说明该岗位更看重实战能力、业务理解与工具熟练度。此外，“学历不限”岗位均值高达 18.65 万，往往对应注重资深项目经验或特定业务背景的社会招聘，而非低端岗位。</span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. 不同经验要求的折算年薪方差分析</span></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>为保证各组统计检验的稳健性，仅保留样本容量大于 30 的经验组别（自动剔除 <span class="in">`在校/应届`</span> $n = 22$ 与 <span class="in">`10年以上`</span> $n = 4$），共保留 5 组进行方差相等的 Fisher $F$ 检验。</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-exp</span></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 11</span></span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7.4</span></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>boss_exp <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(经验要求) <span class="sc">|&gt;</span></span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(经验要求 <span class="ot">=</span> <span class="fu">droplevels</span>(经验要求))</span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss_exp,</span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 经验要求,</span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.5</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"经验要求"</span>,</span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"不同经验要求下数据分析岗位折算年薪的方差分析（n &gt; 30，Fisher ANOVA）"</span>,</span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"注：已剔除样本量 ≤ 30 的组别（在校/应届 n = 22，10年以上 n = 4）。"</span>,</span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="检验结论与现实意义"}</span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**统计检验结论**：Fisher $F$ 检验高度显著（$F(4, 1085) = 77.03, p &lt; 0.001, \hat{\omega}^2 = 0.22$），**工作经验的效应量在所有单因素中最大**（解释了约 22% 的年薪变异）。各组年薪均值呈明显阶梯式跃升：**1年以内（12.41万）&lt; 1-3年（16.80万）&lt; 经验不限（20.19万）&lt; 3-5年（27.02万）&lt; 5-10年（33.94万）**，且**任意两组之间的事后两两比较均达到统计显著**（所有 $p_{\text{Holm}} &lt; 0.05$）。</span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**现实意义**：数据分析是典型的**“强经验驱动型”职业**。入行 1–3 年到 3–5 年是薪酬跃升最剧烈的黄金期（均值一次性跳涨超过 10 万元），5–10 年资深岗位年薪均值突破 33 万元。值得注意的是，“经验不限”组均值（20.19 万）高于 1–3 年组且离散度很大（标准差 14.43 万），反映出该标签既包含基础岗，也包含大厂不限年限、按能力定级的校招或社招高薪岗。</span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. 不同公司规模的折算年薪方差分析</span></span>
+<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-scale</span></span>
+<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 11.5</span></span>
+<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7.4</span></span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss,</span>
+<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 公司规模,</span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.2</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"公司规模"</span>,</span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"不同公司规模下数据分析岗位折算年薪的方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">16</span>),</span>
+<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> big_font_component</span>
+<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="检验结论与现实意义"}</span>
+<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**统计检验结论**：Fisher $F$ 检验高度显著（$F(5, 1110) = 58.02, p &lt; 0.001, \hat{\omega}^2 = 0.20$），效应量仅次于工作经验。折算年薪均值随企业规模严格单调递增：**0-20人（16.55万）≈ 20-99人（16.79万）&lt; 100-499人（20.13万）&lt; 500-999人（25.33万）≈ 1000-9999人（28.34万）&lt; 10000人以上（32.11万）**。事后检验显示，除 <span class="in">`0-20人`</span> 与 <span class="in">`20-99人`</span> 之间（$p_{\text{Holm}} = 0.83$）、`500-999人` 与 `1000-9999人` 之间（$p_{\text{Holm}} = 0.077$）无显著差异外，其余跨规模阶梯的两两比较均显著。</span>
+<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**现实意义**：数据分析岗位存在极强的**“大厂/平台溢价”**——万人以上大型企业的年薪均值（32.11 万）几乎是百人以下小微企业（约 16.7 万）的 **2 倍**。这背后的逻辑在于：大型企业拥有海量业务数据、成熟的数据中台体系以及更高的年终多薪（15–18 薪），数据分析直接撬动大规模营收，因此企业支付意愿和能力显著更强。</span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. 分组方差分析：按城市分面比较核心学历的薪酬差异</span></span>
+<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>使用 <span class="in">`grouped_ggbetweenstats()`</span> 按**城市**分面，分别在四座城市内部执行方差相等的 Fisher $F$ 检验，比较 <span class="in">`大专`</span>、<span class="in">`本科`</span>、<span class="in">`硕士`</span> 三类核心学历的年薪差异。</span>
+<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: anova-grouped</span></span>
+<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 14</span></span>
+<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 11</span></span>
+<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a>boss_edu_core <span class="ot">&lt;-</span> boss <span class="sc">|&gt;</span></span>
+<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(学历要求 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"大专"</span>, <span class="st">"本科"</span>, <span class="st">"硕士"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(学历要求 <span class="ot">=</span> <span class="fu">droplevels</span>(学历要求))</span>
+<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a><span class="fu">grouped_ggbetweenstats</span>(</span>
+<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> boss_edu_core,</span>
+<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> 学历要求,</span>
+<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> 折算年薪,</span>
+<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a>  <span class="at">grouping.var =</span> 城市,</span>
+<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,</span>
+<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>  <span class="at">centrality.label.args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="fl">4.5</span>, <span class="at">nudge_x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggsignif.args =</span> <span class="fu">list</span>(<span class="at">textsize =</span> <span class="fl">4.2</span>, <span class="at">tip_length =</span> <span class="fl">0.01</span>),</span>
+<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"学历要求"</span>,</span>
+<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"折算年薪（万元）"</span>,</span>
+<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>  <span class="at">plotgrid.args =</span> <span class="fu">list</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>),</span>
+<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation.args =</span> <span class="fu">list</span>(</span>
+<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"北上广深各城市内部不同学历的折算年薪方差分析（Fisher ANOVA）"</span>,</span>
+<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>),</span>
+<span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggplot.component =</span> <span class="fu">list</span>(</span>
+<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb9-306"><a href="#cb9-306" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb9-307"><a href="#cb9-307" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">11.5</span>),</span>
+<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="检验结论与现实意义"}</span>
+<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**统计检验结论**：四座城市内部的学历方差分析均达到统计显著（北京 $F(2,268)=4.64, p=0.010$；上海 $F(2,262)=8.76, p&lt;0.001$；深圳 $F(2,276)=21.98, p&lt;0.001$；广州 $F(2,266)=17.23, p&lt;0.001$）。共性在于：**在全部四座城市中，本科与硕士的年薪均显著高于大专**；差异在于：**仅在广州，硕士（24.76 万）显著高于本科（18.59 万，$p_{\text{Holm}} = 0.037$）**，而在北京（本科 28.32 万 vs 硕士 26.14 万）、上海（22.34 万 vs 26.20 万）和深圳（24.10 万 vs 28.01 万），本科与硕士之间均未呈现统计显著差异（$p_{\text{Holm}} &gt; 0.14$）。</span>
+<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**现实意义**：分城检验揭示了一个极有价值的求职洞察——**“本科门槛”在全国一线城市高度一致**，大专学历在四城均值均停留在 11–14 万元区间，很难突破薪酬天花板；而**研究生学历的边际回报存在城市差异**——在广州市场，硕士标签能带来更显著的相对薪资跃升（尽管广州硕士岗位样本较少，$n = 9$）；而在北京、上海、深圳的高密度科技市场中，本科生只要具备扎实的技术栈与项目经验，完全可以拿到与硕士相当甚至更高的薪酬。</span>
+<span id="cb9-318"><a href="#cb9-318" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Copyright 2026, Li Zongzhang</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Data illuminates insights.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
