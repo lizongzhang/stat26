@@ -1,0 +1,379 @@
+---
+title: "北上广深数据分析岗位薪酬差异的方差分析"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-copy: true
+    code-tools: true
+execute:
+  warning: false
+  message: false
+  echo: true
+---
+
+```{r}
+#| include: false
+# 指定图形的中文字体
+par(family  = 'STKaiti')
+#install.packages("showtext")
+library(showtext)
+showtext_auto()
+```
+
+
+## 1. 数据准备与包加载
+
+本报告基于清洗后的招聘数据 `boss.xlsx`（共 1,116 条有效月薪岗位记录，无缺失值），使用 `ggstatsplot` 对**折算年薪（万）**在不同**城市、学历要求、经验要求、公司规模**下的差异进行方差分析（ANOVA）与事后多重比较。
+
+```{r}
+#| label: setup
+
+# 加载核心包
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(ggstatsplot)
+
+# 解决 macOS / Windows 下图形中文显示乱码问题（未安装可运行 install.packages("showtext")）
+if (requireNamespace("showtext", quietly = TRUE)) {
+  showtext::showtext_auto()
+}
+
+# 读取数据（请确保 boss.xlsx 与本 .qmd 文件位于同一文件夹）
+boss <- read_excel("data/boss.xlsx", sheet = "Sheet1")
+
+# 设置合理的因子顺序，并将含括号的数值列重命名以便后续调用
+boss <- boss |>
+  mutate(
+    城市 = factor(城市, levels = c("北京", "上海", "深圳", "广州")),
+    经验要求 = factor(
+      经验要求,
+      levels = c("在校/应届", "经验不限", "1年以内", "1-3年", "3-5年", "5-10年", "10年以上")
+    ),
+    学历要求 = factor(
+      学历要求,
+      levels = c("中专/中技", "高中", "大专", "学历不限", "本科", "硕士")
+    ),
+    公司规模 = factor(
+      公司规模,
+      levels = c("0-20人", "20-99人", "100-499人", "500-999人", "1000-9999人", "10000人以上")
+    ),
+    折算年薪 = `折算年薪(万)`,
+    月薪均值 = `月薪均值(K)`
+  )
+
+# 统一放大后的图形主题（字体较原来增大约 40%）
+big_theme <- theme_minimal(base_size = 18) +
+  theme(
+    plot.title    = element_text(size = 22, face = "bold"),
+    plot.subtitle = element_text(size = 18),
+    plot.caption  = element_text(size = 14),
+    axis.title    = element_text(size = 18),
+    axis.text     = element_text(size = 16)
+  )
+
+# 生成图形下方的检验结论与现实意义文字（自动读取数据计算结果）
+interp_anova <- function(data, group, label, meaning_sig, nonparam = FALSE) {
+  dat <- data[!is.na(data[[group]]) & !is.na(data[["折算年薪"]]), ]
+  dat[[group]] <- droplevels(factor(dat[[group]]))
+  fml <- as.formula(paste0("`折算年薪` ~ `", group, "`"))
+
+  m <- tapply(dat[["折算年薪"]], dat[[group]], mean)
+  mean_txt <- sprintf(
+    "均值最高的是“%s”（%.1f 万元），最低的是“%s”（%.1f 万元）",
+    names(which.max(m)), max(m), names(which.min(m)), min(m)
+  )
+
+  if (nonparam) {
+    ft <- kruskal.test(fml, data = dat)
+    stat_txt <- sprintf("Kruskal-Wallis χ²(%d) = %.2f", ft$parameter, ft$statistic)
+    eff_txt <- ""
+  } else {
+    ft <- oneway.test(fml, data = dat, var.equal = TRUE)
+    ss <- summary(aov(fml, data = dat))[[1]][["Sum Sq"]]
+    eta2 <- ss[1] / sum(ss)
+    eff <- if (eta2 < 0.01) "极弱" else if (eta2 < 0.06) "较弱" else if (eta2 < 0.14) "中等" else "较强"
+    stat_txt <- sprintf("F(%d, %d) = %.2f", ft$parameter[1], ft$parameter[2], ft$statistic)
+    eff_txt <- sprintf(
+      "效应量 η² = %.3f，即%s可解释年薪总变异的 %.1f%%，影响强度为%s。",
+      eta2, label, eta2 * 100, eff
+    )
+  }
+
+  sig <- ft$p.value < 0.05
+  p_txt <- if (ft$p.value < 0.001) "p < 0.001" else sprintf("p = %.3f", ft$p.value)
+  verdict <- if (sig) "存在显著差异" else "未见显著差异"
+  target <- if (nonparam) "分布" else "均值"
+  meaning <- if (sig) {
+    meaning_sig
+  } else {
+    sprintf(
+      "%s对折算年薪的影响在统计上不显著，说明仅凭%s难以判断薪酬高低，求职者和企业在评估岗位价值时应更多关注技能、行业与岗位职责等其他因素。",
+      label, label
+    )
+  }
+
+  cat(sprintf(
+    "\n\n> **检验结论：** 不同%s的折算年薪%s%s（%s，%s）。%s%s\n\n> **现实意义：** %s\n\n",
+    label, target, verdict, stat_txt, p_txt, eff_txt, mean_txt, meaning
+  ))
+}
+```
+
+---
+
+## 2. 不同城市的折算年薪方差分析
+
+本节采用**方差齐性假设下的单因素方差分析（F 检验，`var.equal = TRUE`）**，即经典 ANOVA，两两比较采用 Tukey HSD 检验。
+
+```{r}
+#| label: anova-city
+#| fig-width: 10
+#| fig-height: 7
+
+ggbetweenstats(
+  data = boss,
+  x = 城市,
+  y = 折算年薪,
+  type = "parametric",                 # 参数检验
+  var.equal = TRUE,                    # 假设方差齐性，采用经典 F 检验
+  pairwise.display = "significant",    # 仅标注具有统计显著性的两两比较
+  p.adjust.method = "holm",            # 多重比较 p 值校正方法
+  centrality.plotting = TRUE,          # 显示各组均值点与数值标签
+  centrality.label.args = list(size = 5.5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 6, tip_length = 0.01),
+  xlab = "城市",
+  ylab = "折算年薪（万元）",
+  title = "北上广深数据分析岗位折算年薪的单因素方差分析（F 检验）",
+  caption = "注：折算年薪 = 月薪均值 × 发薪月数 / 10；横轴括号内为各组样本量。",
+  ggtheme = big_theme
+)
+```
+
+```{r}
+#| label: anova-city-text
+#| output: asis
+#| echo: false
+
+interp_anova(
+  boss, "城市", "城市",
+  meaning_sig = "同样是数据分析岗位，一线城市之间的薪酬水平存在可量化的差距。求职者在选择城市时应把生活成本、房价等因素与薪酬一并权衡；企业制定区域薪酬策略时也应参考这一差距。"
+)
+```
+
+### 2.1 非参数稳健性检验（Kruskal-Wallis 检验）
+
+考虑到薪酬数据通常呈右偏分布，使用 `type = "nonparametric"` 执行 **Kruskal-Wallis 秩和检验**与 **Dunn 事后检验**，验证结论的稳健性。
+
+```{r}
+#| label: anova-city-np
+#| fig-width: 10
+#| fig-height: 7
+
+ggbetweenstats(
+  data = boss,
+  x = 城市,
+  y = 折算年薪,
+  type = "nonparametric",              # 非参数检验（Kruskal-Wallis + Dunn）
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5.5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 6, tip_length = 0.01),
+  xlab = "城市",
+  ylab = "折算年薪（万元）",
+  title = "北上广深数据分析岗位折算年薪的非参数检验（Kruskal-Wallis）",
+  ggtheme = big_theme
+)
+```
+
+```{r}
+#| label: anova-city-np-text
+#| output: asis
+#| echo: false
+
+interp_anova(
+  boss, "城市", "城市",
+  meaning_sig = "秩和检验结果与方差分析一致，说明城市间的薪酬差距并非由个别极端高薪岗位造成，结论对数据分布形态具有稳健性。",
+  nonparam = TRUE
+)
+```
+
+---
+
+## 3. 不同学历要求的折算年薪方差分析
+
+原始数据中 `高中`（$n = 1$）与 `中专/中技`（$n = 1$）样本量仅为 1，无法计算组内方差，因此筛选保留 4 个主要学历组别（`大专`、`学历不限`、`本科`、`硕士`）。
+
+```{r}
+#| label: anova-edu
+#| fig-width: 10
+#| fig-height: 7
+
+boss_edu <- boss |>
+  filter(学历要求 %in% c("大专", "学历不限", "本科", "硕士")) |>
+  mutate(学历要求 = droplevels(学历要求))
+
+ggbetweenstats(
+  data = boss_edu,
+  x = 学历要求,
+  y = 折算年薪,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5.5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 6, tip_length = 0.01),
+  xlab = "学历要求",
+  ylab = "折算年薪（万元）",
+  title = "不同学历要求下数据分析岗位折算年薪的方差分析",
+  caption = "注：已剔除样本量 n = 1 的“高中”与“中专/中技”组。",
+  ggtheme = big_theme
+)
+```
+
+```{r}
+#| label: anova-edu-text
+#| output: asis
+#| echo: false
+
+interp_anova(
+  boss_edu, "学历要求", "学历",
+  meaning_sig = "学历与薪酬存在关联，但学历溢价的大小需结合城市与经验来看。对求职者而言，提升学历可能带来薪酬增益，但应与时间成本和机会成本进行比较。"
+)
+```
+
+---
+
+## 4. 不同经验要求的折算年薪方差分析
+
+```{r}
+#| label: anova-exp
+#| fig-width: 12
+#| fig-height: 8
+
+boss_exp <- boss |>
+  group_by(经验要求) |>
+  filter(n() > 30) |>
+  ungroup() |>
+  mutate(经验要求 = droplevels(经验要求))
+
+ggbetweenstats(
+  data = boss_exp,
+  x = 经验要求,
+  y = 折算年薪,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5.5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 6, tip_length = 0.01),
+  xlab = "经验要求",
+  ylab = "折算年薪（万元）",
+  title = "不同经验要求下数据分析岗位折算年薪的方差分析（n > 30）",
+  caption = "注：已剔除样本量 ≤ 30 的组别（在校/应届 n = 22，10年以上 n = 4）。",
+  ggtheme = big_theme
+)
+```
+
+```{r}
+#| label: anova-exp-text
+#| output: asis
+#| echo: false
+
+interp_anova(
+  boss_exp, "经验要求", "经验要求",
+  meaning_sig = "工作经验是决定薪酬的重要因素，薪酬随经验积累呈阶段性增长。对于应届生而言，前几年的经验积累往往是后续薪资跃升的基础，求职初期应重视成长性而非短期薪资。"
+)
+```
+
+---
+
+## 5. 不同公司规模的折算年薪方差分析
+
+```{r}
+#| label: anova-scale
+#| fig-width: 12
+#| fig-height: 8
+
+ggbetweenstats(
+  data = boss,
+  x = 公司规模,
+  y = 折算年薪,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5.5, nudge_x = 0.35),
+  ggsignif.args = list(textsize = 6, tip_length = 0.01),
+  xlab = "公司规模",
+  ylab = "折算年薪（万元）",
+  title = "不同公司规模下数据分析岗位折算年薪的方差分析",
+  ggtheme = big_theme
+)
+```
+
+```{r}
+#| label: anova-scale-text
+#| output: asis
+#| echo: false
+
+interp_anova(
+  boss, "公司规模", "公司规模",
+  meaning_sig = "公司规模与薪酬存在差异，大型企业通常提供更高薪酬与更完善的福利，但规模与薪酬之间并非简单的线性关系。求职时应结合公司发展阶段和个人职业目标综合判断。"
+)
+```
+
+---
+
+## 6. 分组方差分析：按城市分面比较核心学历的薪酬差异
+
+使用 `grouped_ggbetweenstats()` 按**城市**分面，分别检验四座城市内部不同学历（大专、本科、硕士）的年薪差异。
+
+```{r}
+#| label: anova-grouped
+#| fig-width: 14
+#| fig-height: 11
+
+boss_edu_core <- boss |>
+  filter(学历要求 %in% c("大专", "本科", "硕士")) |>
+  mutate(学历要求 = droplevels(学历要求))
+
+grouped_ggbetweenstats(
+  data = boss_edu_core,
+  x = 学历要求,
+  y = 折算年薪,
+  grouping.var = 城市,
+  type = "parametric",
+  var.equal = TRUE,
+  pairwise.display = "significant",
+  p.adjust.method = "holm",
+  centrality.label.args = list(size = 5),
+  ggsignif.args = list(textsize = 5, tip_length = 0.01),
+  xlab = "学历要求",
+  ylab = "折算年薪（万元）",
+  plotgrid.args = list(nrow = 2, ncol = 2),
+  annotation.args = list(
+    title = "北上广深各城市内部不同学历的折算年薪方差分析"
+  ),
+  ggtheme = big_theme
+)
+```
+
+```{r}
+#| label: anova-grouped-text
+#| output: asis
+#| echo: false
+
+for (ci in levels(boss_edu_core$城市)) {
+  cat(sprintf("\n\n#### %s\n", ci))
+  interp_anova(
+    filter(boss_edu_core, 城市 == ci), "学历要求", "学历",
+    meaning_sig = sprintf(
+      "在%s，学历与薪酬的关系在统计上显著，学历溢价具有明显的城市差异。求职者应结合目标城市的人才市场特点，合理规划学历提升或求职策略。",
+      ci
+    )
+  )
+}
+```
